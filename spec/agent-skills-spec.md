@@ -1,3 +1,3 @@
-# Agent Skills Spec
+# Agent Skills 사양
 
-The spec is now located at <https://agentskills.io/specification>
+사양은 현재 <https://agentskills.io/specification>에 위치해 있습니다.

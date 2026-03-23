@@ -1,19 +1,19 @@
 # Botanical Garden
 
-A fresh and organic theme featuring vibrant garden-inspired colors for lively presentations.
+생동감 있는 정원 영감 색상이 특징인 신선하고 유기적인 테마로, 활기찬 프레젠테이션에 적합합니다.
 
-## Color Palette
+## 색상 팔레트
 
-- **Fern Green**: `#4a7c59` - Rich natural green
-- **Marigold**: `#f9a620` - Bright floral accent
-- **Terracotta**: `#b7472a` - Earthy warm tone
-- **Cream**: `#f5f3ed` - Soft neutral backgrounds
+- **Fern Green**: `#4a7c59` - 풍부한 자연 녹색
+- **Marigold**: `#f9a620` - 밝은 꽃 강조색
+- **Terracotta**: `#b7472a` - 흙빛 따뜻한 톤
+- **Cream**: `#f5f3ed` - 부드러운 중립 배경
 
-## Typography
+## 타이포그래피
 
-- **Headers**: DejaVu Serif Bold
-- **Body Text**: DejaVu Sans
+- **제목**: DejaVu Serif Bold
+- **본문**: DejaVu Sans
 
-## Best Used For
+## 최적 용도
 
-Garden centers, food presentations, farm-to-table content, botanical brands, natural products.
+가든 센터, 음식 프레젠테이션, 팜투테이블 콘텐츠, 식물 브랜드, 자연 제품.

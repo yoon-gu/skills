@@ -1,6 +1,6 @@
 ---
 name: template-skill
-description: Replace with description of the skill and when Claude should use it.
+description: 스킬에 대한 설명과 Claude가 언제 사용해야 하는지로 대체하세요.
 ---
 
-# Insert instructions below
+# 아래에 지침을 삽입하세요

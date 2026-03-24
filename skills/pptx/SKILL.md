@@ -1,6 +1,6 @@
 ---
 name: pptx
-description: "Use this skill any time a .pptx file is involved in any way — as input, output, or both. This includes: creating slide decks, pitch decks, or presentations; reading, parsing, or extracting text from any .pptx file (even if the extracted content will be used elsewhere, like in an email or summary); editing, modifying, or updating existing presentations; combining or splitting slide files; working with templates, layouts, speaker notes, or comments. Trigger whenever the user mentions \"deck,\" \"slides,\" \"presentation,\" or references a .pptx filename, regardless of what they plan to do with the content afterward. If a .pptx file needs to be opened, created, or touched, use this skill."
+description: ".pptx 파일이 입력, 출력 또는 양쪽으로 관련된 모든 경우에 이 스킬을 사용하세요. 슬라이드 덱, 피치 덱, 프레젠테이션 생성; .pptx 파일에서 텍스트 읽기/파싱/추출; 기존 프레젠테이션 편집/수정/업데이트; 슬라이드 파일 결합/분할; 템플릿, 레이아웃, 발표자 노트, 댓글 작업이 포함됩니다. 사용자가 '덱', '슬라이드', '프레젠테이션'을 언급하거나 .pptx 파일명을 참조할 때 트리거합니다."
 license: Proprietary. LICENSE.txt has complete terms
 ---
 

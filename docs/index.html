@@ -453,6 +453,31 @@ const CATEGORIES = {
 };
 const CATEGORY_LABELS = { docs: 'Docs', dev: 'Dev', design: 'Design', other: 'Other' };
 
+const KO_NAMES = {
+  'algorithmic-art': '알고리즘 아트',
+  'brand-guidelines': '브랜드 가이드라인',
+  'canvas-design': '캔버스 디자인',
+  'claude-api': 'Claude API',
+  'doc-coauthoring': '문서 공동 작성',
+  'docx': 'Word 문서',
+  'frontend-design': '프론트엔드 디자인',
+  'internal-comms': '사내 커뮤니케이션',
+  'mcp-builder': 'MCP 서버 빌더',
+  'pdf': 'PDF 처리',
+  'pptx': '프레젠테이션',
+  'skill-creator': '스킬 생성기',
+  'slack-gif-creator': 'Slack GIF 생성기',
+  'theme-factory': '테마 팩토리',
+  'web-artifacts-builder': '웹 아티팩트 빌더',
+  'webapp-testing': '웹앱 테스팅',
+  'xlsx': '스프레드시트',
+};
+
+function getDisplayName(name) {
+  const ko = KO_NAMES[name];
+  return ko ? `${name} (${ko})` : name;
+}
+
 function getCategory(name) {
   for (const [cat, list] of Object.entries(CATEGORIES)) {
     if (list.includes(name)) return cat;
@@ -588,7 +613,7 @@ function renderCards() {
     card.className = 'card';
     card.innerHTML = `
       <div class="card-header">
-        <span class="card-name">${skill.name}</span>
+        <span class="card-name">${getDisplayName(skill.name)}</span>
         <span class="card-badge">${CATEGORY_LABELS[cat] || 'Other'}</span>
       </div>
       <div class="card-desc">${skill.description || 'No description'}</div>
@@ -653,7 +678,7 @@ function renderTree(entries, container) {
 }
 
 function openPanel(skill) {
-  panelTitle.textContent = skill.name;
+  panelTitle.textContent = getDisplayName(skill.name);
   panelBody.innerHTML = '';
   renderTree(skill.tree, panelBody);
   sidePanel.classList.add('open');

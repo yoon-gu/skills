@@ -1,6 +1,6 @@
 ---
 name: doc-coauthoring
-description: Guide users through a structured workflow for co-authoring documentation. Use when user wants to write documentation, proposals, technical specs, decision docs, or similar structured content. This workflow helps users efficiently transfer context, refine content through iteration, and verify the doc works for readers. Trigger when user mentions writing docs, creating proposals, drafting specs, or similar documentation tasks.
+description: 문서 공동 작성을 위한 구조화된 워크플로우를 안내합니다. 사용자가 문서, 제안서, 기술 사양서, 의사결정 문서 또는 유사한 구조화된 콘텐츠를 작성하려 할 때 사용하세요. 이 워크플로우는 효율적인 컨텍스트 전달, 반복적 콘텐츠 개선, 독자 관점의 문서 검증을 돕습니다.
 ---
 
 # 문서 공동 작성 워크플로우

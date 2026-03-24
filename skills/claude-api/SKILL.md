@@ -1,6 +1,6 @@
 ---
 name: claude-api
-description: "Build apps with the Claude API or Anthropic SDK. TRIGGER when: code imports `anthropic`/`@anthropic-ai/sdk`/`claude_agent_sdk`, or user asks to use Claude API, Anthropic SDKs, or Agent SDK. DO NOT TRIGGER when: code imports `openai`/other AI SDK, general programming, or ML/data-science tasks."
+description: "Claude API 또는 Anthropic SDK로 앱을 구축합니다. 트리거 조건: 코드에서 `anthropic`/`@anthropic-ai/sdk`/`claude_agent_sdk`를 import하거나, 사용자가 Claude API, Anthropic SDK, Agent SDK 사용을 요청할 때. 트리거하지 않는 경우: `openai`/기타 AI SDK import, 일반 프로그래밍, ML/데이터 과학 작업."
 license: Complete terms in LICENSE.txt
 ---
 

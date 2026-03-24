@@ -1,6 +1,6 @@
 ---
 name: docx
-description: "Use this skill whenever the user wants to create, read, edit, or manipulate Word documents (.docx files). Triggers include: any mention of 'Word doc', 'word document', '.docx', or requests to produce professional documents with formatting like tables of contents, headings, page numbers, or letterheads. Also use when extracting or reorganizing content from .docx files, inserting or replacing images in documents, performing find-and-replace in Word files, working with tracked changes or comments, or converting content into a polished Word document. If the user asks for a 'report', 'memo', 'letter', 'template', or similar deliverable as a Word or .docx file, use this skill. Do NOT use for PDFs, spreadsheets, Google Docs, or general coding tasks unrelated to document generation."
+description: "사용자가 Word 문서(.docx 파일)를 생성, 읽기, 편집 또는 조작하려 할 때 이 스킬을 사용하세요. 트리거: 'Word 문서', '.docx' 언급, 목차/제목/페이지 번호/레터헤드 등 서식이 포함된 전문 문서 작성 요청. .docx 파일에서 콘텐츠 추출/재구성, 이미지 삽입/교체, 찾기-바꾸기, 변경 내용 추적/댓글 작업, 완성된 Word 문서로 변환할 때도 사용합니다. PDF, 스프레드시트, Google Docs, 문서 생성과 무관한 일반 코딩 작업에는 사용하지 마세요."
 license: Proprietary. LICENSE.txt has complete terms
 ---
 

@@ -1,6 +1,6 @@
 ---
 name: xlsx
-description: "Use this skill any time a spreadsheet file is the primary input or output. This means any task where the user wants to: open, read, edit, or fix an existing .xlsx, .xlsm, .csv, or .tsv file (e.g., adding columns, computing formulas, formatting, charting, cleaning messy data); create a new spreadsheet from scratch or from other data sources; or convert between tabular file formats. Trigger especially when the user references a spreadsheet file by name or path — even casually (like \"the xlsx in my downloads\") — and wants something done to it or produced from it. Also trigger for cleaning or restructuring messy tabular data files (malformed rows, misplaced headers, junk data) into proper spreadsheets. The deliverable must be a spreadsheet file. Do NOT trigger when the primary deliverable is a Word document, HTML report, standalone Python script, database pipeline, or Google Sheets API integration, even if tabular data is involved."
+description: "스프레드시트 파일이 주요 입력 또는 출력인 모든 경우에 이 스킬을 사용하세요. 기존 .xlsx, .xlsm, .csv, .tsv 파일 열기/읽기/편집/수정(열 추가, 수식 계산, 서식, 차트, 데이터 정리), 새 스프레드시트 생성, 표 형식 파일 간 변환이 포함됩니다. 사용자가 스프레드시트 파일을 이름이나 경로로 참조할 때 트리거합니다. 잘못된 행, 헤더 오류, 불필요한 데이터가 있는 표 형식 파일을 정리/재구성할 때도 사용합니다. Word 문서, HTML 보고서, Python 스크립트, DB 파이프라인, Google Sheets API 통합이 주요 산출물인 경우에는 사용하지 마세요."
 license: Proprietary. LICENSE.txt has complete terms
 ---
 

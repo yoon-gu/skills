@@ -1,20 +1,20 @@
 # Files API — TypeScript
 
-The Files API uploads files for use in Messages API requests. Reference files via `file_id` in content blocks, avoiding re-uploads across multiple API calls.
+Files API는 Messages API 요청에서 사용할 파일을 업로드합니다. 콘텐츠 블록에서 `file_id`를 참조하여 여러 API 호출에 걸쳐 파일을 다시 업로드하지 않아도 됩니다.
 
-**Beta:** Pass `betas: ["files-api-2025-04-14"]` in your API calls (the SDK sets the required header automatically).
+**베타:** API 호출 시 `betas: ["files-api-2025-04-14"]`를 전달하세요 (SDK가 필요한 헤더를 자동으로 설정합니다).
 
-## Key Facts
+## 주요 사항
 
-- Maximum file size: 500 MB
-- Total storage: 100 GB per organization
-- Files persist until deleted
-- File operations (upload, list, delete) are free; content used in messages is billed as input tokens
-- Not available on Amazon Bedrock or Google Vertex AI
+- 최대 파일 크기: 500 MB
+- 총 저장 용량: 조직당 100 GB
+- 파일은 삭제할 때까지 유지됨
+- 파일 작업(업로드, 목록 조회, 삭제)은 무료이며, 메시지에서 사용된 콘텐츠는 입력 토큰으로 과금
+- Amazon Bedrock 또는 Google Vertex AI에서는 사용 불가
 
 ---
 
-## Upload a File
+## 파일 업로드
 
 ```typescript
 import Anthropic, { toFile } from "@anthropic-ai/sdk";
@@ -35,9 +35,9 @@ console.log(`Size: ${uploaded.size_bytes} bytes`);
 
 ---
 
-## Use a File in Messages
+## 메시지에서 파일 사용
 
-### PDF / Text Document
+### PDF / 텍스트 문서
 
 ```typescript
 const response = await client.beta.messages.create({
@@ -65,9 +65,9 @@ console.log(response.content[0].text);
 
 ---
 
-## Manage Files
+## 파일 관리
 
-### List Files
+### 파일 목록 조회
 
 ```typescript
 const files = await client.beta.files.list({
@@ -78,7 +78,7 @@ for (const f of files.data) {
 }
 ```
 
-### Delete a File
+### 파일 삭제
 
 ```typescript
 await client.beta.files.delete("file_011CNha8iCJcU1wXNR6q4V8w", {
@@ -86,7 +86,7 @@ await client.beta.files.delete("file_011CNha8iCJcU1wXNR6q4V8w", {
 });
 ```
 
-### Download a File
+### 파일 다운로드
 
 ```typescript
 const response = await client.beta.files.download(

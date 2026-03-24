@@ -1,6 +1,6 @@
-# Streaming — Python
+# 스트리밍 — Python
 
-## Quick Start
+## 빠른 시작
 
 ```python
 with client.messages.stream(
@@ -12,7 +12,7 @@ with client.messages.stream(
         print(text, end="", flush=True)
 ```
 
-### Async
+### 비동기
 
 ```python
 async with async_client.messages.stream(
@@ -26,11 +26,11 @@ async with async_client.messages.stream(
 
 ---
 
-## Handling Different Content Types
+## 다양한 콘텐츠 유형 처리
 
-Claude may return text, thinking blocks, or tool use. Handle each appropriately:
+Claude는 텍스트, 사고 블록 또는 도구 사용을 반환할 수 있습니다. 각각을 적절하게 처리하세요:
 
-> **Opus 4.6:** Use `thinking: {type: "adaptive"}`. On older models, use `thinking: {type: "enabled", budget_tokens: N}` instead.
+> **Opus 4.6:** `thinking: {type: "adaptive"}`를 사용하세요. 이전 모델에서는 `thinking: {type: "enabled", budget_tokens: N}`을 대신 사용하세요.
 
 ```python
 with client.messages.stream(
@@ -55,9 +55,9 @@ with client.messages.stream(
 
 ---
 
-## Streaming with Tool Use
+## 도구 사용과 함께 스트리밍
 
-The Python tool runner currently returns complete messages. Use streaming for individual API calls within a manual loop if you need per-token streaming with tools:
+Python 도구 러너는 현재 완전한 메시지를 반환합니다. 도구와 함께 토큰 단위 스트리밍이 필요한 경우, 수동 루프 내에서 개별 API 호출에 스트리밍을 사용하세요:
 
 ```python
 with client.messages.stream(
@@ -75,7 +75,7 @@ with client.messages.stream(
 
 ---
 
-## Getting the Final Message
+## 최종 메시지 가져오기
 
 ```python
 with client.messages.stream(
@@ -93,7 +93,7 @@ with client.messages.stream(
 
 ---
 
-## Streaming with Progress Updates
+## 진행 상태 업데이트와 함께 스트리밍
 
 ```python
 def stream_with_progress(client, **kwargs):
@@ -121,7 +121,7 @@ def stream_with_progress(client, **kwargs):
 
 ---
 
-## Error Handling in Streams
+## 스트림에서의 오류 처리
 
 ```python
 try:
@@ -142,21 +142,21 @@ except anthropic.APIStatusError as e:
 
 ---
 
-## Stream Event Types
+## 스트림 이벤트 유형
 
-| Event Type            | Description                 | When it fires                     |
+| 이벤트 유형            | 설명                        | 발생 시점                          |
 | --------------------- | --------------------------- | --------------------------------- |
-| `message_start`       | Contains message metadata   | Once at the beginning             |
-| `content_block_start` | New content block beginning | When a text/tool_use block starts |
-| `content_block_delta` | Incremental content update  | For each token/chunk              |
-| `content_block_stop`  | Content block complete      | When a block finishes             |
-| `message_delta`       | Message-level updates       | Contains `stop_reason`, usage     |
-| `message_stop`        | Message complete            | Once at the end                   |
+| `message_start`       | 메시지 메타데이터 포함        | 시작 시 한 번                      |
+| `content_block_start` | 새 콘텐츠 블록 시작           | 텍스트/도구 사용 블록이 시작될 때    |
+| `content_block_delta` | 증분 콘텐츠 업데이트          | 각 토큰/청크마다                    |
+| `content_block_stop`  | 콘텐츠 블록 완료              | 블록이 완료될 때                    |
+| `message_delta`       | 메시지 수준 업데이트          | `stop_reason`, 사용량 정보 포함     |
+| `message_stop`        | 메시지 완료                   | 끝에서 한 번                       |
 
-## Best Practices
+## 모범 사례
 
-1. **Always flush output** — Use `flush=True` to show tokens immediately
-2. **Handle partial responses** — If the stream is interrupted, you may have incomplete content
-3. **Track token usage** — The `message_delta` event contains usage information
-4. **Use timeouts** — Set appropriate timeouts for your application
-5. **Default to streaming** — Use `.get_final_message()` to get the complete response even when streaming, giving you timeout protection without needing to handle individual events
+1. **항상 출력을 플러시하세요** — 토큰을 즉시 표시하려면 `flush=True`를 사용하세요
+2. **부분 응답을 처리하세요** — 스트림이 중단되면 불완전한 콘텐츠가 있을 수 있습니다
+3. **토큰 사용량을 추적하세요** — `message_delta` 이벤트에 사용량 정보가 포함됩니다
+4. **타임아웃을 설정하세요** — 애플리케이션에 적절한 타임아웃을 설정하세요
+5. **스트리밍을 기본으로 사용하세요** — `.get_final_message()`를 사용하면 개별 이벤트를 처리하지 않아도 타임아웃 보호와 함께 완전한 응답을 받을 수 있습니다

@@ -1,14 +1,14 @@
 # Claude API — PHP
 
-> **Note:** The PHP SDK is the official Anthropic SDK for PHP. Tool runner and Agent SDK are not available. Bedrock, Vertex AI, and Foundry clients are supported.
+> **참고:** PHP SDK는 PHP용 공식 Anthropic SDK입니다. 도구 실행기와 Agent SDK는 사용할 수 없습니다. Bedrock, Vertex AI, Foundry 클라이언트가 지원됩니다.
 
-## Installation
+## 설치
 
 ```bash
 composer require "anthropic-ai/sdk"
 ```
 
-## Client Initialization
+## 클라이언트 초기화
 
 ```php
 use Anthropic\Client;
@@ -52,7 +52,7 @@ $client = Foundry\Client::withCredentials(
 
 ---
 
-## Basic Message Request
+## 기본 메시지 요청
 
 ```php
 $message = $client->messages->create(
@@ -74,7 +74,7 @@ foreach ($message->content as $block) {
 }
 ```
 
-If you only want the first text block:
+첫 번째 텍스트 블록만 필요한 경우:
 
 ```php
 foreach ($message->content as $block) {
@@ -87,9 +87,9 @@ foreach ($message->content as $block) {
 
 ---
 
-## Streaming
+## 스트리밍
 
-> **Requires SDK v0.5.0+.** v0.4.0 and earlier used a single `$params` array; calling with named parameters throws `Unknown named parameter $model`. Upgrade: `composer require "anthropic-ai/sdk:^0.6"`
+> **SDK v0.5.0 이상 필요.** v0.4.0 이하에서는 단일 `$params` 배열을 사용했습니다. 명명된 매개변수로 호출하면 `Unknown named parameter $model` 오류가 발생합니다. 업그레이드: `composer require "anthropic-ai/sdk:^0.6"`
 
 ```php
 use Anthropic\Messages\RawContentBlockDeltaEvent;
@@ -112,9 +112,9 @@ foreach ($stream as $event) {
 
 ---
 
-## Tool Use (Manual Loop)
+## 도구 사용 (수동 루프)
 
-Tools are passed as arrays. **The SDK uses camelCase keys** (`inputSchema`, `toolUseID`, `stopReason`) and auto-maps to the API's snake_case on the wire — since v0.5.0. See [shared tool use concepts](../shared/tool-use-concepts.md) for the loop pattern.
+도구는 배열로 전달됩니다. **SDK는 camelCase 키를 사용합니다** (`inputSchema`, `toolUseID`, `stopReason`). v0.5.0부터 API의 snake_case로 자동 매핑됩니다. 루프 패턴에 대해서는 [공유 도구 사용 개념](../shared/tool-use-concepts.md)을 참조하세요.
 
 ```php
 use Anthropic\Messages\ToolUseBlock;
@@ -178,14 +178,14 @@ foreach ($response->content as $block) {
 }
 ```
 
-`$block->type === 'tool_use'` also works; `instanceof ToolUseBlock` narrows for PHPStan.
+`$block->type === 'tool_use'`도 사용 가능합니다. `instanceof ToolUseBlock`은 PHPStan을 위해 타입을 좁혀줍니다.
 
 
 ---
 
-## Extended Thinking
+## 확장 사고
 
-**Adaptive thinking is the recommended mode for Claude 4.6+ models.** Claude decides dynamically when and how much to think.
+**적응형 사고는 Claude 4.6+ 모델에 권장되는 모드입니다.** Claude가 언제, 얼마나 사고할지 동적으로 결정합니다.
 
 ```php
 use Anthropic\Messages\ThinkingBlock;
@@ -211,15 +211,15 @@ foreach ($message->content as $block) {
 }
 ```
 
-> **Deprecated:** `['type' => 'enabled', 'budgetTokens' => N]` (fixed-budget extended thinking) still works on Claude 4.6 but is deprecated. Use adaptive thinking above.
+> **지원 중단:** `['type' => 'enabled', 'budgetTokens' => N]` (고정 예산 확장 사고)는 Claude 4.6에서 여전히 작동하지만 지원 중단되었습니다. 위의 적응형 사고를 사용하세요.
 
-`$block->type === 'thinking'` also works for the check; `instanceof` narrows for PHPStan.
+`$block->type === 'thinking'`도 확인에 사용할 수 있습니다. `instanceof`는 PHPStan을 위해 타입을 좁혀줍니다.
 
 ---
 
-## Beta Features & Server-Side Tools
+## 베타 기능 및 서버 측 도구
 
-**`betas:` is NOT a param on `$client->messages->create()`** — it only exists on the beta namespace. Use it for features that need an explicit opt-in header:
+**`betas:`는 `$client->messages->create()`의 매개변수가 아닙니다** — 베타 네임스페이스에만 존재합니다. 명시적 옵트인 헤더가 필요한 기능에 사용하세요:
 
 ```php
 use Anthropic\Beta\Messages\BetaRequestMCPServerURLDefinition;
@@ -238,4 +238,4 @@ $response = $client->beta->messages->create(
 );
 ```
 
-**Server-side tools** (bash, web_search, text_editor, code_execution) are GA and work on both paths — `Anthropic\Messages\ToolBash20250124` / `WebSearchTool20260209` / `ToolTextEditor20250728` / `CodeExecutionTool20260120` for non-beta, `Anthropic\Beta\Messages\BetaToolBash20250124` / `BetaWebSearchTool20260209` / `BetaToolTextEditor20250728` / `BetaCodeExecutionTool20260120` for beta. No `betas:` header needed for these.
+**서버 측 도구** (bash, web_search, text_editor, code_execution)는 GA이며 두 경로 모두에서 작동합니다 — 비베타용 `Anthropic\Messages\ToolBash20250124` / `WebSearchTool20260209` / `ToolTextEditor20250728` / `CodeExecutionTool20260120`, 베타용 `Anthropic\Beta\Messages\BetaToolBash20250124` / `BetaWebSearchTool20260209` / `BetaToolTextEditor20250728` / `BetaCodeExecutionTool20260120`. 이들에는 `betas:` 헤더가 필요하지 않습니다.

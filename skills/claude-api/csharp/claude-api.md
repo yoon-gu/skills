@@ -1,14 +1,14 @@
 # Claude API — C#
 
-> **Note:** The C# SDK is the official Anthropic SDK for C#. Tool use is supported via the Messages API. A class-annotation-based tool runner is not available; use raw tool definitions with JSON schema. The SDK also supports Microsoft.Extensions.AI IChatClient integration with function invocation.
+> **참고:** C# SDK는 C#용 공식 Anthropic SDK입니다. 도구 사용은 Messages API를 통해 지원됩니다. 클래스 어노테이션 기반 도구 실행기는 사용할 수 없습니다. JSON 스키마를 사용한 원시 도구 정의를 사용하세요. SDK는 함수 호출을 포함한 Microsoft.Extensions.AI IChatClient 통합도 지원합니다.
 
-## Installation
+## 설치
 
 ```bash
 dotnet add package Anthropic
 ```
 
-## Client Initialization
+## 클라이언트 초기화
 
 ```csharp
 using Anthropic;
@@ -24,7 +24,7 @@ AnthropicClient client = new() {
 
 ---
 
-## Basic Message Request
+## 기본 메시지 요청
 
 ```csharp
 using Anthropic.Models.Messages;
@@ -48,7 +48,7 @@ foreach (var text in response.Content.Select(b => b.Value).OfType<TextBlock>())
 
 ---
 
-## Streaming
+## 스트리밍
 
 ```csharp
 using Anthropic.Models.Messages;
@@ -70,13 +70,13 @@ await foreach (RawMessageStreamEvent streamEvent in client.Messages.CreateStream
 }
 ```
 
-**`RawMessageStreamEvent` TryPick methods** (naming drops the `Message`/`Raw` prefix): `TryPickStart`, `TryPickDelta`, `TryPickStop`, `TryPickContentBlockStart`, `TryPickContentBlockDelta`, `TryPickContentBlockStop`. There is no `TryPickMessageStop` — use `TryPickStop`.
+**`RawMessageStreamEvent` TryPick 메서드** (이름에서 `Message`/`Raw` 접두사가 제거됨): `TryPickStart`, `TryPickDelta`, `TryPickStop`, `TryPickContentBlockStart`, `TryPickContentBlockDelta`, `TryPickContentBlockStop`. `TryPickMessageStop`은 없습니다 — `TryPickStop`을 사용하세요.
 
 ---
 
-## Thinking
+## 사고
 
-**Adaptive thinking is the recommended mode for Claude 4.6+ models.** Claude decides dynamically when and how much to think.
+**적응형 사고는 Claude 4.6+ 모델에 권장되는 모드입니다.** Claude가 언제, 얼마나 사고할지 동적으로 결정합니다.
 
 ```csharp
 using Anthropic.Models.Messages;
@@ -108,17 +108,17 @@ foreach (var block in response.Content)
 }
 ```
 
-> **Deprecated:** `new ThinkingConfigEnabled { BudgetTokens = N }` (fixed-budget extended thinking) still works on Claude 4.6 but is deprecated. Use adaptive thinking above.
+> **지원 중단:** `new ThinkingConfigEnabled { BudgetTokens = N }` (고정 예산 확장 사고)는 Claude 4.6에서 여전히 작동하지만 지원 중단되었습니다. 위의 적응형 사고를 사용하세요.
 
-Alternative to `TryPick*`: `.Select(b => b.Value).OfType<ThinkingBlock>()` (same LINQ pattern as the Basic Message example).
+`TryPick*`의 대안: `.Select(b => b.Value).OfType<ThinkingBlock>()` (기본 메시지 예제와 동일한 LINQ 패턴).
 
 ---
 
-## Tool Use
+## 도구 사용
 
-### Defining a tool
+### 도구 정의
 
-`Tool` (NOT `ToolParam`) with an `InputSchema` record. `InputSchema.Type` is auto-set to `"object"` by the constructor — don't set it. `ToolUnion` has an implicit conversion from `Tool`, triggered by the collection expression `[...]`.
+`Tool` (`ToolParam`이 아님)과 `InputSchema` 레코드를 사용합니다. `InputSchema.Type`은 생성자에 의해 자동으로 `"object"`로 설정됩니다 — 직접 설정하지 마세요. `ToolUnion`은 `Tool`로부터 암시적 변환이 가능하며, 컬렉션 표현식 `[...]`에 의해 트리거됩니다.
 
 ```csharp
 using System.Text.Json;
@@ -145,12 +145,12 @@ var parameters = new MessageCreateParams
 };
 ```
 
-Derived from `anthropic-sdk-csharp/src/Anthropic/Models/Messages/Tool.cs` and `ToolUnion.cs:799` (implicit conversion).
+`anthropic-sdk-csharp/src/Anthropic/Models/Messages/Tool.cs` 및 `ToolUnion.cs:799` (암시적 변환)에서 파생되었습니다.
 
-See [shared tool use concepts](../shared/tool-use-concepts.md) for the loop pattern.
-### Converting response content to the follow-up assistant message
+루프 패턴에 대해서는 [공유 도구 사용 개념](../shared/tool-use-concepts.md)을 참조하세요.
+### 응답 콘텐츠를 후속 어시스턴트 메시지로 변환
 
-When echoing Claude's response back in the assistant turn, **there is no `.ToParam()` helper** — manually reconstruct each `ContentBlock` variant as its `*Param` counterpart. Do NOT use `new ContentBlockParam(block.Json)`: it compiles and serializes, but `.Value` stays `null` so `TryPick*`/`Validate()` fail (degraded JSON pass-through, not the typed path).
+Claude의 응답을 어시스턴트 턴에서 다시 전달할 때, **`.ToParam()` 헬퍼가 없습니다** — 각 `ContentBlock` 변형을 해당하는 `*Param` 대응물로 수동 재구성하세요. `new ContentBlockParam(block.Json)`을 사용하지 마세요: 컴파일되고 직렬화되지만, `.Value`가 `null`로 유지되어 `TryPick*`/`Validate()`가 실패합니다 (타입이 지정된 경로가 아닌 저하된 JSON 패스스루).
 
 ```csharp
 using Anthropic.Models.Messages;
@@ -209,13 +209,13 @@ List<MessageParam> followUpMessages =
 ];
 ```
 
-`ToolResultBlockParam` has no tuple constructor — use the object initializer. `Content` is a string-or-list union; a plain `string` implicitly converts.
+`ToolResultBlockParam`에는 튜플 생성자가 없습니다 — 객체 이니셜라이저를 사용하세요. `Content`는 문자열 또는 리스트 유니온이며, 일반 `string`이 암시적으로 변환됩니다.
 
 ---
 
-## Context Editing / Compaction (Beta)
+## 컨텍스트 편집 / 압축 (베타)
 
-**Beta-namespace prefix is inconsistent** (source-verified against `src/Anthropic/Models/Beta/Messages/*.cs` @ 12.8.0). No prefix: `MessageCreateParams`, `MessageCountTokensParams`, `Role`. **Everything else has the `Beta` prefix**: `BetaMessageParam`, `BetaMessage`, `BetaContentBlock`, `BetaToolUseBlock`, all block param types. The unprefixed `Role` WILL collide with `Anthropic.Models.Messages.Role` if you import both namespaces (CS0104). Safest: import only Beta; if mixing, alias the beta `Role`:
+**베타 네임스페이스 접두사가 일관적이지 않습니다** (`src/Anthropic/Models/Beta/Messages/*.cs` @ 12.8.0에서 소스 검증됨). 접두사 없음: `MessageCreateParams`, `MessageCountTokensParams`, `Role`. **나머지는 모두 `Beta` 접두사를 가집니다**: `BetaMessageParam`, `BetaMessage`, `BetaContentBlock`, `BetaToolUseBlock`, 모든 블록 매개변수 타입. 접두사가 없는 `Role`은 두 네임스페이스를 모두 임포트하면 `Anthropic.Models.Messages.Role`과 충돌합니다 (CS0104). 가장 안전한 방법: Beta만 임포트하세요. 혼합 사용 시 베타 `Role`에 별칭을 지정하세요:
 
 ```csharp
 using Anthropic.Models.Beta.Messages;
@@ -224,7 +224,7 @@ using NonBeta = Anthropic.Models.Messages;  // only if you also need non-beta ty
 ```
 
 
-`BetaMessage.Content` is `IReadOnlyList<BetaContentBlock>` — a 15-variant discriminated union. Narrow with `TryPick*`. **Response `BetaContentBlock` is NOT assignable to param `BetaContentBlockParam`** — there's no `.ToParam()` in C#. Round-trip by converting each block:
+`BetaMessage.Content`는 `IReadOnlyList<BetaContentBlock>`입니다 — 15개 변형의 구분된 유니온입니다. `TryPick*`으로 좁히세요. **응답 `BetaContentBlock`은 매개변수 `BetaContentBlockParam`에 할당할 수 없습니다** — C#에는 `.ToParam()`이 없습니다. 각 블록을 변환하여 왕복하세요:
 
 ```csharp
 using Anthropic.Models.Beta.Messages;
@@ -271,9 +271,9 @@ foreach (var b in resp.Content)
 messages.Add(new BetaMessageParam { Role = Role.Assistant, Content = paramBlocks });
 ```
 
-All 15 `BetaContentBlock.TryPick*` variants: `Text`, `Thinking`, `RedactedThinking`, `ToolUse`, `ServerToolUse`, `WebSearchToolResult`, `WebFetchToolResult`, `CodeExecutionToolResult`, `BashCodeExecutionToolResult`, `TextEditorCodeExecutionToolResult`, `ToolSearchToolResult`, `McpToolUse`, `McpToolResult`, `ContainerUpload`, `Compaction`.
+15개의 `BetaContentBlock.TryPick*` 변형 전체: `Text`, `Thinking`, `RedactedThinking`, `ToolUse`, `ServerToolUse`, `WebSearchToolResult`, `WebFetchToolResult`, `CodeExecutionToolResult`, `BashCodeExecutionToolResult`, `TextEditorCodeExecutionToolResult`, `ToolSearchToolResult`, `McpToolUse`, `McpToolResult`, `ContainerUpload`, `Compaction`.
 
-**`BetaToolUseBlock.Input` is `IReadOnlyDictionary<string, JsonElement>`** — index by key then call the `JsonElement` extractor:
+**`BetaToolUseBlock.Input`은 `IReadOnlyDictionary<string, JsonElement>`입니다** — 키로 인덱싱한 다음 `JsonElement` 추출기를 호출하세요:
 
 ```csharp
 if (block.TryPickToolUse(out BetaToolUseBlock? tu))
@@ -285,21 +285,21 @@ if (block.TryPickToolUse(out BetaToolUseBlock? tu))
 
 ---
 
-## Effort Parameter
+## 노력 매개변수
 
-Effort is nested under `OutputConfig`, NOT a top-level property. `ApiEnum<string, Effort>` has an implicit conversion from the enum, so assign `Effort.High` directly.
+노력은 `OutputConfig` 아래에 중첩되며, 최상위 속성이 아닙니다. `ApiEnum<string, Effort>`는 열거형으로부터 암시적 변환이 가능하므로 `Effort.High`를 직접 할당하세요.
 
 ```csharp
 OutputConfig = new OutputConfig { Effort = Effort.High },
 ```
 
-Values: `Effort.Low`, `Effort.Medium`, `Effort.High`, `Effort.Max`. Combine with `Thinking = new ThinkingConfigAdaptive()` for cost-quality control.
+값: `Effort.Low`, `Effort.Medium`, `Effort.High`, `Effort.Max`. 비용-품질 제어를 위해 `Thinking = new ThinkingConfigAdaptive()`와 결합하세요.
 
 ---
 
-## Prompt Caching
+## 프롬프트 캐싱
 
-`System` takes `MessageCreateParamsSystem?` — a union of `string` or `List<TextBlockParam>`. There is no `SystemTextBlockParam`; use plain `TextBlockParam`. The implicit conversion needs the concrete `List<TextBlockParam>` type (array literals won't convert).
+`System`은 `MessageCreateParamsSystem?`을 받습니다 — `string` 또는 `List<TextBlockParam>`의 유니온입니다. `SystemTextBlockParam`은 없으며, 일반 `TextBlockParam`을 사용하세요. 암시적 변환에는 구체적인 `List<TextBlockParam>` 타입이 필요합니다 (배열 리터럴은 변환되지 않습니다).
 
 ```csharp
 System = new List<TextBlockParam> {
@@ -310,11 +310,11 @@ System = new List<TextBlockParam> {
 },
 ```
 
-Optional `Ttl` on `CacheControlEphemeral`: `new() { Ttl = Ttl.Ttl1h }` or `Ttl.Ttl5m`. `CacheControl` also exists on `Tool.CacheControl` and top-level `MessageCreateParams.CacheControl`.
+`CacheControlEphemeral`의 선택적 `Ttl`: `new() { Ttl = Ttl.Ttl1h }` 또는 `Ttl.Ttl5m`. `CacheControl`은 `Tool.CacheControl` 및 최상위 `MessageCreateParams.CacheControl`에도 존재합니다.
 
 ---
 
-## Token Counting
+## 토큰 카운팅
 
 ```csharp
 MessageTokensCount result = await client.Messages.CountTokens(new MessageCountTokensParams {
@@ -324,11 +324,11 @@ MessageTokensCount result = await client.Messages.CountTokens(new MessageCountTo
 long tokens = result.InputTokens;
 ```
 
-`MessageCountTokensParams.Tools` uses a different union type (`MessageCountTokensTool`) than `MessageCreateParams.Tools` (`ToolUnion`) — if you're passing tools, the compiler will tell you when it matters.
+`MessageCountTokensParams.Tools`는 `MessageCreateParams.Tools` (`ToolUnion`)와 다른 유니온 타입 (`MessageCountTokensTool`)을 사용합니다 — 도구를 전달할 때 중요한 경우 컴파일러가 알려줄 것입니다.
 
 ---
 
-## Structured Output
+## 구조화된 출력
 
 ```csharp
 OutputConfig = new OutputConfig {
@@ -343,13 +343,13 @@ OutputConfig = new OutputConfig {
 },
 ```
 
-`JsonOutputFormat.Type` is auto-set to `"json_schema"` by the constructor. `Schema` is `required`.
+`JsonOutputFormat.Type`은 생성자에 의해 자동으로 `"json_schema"`로 설정됩니다. `Schema`는 필수입니다.
 
 ---
 
-## PDF / Document Input
+## PDF / 문서 입력
 
-`DocumentBlockParam` takes a `DocumentBlockParamSource` union: `Base64PdfSource` / `UrlPdfSource` / `PlainTextSource` / `ContentBlockSource`. `Base64PdfSource` auto-sets `MediaType = "application/pdf"` and `Type = "base64"`.
+`DocumentBlockParam`은 `DocumentBlockParamSource` 유니온을 받습니다: `Base64PdfSource` / `UrlPdfSource` / `PlainTextSource` / `ContentBlockSource`. `Base64PdfSource`는 자동으로 `MediaType = "application/pdf"` 및 `Type = "base64"`를 설정합니다.
 
 ```csharp
 new MessageParam {
@@ -363,9 +363,9 @@ new MessageParam {
 
 ---
 
-## Server-Side Tools
+## 서버 측 도구
 
-Web search, bash, text editor, and code execution are built-in server tools. Type names are version-suffixed; constructors auto-set `name`/`type`. All implicit-convert to `ToolUnion`.
+웹 검색, bash, 텍스트 편집기, 코드 실행은 내장 서버 도구입니다. 타입 이름에는 버전 접미사가 붙으며, 생성자가 자동으로 `name`/`type`을 설정합니다. 모두 `ToolUnion`으로 암시적 변환됩니다.
 
 ```csharp
 Tools = [
@@ -376,13 +376,13 @@ Tools = [
 ],
 ```
 
-Also available: `WebFetchTool20260209`, `MemoryTool20250818`. `WebSearchTool20260209` optionals: `AllowedDomains`, `BlockedDomains`, `MaxUses`, `UserLocation`.
+추가 사용 가능: `WebFetchTool20260209`, `MemoryTool20250818`. `WebSearchTool20260209` 선택 옵션: `AllowedDomains`, `BlockedDomains`, `MaxUses`, `UserLocation`.
 
 ---
 
-## Files API (Beta)
+## 파일 API (베타)
 
-Files live under `client.Beta.Files` (namespace `Anthropic.Models.Beta.Files`). `BinaryContent` implicit-converts from `Stream` and `byte[]`.
+파일은 `client.Beta.Files` (네임스페이스 `Anthropic.Models.Beta.Files`) 아래에 있습니다. `BinaryContent`는 `Stream` 및 `byte[]`로부터 암시적 변환됩니다.
 
 ```csharp
 using Anthropic.Models.Beta.Files;
@@ -397,4 +397,4 @@ new BetaRequestDocumentBlock {
 }
 ```
 
-The non-beta `DocumentBlockParamSource` union has no file-ID variant — file references need `client.Beta.Messages.Create()`.
+비베타 `DocumentBlockParamSource` 유니온에는 파일 ID 변형이 없습니다 — 파일 참조에는 `client.Beta.Messages.Create()`가 필요합니다.

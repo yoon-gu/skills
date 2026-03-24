@@ -1,12 +1,12 @@
-# Tool Use — TypeScript
+# 도구 사용 — TypeScript
 
-For conceptual overview (tool definitions, tool choice, tips), see [shared/tool-use-concepts.md](../../shared/tool-use-concepts.md).
+개념 개요(도구 정의, 도구 선택, 팁)는 [shared/tool-use-concepts.md](../../shared/tool-use-concepts.md)를 참조하세요.
 
-## Tool Runner (Recommended)
+## Tool Runner (권장)
 
-**Beta:** The tool runner is in beta in the TypeScript SDK.
+**베타:** Tool Runner는 TypeScript SDK에서 베타 상태입니다.
 
-Use `betaZodTool` with Zod schemas to define tools with a `run` function, then pass them to `client.beta.messages.toolRunner()`:
+Zod 스키마와 함께 `betaZodTool`을 사용하여 `run` 함수가 있는 도구를 정의한 다음, `client.beta.messages.toolRunner()`에 전달합니다:
 
 ```typescript
 import Anthropic from "@anthropic-ai/sdk";
@@ -39,18 +39,18 @@ const finalMessage = await client.beta.messages.toolRunner({
 console.log(finalMessage.content);
 ```
 
-**Key benefits of the tool runner:**
+**Tool Runner의 주요 이점:**
 
-- No manual loop — the SDK handles calling tools and feeding results back
-- Type-safe tool inputs via Zod schemas
-- Tool schemas are generated automatically from Zod definitions
-- Iteration stops automatically when Claude has no more tool calls
+- 수동 루프 불필요 -- SDK가 도구 호출과 결과 피드백을 처리합니다
+- Zod 스키마를 통한 타입 안전한 도구 입력
+- Zod 정의에서 도구 스키마가 자동으로 생성됩니다
+- Claude에 더 이상 도구 호출이 없으면 반복이 자동으로 중지됩니다
 
 ---
 
-## Manual Agentic Loop
+## 수동 에이전트 루프
 
-Use this when you need fine-grained control (custom logging, conditional tool execution, streaming individual iterations, human-in-the-loop approval):
+세밀한 제어가 필요할 때 사용합니다 (커스텀 로깅, 조건부 도구 실행, 개별 반복 스트리밍, 사람 개입 승인):
 
 ```typescript
 import Anthropic from "@anthropic-ai/sdk";
@@ -95,9 +95,9 @@ while (true) {
 }
 ```
 
-### Streaming Manual Loop
+### 스트리밍 수동 루프
 
-Use `client.messages.stream()` + `finalMessage()` instead of `.create()` when you need streaming within a manual loop. Text deltas are streamed on each iteration; `finalMessage()` collects the complete `Message` so you can inspect `stop_reason` and extract tool-use blocks:
+수동 루프 내에서 스트리밍이 필요한 경우 `.create()` 대신 `client.messages.stream()` + `finalMessage()`를 사용합니다. 각 반복에서 텍스트 델타가 스트리밍되며, `finalMessage()`는 완전한 `Message`를 수집하여 `stop_reason`을 검사하고 tool-use 블록을 추출할 수 있게 합니다:
 
 ```typescript
 import Anthropic from "@anthropic-ai/sdk";
@@ -151,15 +151,15 @@ while (true) {
 }
 ```
 
-> **Important:** Don't wrap `.on()` events in `new Promise()` to collect the final message — use `stream.finalMessage()` instead. The SDK handles all error/abort/completion states internally.
+> **중요:** 최종 메시지를 수집하기 위해 `.on()` 이벤트를 `new Promise()`로 감싸지 마세요 -- 대신 `stream.finalMessage()`를 사용하세요. SDK가 모든 오류/중단/완료 상태를 내부적으로 처리합니다.
 
-> **Error handling in the loop:** Use the SDK's typed exceptions (e.g., `Anthropic.RateLimitError`, `Anthropic.APIError`) — see [Error Handling](./README.md#error-handling) for examples. Don't check error messages with string matching.
+> **루프 내 오류 처리:** SDK의 타입이 지정된 예외(예: `Anthropic.RateLimitError`, `Anthropic.APIError`)를 사용하세요 -- 예제는 [오류 처리](./README.md#error-handling)를 참조하세요. 문자열 매칭으로 오류 메시지를 확인하지 마세요.
 
-> **SDK types:** Use `Anthropic.MessageParam`, `Anthropic.Tool`, `Anthropic.ToolUseBlock`, `Anthropic.ToolResultBlockParam`, `Anthropic.Message`, etc. for all API-related data structures. Don't redefine equivalent interfaces.
+> **SDK 타입:** 모든 API 관련 데이터 구조에 `Anthropic.MessageParam`, `Anthropic.Tool`, `Anthropic.ToolUseBlock`, `Anthropic.ToolResultBlockParam`, `Anthropic.Message` 등을 사용하세요. 동일한 인터페이스를 다시 정의하지 마세요.
 
 ---
 
-## Handling Tool Results
+## 도구 결과 처리
 
 ```typescript
 const response = await client.messages.create({
@@ -194,7 +194,7 @@ for (const block of response.content) {
 
 ---
 
-## Tool Choice
+## 도구 선택
 
 ```typescript
 const response = await client.messages.create({
@@ -208,11 +208,11 @@ const response = await client.messages.create({
 
 ---
 
-## Server-Side Tools
+## 서버 측 도구
 
-Version-suffixed `type` literals; `name` is fixed per interface. Pass plain object literals — the `ToolUnion` type is satisfied structurally. **The `name`/`type` pair must match the interface**: mixing `str_replace_based_edit_tool` (20250728 name) with `text_editor_20250124` (which expects `str_replace_editor`) is a TS2322.
+버전 접미사가 있는 `type` 리터럴이며, `name`은 인터페이스별로 고정됩니다. 일반 객체 리터럴을 전달하세요 -- `ToolUnion` 타입은 구조적으로 충족됩니다. **`name`/`type` 쌍은 인터페이스와 일치해야 합니다**: `str_replace_based_edit_tool` (20250728 name)과 `text_editor_20250124` (`str_replace_editor`를 예상하는)를 혼합하면 TS2322 오류가 발생합니다.
 
-**Don't type-annotate as `Tool[]`** — `Tool` is just the custom-tool variant. Let structural typing infer from the `tools` param, or annotate as `Anthropic.Messages.ToolUnion[]` if you must:
+**`Tool[]`로 타입 주석을 달지 마세요** -- `Tool`은 커스텀 도구 변형일 뿐입니다. `tools` 매개변수에서 구조적 타이핑이 추론하도록 하거나, 필요한 경우 `Anthropic.Messages.ToolUnion[]`으로 주석을 달아주세요:
 
 ```typescript
 // ✓ let inference work — no annotation
@@ -232,7 +232,7 @@ const response = await client.messages.create({
 // const tools: Anthropic.Tool[] = [{ type: "text_editor_20250728", ... }]
 ```
 
-| Interface | `name` | `type` |
+| 인터페이스 | `name` | `type` |
 |---|---|---|
 | `ToolTextEditor20250124` | `str_replace_editor` | `text_editor_20250124` |
 | `ToolTextEditor20250429` | `str_replace_based_edit_tool` | `text_editor_20250429` |
@@ -242,14 +242,14 @@ const response = await client.messages.create({
 | `WebFetchTool20260209` | `web_fetch` | `web_fetch_20260209` |
 | `CodeExecutionTool20260120` | `code_execution` | `code_execution_20260120` |
 
-**Don't mix beta and non-beta types**: if you call `client.beta.messages.create()`, the response `content` is `BetaContentBlock[]` — you cannot pass that to a non-beta `ContentBlockParam[]` without narrowing each element.
+**베타와 비베타 타입을 혼합하지 마세요**: `client.beta.messages.create()`를 호출하면 응답 `content`는 `BetaContentBlock[]`입니다 -- 각 요소를 축소하지 않고는 비베타 `ContentBlockParam[]`에 전달할 수 없습니다.
 
 ---
 
 
-## Code Execution
+## 코드 실행
 
-### Basic Usage
+### 기본 사용법
 
 ```typescript
 import Anthropic from "@anthropic-ai/sdk";
@@ -270,9 +270,9 @@ const response = await client.messages.create({
 });
 ```
 
-### Reading Local Files (ESM note)
+### 로컬 파일 읽기 (ESM 참고사항)
 
-`__dirname` doesn't exist in ES modules. For script-relative paths use `import.meta.url`:
+ES 모듈에서는 `__dirname`이 존재하지 않습니다. 스크립트 기준 경로를 사용하려면 `import.meta.url`을 사용하세요:
 
 ```typescript
 import { readFileSync } from "fs";
@@ -283,9 +283,9 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const pdfBytes = readFileSync(join(__dirname, "sample.pdf"));
 ```
 
-Or use a CWD-relative path if the script runs from a known directory: `readFileSync("./sample.pdf")`.
+또는 스크립트가 알려진 디렉토리에서 실행되는 경우 CWD 기준 경로를 사용하세요: `readFileSync("./sample.pdf")`.
 
-### Upload Files for Analysis
+### 분석을 위한 파일 업로드
 
 ```typescript
 import Anthropic, { toFile } from "@anthropic-ai/sdk";
@@ -325,7 +325,7 @@ const response = await client.messages.create(
 );
 ```
 
-### Retrieve Generated Files
+### 생성된 파일 가져오기
 
 ```typescript
 import path from "path";
@@ -360,7 +360,7 @@ for (const block of response.content) {
 }
 ```
 
-### Container Reuse
+### 컨테이너 재사용
 
 ```typescript
 // First request: set up environment
@@ -396,9 +396,9 @@ const response2 = await client.messages.create({
 
 ---
 
-## Memory Tool
+## 메모리 도구
 
-### Basic Usage
+### 기본 사용법
 
 ```typescript
 const response = await client.messages.create({
@@ -414,9 +414,9 @@ const response = await client.messages.create({
 });
 ```
 
-### SDK Memory Helper
+### SDK 메모리 헬퍼
 
-Use `betaMemoryTool` with a `MemoryToolHandlers` implementation:
+`MemoryToolHandlers` 구현과 함께 `betaMemoryTool`을 사용합니다:
 
 ```typescript
 import {
@@ -447,15 +447,15 @@ for await (const message of runner) {
 }
 ```
 
-For full implementation examples, use WebFetch:
+전체 구현 예제는 WebFetch를 사용하세요:
 
 - `https://github.com/anthropics/anthropic-sdk-typescript/blob/main/examples/tools-helpers-memory.ts`
 
 ---
 
-## Structured Outputs
+## 구조화된 출력
 
-### JSON Outputs (Zod — Recommended)
+### JSON 출력 (Zod -- 권장)
 
 ```typescript
 import Anthropic from "@anthropic-ai/sdk";
@@ -491,7 +491,7 @@ const response = await client.messages.parse({
 console.log(response.parsed_output!.name); // "Jane Doe"
 ```
 
-### Strict Tool Use
+### 엄격한 도구 사용
 
 ```typescript
 const response = await client.messages.create({

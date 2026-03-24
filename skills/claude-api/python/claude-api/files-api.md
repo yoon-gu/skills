@@ -1,20 +1,20 @@
 # Files API — Python
 
-The Files API uploads files for use in Messages API requests. Reference files via `file_id` in content blocks, avoiding re-uploads across multiple API calls.
+Files API는 Messages API 요청에서 사용할 파일을 업로드합니다. 여러 API 호출에서 재업로드를 피하고 콘텐츠 블록에서 `file_id`로 파일을 참조합니다.
 
-**Beta:** Pass `betas=["files-api-2025-04-14"]` in your API calls (the SDK sets the required header automatically).
+**베타:** API 호출에 `betas=["files-api-2025-04-14"]`를 전달하세요 (SDK가 필요한 헤더를 자동으로 설정합니다).
 
-## Key Facts
+## 주요 사항
 
-- Maximum file size: 500 MB
-- Total storage: 100 GB per organization
-- Files persist until deleted
-- File operations (upload, list, delete) are free; content used in messages is billed as input tokens
-- Not available on Amazon Bedrock or Google Vertex AI
+- 최대 파일 크기: 500 MB
+- 총 저장 용량: 조직당 100 GB
+- 파일은 삭제할 때까지 유지됩니다
+- 파일 작업(업로드, 목록, 삭제)은 무료이며, 메시지에서 사용된 콘텐츠는 입력 토큰으로 과금됩니다
+- Amazon Bedrock 또는 Google Vertex AI에서는 사용할 수 없습니다
 
 ---
 
-## Upload a File
+## 파일 업로드
 
 ```python
 import anthropic
@@ -30,9 +30,9 @@ print(f"Size: {uploaded.size_bytes} bytes")
 
 ---
 
-## Use a File in Messages
+## 메시지에서 파일 사용
 
-### PDF / Text Document
+### PDF / 텍스트 문서
 
 ```python
 response = client.beta.messages.create(
@@ -57,7 +57,7 @@ for block in response.content:
         print(block.text)
 ```
 
-### Image
+### 이미지
 
 ```python
 image_file = client.beta.files.upload(
@@ -83,9 +83,9 @@ response = client.beta.messages.create(
 
 ---
 
-## Manage Files
+## 파일 관리
 
-### List Files
+### 파일 목록 조회
 
 ```python
 files = client.beta.files.list()
@@ -93,7 +93,7 @@ for f in files.data:
     print(f"{f.id}: {f.filename} ({f.size_bytes} bytes)")
 ```
 
-### Get File Metadata
+### 파일 메타데이터 조회
 
 ```python
 file_info = client.beta.files.retrieve_metadata("file_011CNha8iCJcU1wXNR6q4V8w")
@@ -101,15 +101,15 @@ print(f"Filename: {file_info.filename}")
 print(f"MIME type: {file_info.mime_type}")
 ```
 
-### Delete a File
+### 파일 삭제
 
 ```python
 client.beta.files.delete("file_011CNha8iCJcU1wXNR6q4V8w")
 ```
 
-### Download a File
+### 파일 다운로드
 
-Only files created by the code execution tool or skills can be downloaded (not user-uploaded files).
+코드 실행 도구나 스킬이 생성한 파일만 다운로드할 수 있습니다 (사용자가 업로드한 파일은 불가).
 
 ```python
 file_content = client.beta.files.download("file_011CNha8iCJcU1wXNR6q4V8w")
@@ -118,9 +118,9 @@ file_content.write_to_file("output.txt")
 
 ---
 
-## Full End-to-End Example
+## 전체 엔드투엔드 예제
 
-Upload a document once, ask multiple questions about it:
+문서를 한 번 업로드한 후 여러 질문을 합니다:
 
 ```python
 import anthropic

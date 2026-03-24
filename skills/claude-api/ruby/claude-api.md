@@ -1,14 +1,14 @@
 # Claude API — Ruby
 
-> **Note:** The Ruby SDK supports the Claude API. A tool runner is available in beta via `client.beta.messages.tool_runner()`. Agent SDK is not yet available for Ruby.
+> **참고:** Ruby SDK는 Claude API를 지원합니다. 도구 실행기는 `client.beta.messages.tool_runner()`를 통해 베타로 제공됩니다. Agent SDK는 아직 Ruby에서 사용할 수 없습니다.
 
-## Installation
+## 설치
 
 ```bash
 gem install anthropic
 ```
 
-## Client Initialization
+## 클라이언트 초기화
 
 ```ruby
 require "anthropic"
@@ -22,7 +22,7 @@ client = Anthropic::Client.new(api_key: "your-api-key")
 
 ---
 
-## Basic Message Request
+## 기본 메시지 요청
 
 ```ruby
 message = client.messages.create(
@@ -42,7 +42,7 @@ end
 
 ---
 
-## Streaming
+## 스트리밍
 
 ```ruby
 stream = client.messages.stream(
@@ -56,11 +56,11 @@ stream.text.each { |text| print(text) }
 
 ---
 
-## Tool Use
+## 도구 사용
 
-The Ruby SDK supports tool use via raw JSON schema definitions and also provides a beta tool runner for automatic tool execution.
+Ruby SDK는 원시 JSON 스키마 정의를 통한 도구 사용을 지원하며, 자동 도구 실행을 위한 베타 도구 실행기도 제공합니다.
 
-### Tool Runner (Beta)
+### 도구 실행기 (베타)
 
 ```ruby
 class GetWeatherInput < Anthropic::BaseModel
@@ -87,6 +87,6 @@ client.beta.messages.tool_runner(
 end
 ```
 
-### Manual Loop
+### 수동 루프
 
-See the [shared tool use concepts](../shared/tool-use-concepts.md) for the tool definition format and agentic loop pattern.
+도구 정의 형식과 에이전트 루프 패턴에 대해서는 [공유 도구 사용 개념](../shared/tool-use-concepts.md)을 참조하세요.

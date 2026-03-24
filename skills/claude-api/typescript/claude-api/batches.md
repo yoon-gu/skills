@@ -1,18 +1,18 @@
 # Message Batches API — TypeScript
 
-The Batches API (`POST /v1/messages/batches`) processes Messages API requests asynchronously at 50% of standard prices.
+Batches API (`POST /v1/messages/batches`)는 Messages API 요청을 표준 가격의 50%로 비동기적으로 처리합니다.
 
-## Key Facts
+## 주요 사항
 
-- Up to 100,000 requests or 256 MB per batch
-- Most batches complete within 1 hour; maximum 24 hours
-- Results available for 29 days after creation
-- 50% cost reduction on all token usage
-- All Messages API features supported (vision, tools, caching, etc.)
+- 배치당 최대 100,000개의 요청 또는 256 MB
+- 대부분의 배치는 1시간 이내에 완료되며, 최대 24시간 소요
+- 결과는 생성 후 29일간 조회 가능
+- 모든 토큰 사용에 대해 50% 비용 절감
+- 모든 Messages API 기능 지원 (비전, 도구, 캐싱 등)
 
 ---
 
-## Create a Batch
+## 배치 생성
 
 ```typescript
 import Anthropic from "@anthropic-ai/sdk";
@@ -50,7 +50,7 @@ console.log(`Status: ${messageBatch.processing_status}`);
 
 ---
 
-## Poll for Completion
+## 완료 폴링
 
 ```typescript
 let batch;
@@ -70,7 +70,7 @@ console.log(`Errored: ${batch.request_counts.errored}`);
 
 ---
 
-## Retrieve Results
+## 결과 조회
 
 ```typescript
 for await (const result of await client.messages.batches.results(
@@ -98,7 +98,7 @@ for await (const result of await client.messages.batches.results(
 
 ---
 
-## Cancel a Batch
+## 배치 취소
 
 ```typescript
 const cancelled = await client.messages.batches.cancel(messageBatch.id);

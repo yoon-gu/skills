@@ -1,6 +1,6 @@
-# Streaming — TypeScript
+# 스트리밍 — TypeScript
 
-## Quick Start
+## 빠른 시작
 
 ```typescript
 const stream = client.messages.stream({
@@ -21,9 +21,9 @@ for await (const event of stream) {
 
 ---
 
-## Handling Different Content Types
+## 다양한 콘텐츠 타입 처리
 
-> **Opus 4.6:** Use `thinking: {type: "adaptive"}`. On older models, use `thinking: {type: "enabled", budget_tokens: N}` instead.
+> **Opus 4.6:** `thinking: {type: "adaptive"}`를 사용합니다. 이전 모델에서는 `thinking: {type: "enabled", budget_tokens: N}`을 대신 사용하세요.
 
 ```typescript
 const stream = client.messages.stream({
@@ -61,9 +61,9 @@ for await (const event of stream) {
 
 ---
 
-## Streaming with Tool Use (Tool Runner)
+## 도구 사용과 스트리밍 (Tool Runner)
 
-Use the tool runner with `stream: true`. The outer loop iterates over tool runner iterations (messages), the inner loop processes stream events:
+`stream: true`와 함께 Tool Runner를 사용합니다. 외부 루프는 Tool Runner 반복(메시지)을 순회하고, 내부 루프는 스트림 이벤트를 처리합니다:
 
 ```typescript
 import Anthropic from "@anthropic-ai/sdk";
@@ -113,7 +113,7 @@ for await (const messageStream of runner) {
 
 ---
 
-## Getting the Final Message
+## 최종 메시지 가져오기
 
 ```typescript
 const stream = client.messages.stream({
@@ -132,30 +132,30 @@ console.log(`Tokens used: ${finalMessage.usage.output_tokens}`);
 
 ---
 
-## Stream Event Types
+## 스트림 이벤트 타입
 
-| Event Type            | Description                 | When it fires                     |
+| 이벤트 타입           | 설명                        | 발생 시점                          |
 | --------------------- | --------------------------- | --------------------------------- |
-| `message_start`       | Contains message metadata   | Once at the beginning             |
-| `content_block_start` | New content block beginning | When a text/tool_use block starts |
-| `content_block_delta` | Incremental content update  | For each token/chunk              |
-| `content_block_stop`  | Content block complete      | When a block finishes             |
-| `message_delta`       | Message-level updates       | Contains `stop_reason`, usage     |
-| `message_stop`        | Message complete            | Once at the end                   |
+| `message_start`       | 메시지 메타데이터 포함        | 시작 시 한 번                      |
+| `content_block_start` | 새 콘텐츠 블록 시작           | text/tool_use 블록이 시작될 때      |
+| `content_block_delta` | 증분 콘텐츠 업데이트          | 각 토큰/청크마다                    |
+| `content_block_stop`  | 콘텐츠 블록 완료              | 블록이 완료될 때                    |
+| `message_delta`       | 메시지 수준 업데이트          | `stop_reason`, 사용량 정보 포함     |
+| `message_stop`        | 메시지 완료                  | 끝에서 한 번                       |
 
-## Best Practices
+## 모범 사례
 
-1. **Always flush output** — Use `process.stdout.write()` for immediate display
-2. **Handle partial responses** — If the stream is interrupted, you may have incomplete content
-3. **Track token usage** — The `message_delta` event contains usage information
-4. **Use `finalMessage()`** — Get the complete `Anthropic.Message` object even when streaming. Don't wrap `.on()` events in `new Promise()` — `finalMessage()` handles all completion/error/abort states internally
-5. **Buffer for web UIs** — Consider buffering a few tokens before rendering to avoid excessive DOM updates
-6. **Use `stream.on("text", ...)` for deltas** — The `text` event provides just the delta string, simpler than manually filtering `content_block_delta` events
-7. **For agentic loops with streaming** — See the [Streaming Manual Loop](./tool-use.md#streaming-manual-loop) section in tool-use.md for combining `stream()` + `finalMessage()` with a tool-use loop
+1. **항상 출력을 플러시하세요** -- 즉시 표시하려면 `process.stdout.write()`를 사용하세요
+2. **부분 응답을 처리하세요** -- 스트림이 중단되면 불완전한 콘텐츠가 있을 수 있습니다
+3. **토큰 사용량을 추적하세요** -- `message_delta` 이벤트에 사용량 정보가 포함됩니다
+4. **`finalMessage()`를 사용하세요** -- 스트리밍 중에도 완전한 `Anthropic.Message` 객체를 가져옵니다. `.on()` 이벤트를 `new Promise()`로 감싸지 마세요 -- `finalMessage()`가 모든 완료/오류/중단 상태를 내부적으로 처리합니다
+5. **웹 UI에서는 버퍼링하세요** -- 과도한 DOM 업데이트를 피하기 위해 렌더링 전에 몇 개의 토큰을 버퍼링하는 것을 고려하세요
+6. **델타에는 `stream.on("text", ...)`를 사용하세요** -- `text` 이벤트는 델타 문자열만 제공하므로 `content_block_delta` 이벤트를 수동으로 필터링하는 것보다 간단합니다
+7. **스트리밍이 있는 에이전트 루프의 경우** -- 도구 사용 루프와 `stream()` + `finalMessage()`를 결합하는 방법은 tool-use.md의 [스트리밍 수동 루프](./tool-use.md#streaming-manual-loop) 섹션을 참조하세요
 
-## Raw SSE Format
+## Raw SSE 형식
 
-If using raw HTTP (not SDKs), the stream returns Server-Sent Events:
+SDK가 아닌 Raw HTTP를 사용하는 경우, 스트림은 Server-Sent Events를 반환합니다:
 
 ```
 event: message_start

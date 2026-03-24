@@ -1,12 +1,12 @@
 # Claude API — TypeScript
 
-## Installation
+## 설치
 
 ```bash
 npm install @anthropic-ai/sdk
 ```
 
-## Client Initialization
+## 클라이언트 초기화
 
 ```typescript
 import Anthropic from "@anthropic-ai/sdk";
@@ -20,7 +20,7 @@ const client = new Anthropic({ apiKey: "your-api-key" });
 
 ---
 
-## Basic Message Request
+## 기본 메시지 요청
 
 ```typescript
 const response = await client.messages.create({
@@ -39,7 +39,7 @@ for (const block of response.content) {
 
 ---
 
-## System Prompts
+## 시스템 프롬프트
 
 ```typescript
 const response = await client.messages.create({
@@ -53,7 +53,7 @@ const response = await client.messages.create({
 
 ---
 
-## Vision (Images)
+## 비전 (이미지)
 
 ### URL
 
@@ -103,11 +103,11 @@ const response = await client.messages.create({
 
 ---
 
-## Prompt Caching
+## 프롬프트 캐싱
 
-### Automatic Caching (Recommended)
+### 자동 캐싱 (권장)
 
-Use top-level `cache_control` to automatically cache the last cacheable block in the request:
+최상위 `cache_control`을 사용하여 요청의 마지막 캐시 가능한 블록을 자동으로 캐싱합니다:
 
 ```typescript
 const response = await client.messages.create({
@@ -119,9 +119,9 @@ const response = await client.messages.create({
 });
 ```
 
-### Manual Cache Control
+### 수동 캐시 제어
 
-For fine-grained control, add `cache_control` to specific content blocks:
+세밀한 제어가 필요한 경우, 특정 콘텐츠 블록에 `cache_control`을 추가합니다:
 
 ```typescript
 const response = await client.messages.create({
@@ -154,10 +154,10 @@ const response2 = await client.messages.create({
 
 ---
 
-## Extended Thinking
+## 확장 사고
 
-> **Opus 4.6 and Sonnet 4.6:** Use adaptive thinking. `budget_tokens` is deprecated on both Opus 4.6 and Sonnet 4.6.
-> **Older models:** Use `thinking: {type: "enabled", budget_tokens: N}` (must be < `max_tokens`, min 1024).
+> **Opus 4.6 및 Sonnet 4.6:** 적응형 사고를 사용합니다. `budget_tokens`는 Opus 4.6과 Sonnet 4.6 모두에서 더 이상 사용되지 않습니다.
+> **이전 모델:** `thinking: {type: "enabled", budget_tokens: N}`을 사용합니다 (`max_tokens`보다 작아야 하며, 최소 1024).
 
 ```typescript
 // Opus 4.6: adaptive thinking (recommended)
@@ -182,9 +182,9 @@ for (const block of response.content) {
 
 ---
 
-## Error Handling
+## 오류 처리
 
-Use the SDK's typed exception classes — never check error messages with string matching:
+SDK의 타입이 지정된 예외 클래스를 사용하세요 -- 문자열 매칭으로 오류 메시지를 확인하지 마세요:
 
 ```typescript
 import Anthropic from "@anthropic-ai/sdk";
@@ -204,13 +204,13 @@ try {
 }
 ```
 
-All classes extend `Anthropic.APIError` with a typed `status` field. Check from most specific to least specific. See [shared/error-codes.md](../../shared/error-codes.md) for the full error code reference.
+모든 클래스는 타입이 지정된 `status` 필드를 가진 `Anthropic.APIError`를 확장합니다. 가장 구체적인 것부터 가장 일반적인 것 순서로 확인하세요. 전체 오류 코드 참조는 [shared/error-codes.md](../../shared/error-codes.md)를 참조하세요.
 
 ---
 
-## Multi-Turn Conversations
+## 다중 턴 대화
 
-The API is stateless — send the full conversation history each time. Use `Anthropic.MessageParam[]` to type the messages array:
+API는 상태를 유지하지 않으므로 매번 전체 대화 기록을 전송해야 합니다. 메시지 배열의 타입을 지정하려면 `Anthropic.MessageParam[]`을 사용하세요:
 
 ```typescript
 const messages: Anthropic.MessageParam[] = [
@@ -226,17 +226,17 @@ const response = await client.messages.create({
 });
 ```
 
-**Rules:**
+**규칙:**
 
-- Consecutive same-role messages are allowed — the API combines them into a single turn
-- First message must be `user`
-- Use SDK types (`Anthropic.MessageParam`, `Anthropic.Message`, `Anthropic.Tool`, etc.) for all API data structures — don't redefine equivalent interfaces
+- 동일한 역할의 연속 메시지가 허용됩니다 -- API가 이를 하나의 턴으로 결합합니다
+- 첫 번째 메시지는 `user`여야 합니다
+- 모든 API 데이터 구조에 SDK 타입(`Anthropic.MessageParam`, `Anthropic.Message`, `Anthropic.Tool` 등)을 사용하세요 -- 동일한 인터페이스를 다시 정의하지 마세요
 
 ---
 
-### Compaction (long conversations)
+### 압축 (긴 대화)
 
-> **Beta, Opus 4.6 and Sonnet 4.6.** When conversations approach the 200K context window, compaction automatically summarizes earlier context server-side. The API returns a `compaction` block; you must pass it back on subsequent requests — append `response.content`, not just the text.
+> **베타, Opus 4.6 및 Sonnet 4.6.** 대화가 200K 컨텍스트 윈도우에 가까워지면, 압축이 서버 측에서 이전 컨텍스트를 자동으로 요약합니다. API는 `compaction` 블록을 반환합니다. 이후 요청에서 이를 다시 전달해야 합니다 -- 텍스트만이 아닌 `response.content`를 추가하세요.
 
 ```typescript
 import Anthropic from "@anthropic-ai/sdk";
@@ -274,24 +274,24 @@ console.log(await chat("Now add rate limiting and error handling"));
 
 ---
 
-## Stop Reasons
+## 중단 이유
 
-The `stop_reason` field in the response indicates why the model stopped generating:
+응답의 `stop_reason` 필드는 모델이 생성을 중단한 이유를 나타냅니다:
 
-| Value           | Meaning                                                         |
+| 값              | 의미                                                            |
 | --------------- | --------------------------------------------------------------- |
-| `end_turn`      | Claude finished its response naturally                          |
-| `max_tokens`    | Hit the `max_tokens` limit — increase it or use streaming       |
-| `stop_sequence` | Hit a custom stop sequence                                      |
-| `tool_use`      | Claude wants to call a tool — execute it and continue           |
-| `pause_turn`    | Model paused and can be resumed (agentic flows)                 |
-| `refusal`       | Claude refused for safety reasons — output may not match schema |
+| `end_turn`      | Claude가 자연스럽게 응답을 완료함                                  |
+| `max_tokens`    | `max_tokens` 제한에 도달함 -- 값을 늘리거나 스트리밍을 사용하세요     |
+| `stop_sequence` | 사용자 정의 중단 시퀀스에 도달함                                    |
+| `tool_use`      | Claude가 도구를 호출하려 함 -- 실행 후 계속 진행하세요               |
+| `pause_turn`    | 모델이 일시 중지되었으며 재개 가능 (에이전트 플로우)                  |
+| `refusal`       | Claude가 안전상의 이유로 거부함 -- 출력이 스키마와 일치하지 않을 수 있음 |
 
 ---
 
-## Cost Optimization Strategies
+## 비용 최적화 전략
 
-### 1. Use Prompt Caching for Repeated Context
+### 1. 반복되는 컨텍스트에 프롬프트 캐싱 사용
 
 ```typescript
 // Automatic caching (simplest — caches the last cacheable block)
@@ -307,7 +307,7 @@ const response = await client.messages.create({
 // Subsequent requests: ~90% cheaper for cached portion
 ```
 
-### 2. Use Token Counting Before Requests
+### 2. 요청 전 토큰 수 카운팅 사용
 
 ```typescript
 const countResponse = await client.messages.countTokens({

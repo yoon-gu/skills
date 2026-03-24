@@ -1,8 +1,8 @@
 # Claude API — cURL / Raw HTTP
 
-Use these examples when the user needs raw HTTP requests or is working in a language without an official SDK.
+사용자가 원시 HTTP 요청이 필요하거나 공식 SDK가 없는 언어로 작업할 때 이 예제를 사용하세요.
 
-## Setup
+## 설정
 
 ```bash
 export ANTHROPIC_API_KEY="your-api-key"
@@ -10,7 +10,7 @@ export ANTHROPIC_API_KEY="your-api-key"
 
 ---
 
-## Basic Message Request
+## 기본 메시지 요청
 
 ```bash
 curl https://api.anthropic.com/v1/messages \
@@ -26,11 +26,10 @@ curl https://api.anthropic.com/v1/messages \
   }'
 ```
 
-### Parsing the response
+### 응답 파싱
 
-Use `jq` to extract fields from the JSON response. Do not use `grep`/`sed` —
-JSON strings can contain any character and regex parsing will break on quotes,
-escapes, or multi-line content.
+`jq`를 사용하여 JSON 응답에서 필드를 추출하세요. `grep`/`sed`를 사용하지 마세요 —
+JSON 문자열에는 모든 문자가 포함될 수 있으며, 정규식 파싱은 따옴표, 이스케이프 또는 여러 줄 콘텐츠에서 오류가 발생합니다.
 
 ```bash
 # Capture the response, then extract fields
@@ -57,7 +56,7 @@ echo "$response" | jq -r '.content[] | select(.type == "text") | .text'
 
 ---
 
-## Streaming (SSE)
+## 스트리밍 (SSE)
 
 ```bash
 curl https://api.anthropic.com/v1/messages \
@@ -72,7 +71,7 @@ curl https://api.anthropic.com/v1/messages \
   }'
 ```
 
-The response is a stream of Server-Sent Events:
+응답은 Server-Sent Events 스트림입니다:
 
 ```
 event: message_start
@@ -96,7 +95,7 @@ data: {"type":"message_stop"}
 
 ---
 
-## Tool Use
+## 도구 사용
 
 ```bash
 curl https://api.anthropic.com/v1/messages \
@@ -121,7 +120,7 @@ curl https://api.anthropic.com/v1/messages \
   }'
 ```
 
-When Claude responds with a `tool_use` block, send the result back:
+Claude가 `tool_use` 블록으로 응답하면 결과를 다시 전송하세요:
 
 ```bash
 curl https://api.anthropic.com/v1/messages \
@@ -157,10 +156,10 @@ curl https://api.anthropic.com/v1/messages \
 
 ---
 
-## Extended Thinking
+## 확장 사고
 
-> **Opus 4.6 and Sonnet 4.6:** Use adaptive thinking. `budget_tokens` is deprecated on both Opus 4.6 and Sonnet 4.6.
-> **Older models:** Use `"type": "enabled"` with `"budget_tokens": N` (must be < `max_tokens`, min 1024).
+> **Opus 4.6 및 Sonnet 4.6:** 적응형 사고를 사용하세요. `budget_tokens`는 Opus 4.6과 Sonnet 4.6 모두에서 더 이상 사용되지 않습니다.
+> **이전 모델:** `"type": "enabled"`와 `"budget_tokens": N`을 사용하세요 (`max_tokens`보다 작아야 하며, 최소 1024).
 
 ```bash
 # Opus 4.6: adaptive thinking (recommended)
@@ -183,11 +182,11 @@ curl https://api.anthropic.com/v1/messages \
 
 ---
 
-## Required Headers
+## 필수 헤더
 
-| Header              | Value              | Description                |
+| 헤더                | 값                 | 설명                       |
 | ------------------- | ------------------ | -------------------------- |
-| `Content-Type`      | `application/json` | Required                   |
-| `x-api-key`         | Your API key       | Authentication             |
-| `anthropic-version` | `2023-06-01`       | API version                |
-| `anthropic-beta`    | Beta feature IDs   | Required for beta features |
+| `Content-Type`      | `application/json` | 필수                       |
+| `x-api-key`         | Your API key       | 인증                       |
+| `anthropic-version` | `2023-06-01`       | API 버전                   |
+| `anthropic-beta`    | Beta feature IDs   | 베타 기능에 필요           |

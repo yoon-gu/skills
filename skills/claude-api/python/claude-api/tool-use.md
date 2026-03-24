@@ -1,12 +1,12 @@
-# Tool Use — Python
+# 도구 사용 — Python
 
-For conceptual overview (tool definitions, tool choice, tips), see [shared/tool-use-concepts.md](../../shared/tool-use-concepts.md).
+개념적 개요 (도구 정의, 도구 선택, 팁)는 [shared/tool-use-concepts.md](../../shared/tool-use-concepts.md)를 참조하세요.
 
-## Tool Runner (Recommended)
+## 도구 러너 (권장)
 
-**Beta:** The tool runner is in beta in the Python SDK.
+**베타:** 도구 러너는 Python SDK에서 베타 상태입니다.
 
-Use the `@beta_tool` decorator to define tools as typed functions, then pass them to `client.beta.messages.tool_runner()`:
+`@beta_tool` 데코레이터를 사용하여 도구를 타입이 지정된 함수로 정의한 다음, `client.beta.messages.tool_runner()`에 전달하세요:
 
 ```python
 import anthropic
@@ -38,24 +38,24 @@ for message in runner:
     print(message)
 ```
 
-For async usage, use `@beta_async_tool` with `async def` functions.
+비동기 사용의 경우, `async def` 함수와 함께 `@beta_async_tool`을 사용하세요.
 
-**Key benefits of the tool runner:**
+**도구 러너의 주요 이점:**
 
-- No manual loop — the SDK handles calling tools and feeding results back
-- Type-safe tool inputs via decorators
-- Tool schemas are generated automatically from function signatures
-- Iteration stops automatically when Claude has no more tool calls
+- 수동 루프 불필요 — SDK가 도구 호출과 결과 반환을 자동으로 처리합니다
+- 데코레이터를 통한 타입 안전한 도구 입력
+- 함수 시그니처에서 도구 스키마가 자동으로 생성됩니다
+- Claude가 더 이상 도구를 호출하지 않으면 반복이 자동으로 중단됩니다
 
 ---
 
-## MCP Tool Conversion Helpers
+## MCP 도구 변환 헬퍼
 
-**Beta.** Convert [MCP (Model Context Protocol)](https://modelcontextprotocol.io/) tools, prompts, and resources to Anthropic API types for use with the tool runner. Requires `pip install anthropic[mcp]` (Python 3.10+).
+**베타.** [MCP (Model Context Protocol)](https://modelcontextprotocol.io/) 도구, 프롬프트 및 리소스를 도구 러너와 함께 사용할 수 있도록 Anthropic API 타입으로 변환합니다. `pip install anthropic[mcp]` (Python 3.10+)가 필요합니다.
 
-> **Note:** The Claude API also supports an `mcp_servers` parameter that lets Claude connect directly to remote MCP servers. Use these helpers instead when you need local MCP servers, prompts, resources, or more control over the MCP connection.
+> **참고:** Claude API는 Claude가 원격 MCP 서버에 직접 연결할 수 있는 `mcp_servers` 매개변수도 지원합니다. 로컬 MCP 서버, 프롬프트, 리소스 또는 MCP 연결에 대한 더 많은 제어가 필요한 경우 이 헬퍼를 대신 사용하세요.
 
-### MCP Tools with Tool Runner
+### 도구 러너와 MCP 도구
 
 ```python
 from anthropic import AsyncAnthropic
@@ -81,9 +81,9 @@ async with stdio_client(StdioServerParameters(command="mcp-server")) as (read, w
             print(message)
 ```
 
-For sync usage, use `mcp_tool` instead of `async_mcp_tool`.
+동기 사용의 경우, `async_mcp_tool` 대신 `mcp_tool`을 사용하세요.
 
-### MCP Prompts
+### MCP 프롬프트
 
 ```python
 from anthropic.lib.tools.mcp import mcp_message
@@ -96,7 +96,7 @@ response = await client.beta.messages.create(
 )
 ```
 
-### MCP Resources as Content
+### 콘텐츠로서의 MCP 리소스
 
 ```python
 from anthropic.lib.tools.mcp import mcp_resource_to_content
@@ -115,7 +115,7 @@ response = await client.beta.messages.create(
 )
 ```
 
-### Upload MCP Resources as Files
+### MCP 리소스를 파일로 업로드
 
 ```python
 from anthropic.lib.tools.mcp import mcp_resource_to_file
@@ -124,13 +124,13 @@ resource = await mcp_client.read_resource(uri="file:///path/to/data.json")
 uploaded = await client.beta.files.upload(file=mcp_resource_to_file(resource))
 ```
 
-Conversion functions raise `UnsupportedMCPValueError` if an MCP value cannot be converted (e.g., unsupported content types like audio, unsupported MIME types).
+변환 함수는 MCP 값을 변환할 수 없는 경우 (예: 오디오와 같은 지원되지 않는 콘텐츠 유형, 지원되지 않는 MIME 타입) `UnsupportedMCPValueError`를 발생시킵니다.
 
 ---
 
-## Manual Agentic Loop
+## 수동 에이전트 루프
 
-Use this when you need fine-grained control over the loop (e.g., custom logging, conditional tool execution, human-in-the-loop approval):
+루프에 대한 세밀한 제어가 필요한 경우 (예: 사용자 정의 로깅, 조건부 도구 실행, 사람의 승인이 필요한 루프) 이 방법을 사용하세요:
 
 ```python
 import anthropic
@@ -185,7 +185,7 @@ final_text = next(b.text for b in response.content if b.type == "text")
 
 ---
 
-## Handling Tool Results
+## 도구 결과 처리
 
 ```python
 response = client.messages.create(
@@ -224,7 +224,7 @@ for block in response.content:
 
 ---
 
-## Multiple Tool Calls
+## 다중 도구 호출
 
 ```python
 tool_results = []
@@ -254,7 +254,7 @@ if tool_results:
 
 ---
 
-## Error Handling in Tool Results
+## 도구 결과에서의 오류 처리
 
 ```python
 tool_result = {
@@ -267,7 +267,7 @@ tool_result = {
 
 ---
 
-## Tool Choice
+## 도구 선택
 
 ```python
 response = client.messages.create(
@@ -281,9 +281,9 @@ response = client.messages.create(
 
 ---
 
-## Code Execution
+## 코드 실행
 
-### Basic Usage
+### 기본 사용법
 
 ```python
 import anthropic
@@ -310,7 +310,7 @@ for block in response.content:
         print(f"stdout: {block.content.stdout}")
 ```
 
-### Upload Files for Analysis
+### 분석을 위한 파일 업로드
 
 ```python
 # 1. Upload a file
@@ -333,7 +333,7 @@ response = client.messages.create(
 )
 ```
 
-### Retrieve Generated Files
+### 생성된 파일 가져오기
 
 ```python
 import os
@@ -359,7 +359,7 @@ for block in response.content:
                     print(f"Saved: {output_path}")
 ```
 
-### Container Reuse
+### 컨테이너 재사용
 
 ```python
 # First request: set up environment
@@ -383,7 +383,7 @@ response2 = client.messages.create(
 )
 ```
 
-### Response Structure
+### 응답 구조
 
 ```python
 for block in response.content:
@@ -406,9 +406,9 @@ for block in response.content:
 
 ---
 
-## Memory Tool
+## 메모리 도구
 
-### Basic Usage
+### 기본 사용법
 
 ```python
 import anthropic
@@ -423,9 +423,9 @@ response = client.messages.create(
 )
 ```
 
-### SDK Memory Helper
+### SDK 메모리 헬퍼
 
-Subclass `BetaAbstractMemoryTool`:
+`BetaAbstractMemoryTool`을 서브클래싱하세요:
 
 ```python
 from anthropic.lib.tools import BetaAbstractMemoryTool
@@ -452,15 +452,15 @@ for message in runner:
     print(message)
 ```
 
-For full implementation examples, use WebFetch:
+전체 구현 예제는 WebFetch를 사용하세요:
 
 - `https://github.com/anthropics/anthropic-sdk-python/blob/main/examples/memory/basic.py`
 
 ---
 
-## Structured Outputs
+## 구조화된 출력
 
-### JSON Outputs (Pydantic — Recommended)
+### JSON 출력 (Pydantic — 권장)
 
 ```python
 from pydantic import BaseModel
@@ -492,7 +492,7 @@ print(contact.name)           # "Jane Doe"
 print(contact.interests)      # ["API", "SDKs"]
 ```
 
-### Raw Schema
+### 원시 스키마
 
 ```python
 response = client.messages.create(
@@ -526,7 +526,7 @@ text = next(b.text for b in response.content if b.type == "text")
 data = json.loads(text)
 ```
 
-### Strict Tool Use
+### 엄격한 도구 사용
 
 ```python
 response = client.messages.create(
@@ -551,7 +551,7 @@ response = client.messages.create(
 )
 ```
 
-### Using Both Together
+### 함께 사용하기
 
 ```python
 response = client.messages.create(

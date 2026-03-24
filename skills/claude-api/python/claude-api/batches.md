@@ -1,18 +1,18 @@
-# Message Batches API — Python
+# 메시지 배치 API — Python
 
-The Batches API (`POST /v1/messages/batches`) processes Messages API requests asynchronously at 50% of standard prices.
+배치 API (`POST /v1/messages/batches`)는 Messages API 요청을 표준 가격의 50%로 비동기적으로 처리합니다.
 
-## Key Facts
+## 주요 사항
 
-- Up to 100,000 requests or 256 MB per batch
-- Most batches complete within 1 hour; maximum 24 hours
-- Results available for 29 days after creation
-- 50% cost reduction on all token usage
-- All Messages API features supported (vision, tools, caching, etc.)
+- 배치당 최대 100,000개의 요청 또는 256 MB
+- 대부분의 배치는 1시간 이내에 완료되며, 최대 24시간 소요
+- 결과는 생성 후 29일 동안 사용 가능
+- 모든 토큰 사용에 대해 50% 비용 절감
+- 모든 Messages API 기능 지원 (비전, 도구, 캐싱 등)
 
 ---
 
-## Create a Batch
+## 배치 생성
 
 ```python
 import anthropic
@@ -48,7 +48,7 @@ print(f"Status: {message_batch.processing_status}")
 
 ---
 
-## Poll for Completion
+## 완료 여부 폴링
 
 ```python
 import time
@@ -67,9 +67,9 @@ print(f"Errored: {batch.request_counts.errored}")
 
 ---
 
-## Retrieve Results
+## 결과 조회
 
-> **Note:** Examples below use `match/case` syntax, requiring Python 3.10+. For earlier versions, use `if/elif` chains instead.
+> **참고:** 아래 예제는 Python 3.10 이상이 필요한 `match/case` 구문을 사용합니다. 이전 버전의 경우 `if/elif` 체인을 대신 사용하세요.
 
 ```python
 for result in client.messages.batches.results(message_batch.id):
@@ -91,7 +91,7 @@ for result in client.messages.batches.results(message_batch.id):
 
 ---
 
-## Cancel a Batch
+## 배치 취소
 
 ```python
 cancelled = client.messages.batches.cancel(message_batch.id)
@@ -100,7 +100,7 @@ print(f"Status: {cancelled.processing_status}")  # "canceling"
 
 ---
 
-## Batch with Prompt Caching
+## 프롬프트 캐싱을 사용한 배치
 
 ```python
 shared_system = [
@@ -130,7 +130,7 @@ message_batch = client.messages.batches.create(
 
 ---
 
-## Full End-to-End Example
+## 전체 엔드투엔드 예제
 
 ```python
 import anthropic

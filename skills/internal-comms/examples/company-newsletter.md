@@ -1,65 +1,65 @@
-## Instructions
-You are being asked to write a company-wide newsletter update. You are meant to summarize the past week/month of a company in the form of a newsletter that the entire company will read. It should be maybe ~20-25 bullet points long. It will be sent via Slack and email, so make it consumable for that.
+## 지침
+전사 뉴스레터 업데이트를 작성하라는 요청을 받았습니다. 지난 주/월의 회사 상황을 전체 직원이 읽을 뉴스레터 형태로 요약해야 합니다. 약 20-25개의 글머리 기호 길이여야 합니다. Slack과 이메일을 통해 발송되므로 해당 매체에서 소화하기 쉽게 만드세요.
 
-Ideally it includes the following attributes:
-- Lots of links: pulling documents from Google Drive that are very relevant, linking to prominent Slack messages in announce channels and from executives, perhgaps referencing emails that went company-wide, highlighting significant things that have happened in the company.
-- Short and to-the-point: each bullet should probably be no longer than ~1-2 sentences
-- Use the "we" tense, as you are part of the company. Many of the bullets should say "we did this" or "we did that"
+이상적으로 다음 속성을 포함해야 합니다:
+- 많은 링크: 매우 관련성 높은 Google Drive 문서를 가져오고, 공지 채널과 임원의 주요 Slack 메시지에 링크하고, 전사 이메일을 참조하고, 회사에서 발생한 중요한 사건을 강조합니다.
+- 짧고 요점에 맞게: 각 글머리 기호는 약 1-2문장을 넘지 않아야 합니다
+- "우리" 어조를 사용하세요. 회사의 일원으로서 작성합니다. 많은 글머리 기호가 "우리가 이것을 했다" 또는 "우리가 저것을 했다"라고 말해야 합니다
 
-## Tools to use
-If you have access to the following tools, please try to use them. If not, you can also let the user know directly that their responses would be better if they gave them access.
+## 사용할 도구
+다음 도구에 접근할 수 있다면 사용해 주세요. 그렇지 않다면 사용자에게 접근 권한이 있으면 응답이 더 좋아질 것이라고 알려줄 수 있습니다.
 
-- Slack: look for messages in channels with lots of people, with lots of reactions or lots of responses within the thread
-- Email: look for things from executives that discuss company-wide announcements
-- Calendar: if there were meetings with large attendee lists, particularly things like All-Hands meetings, big company announcements, etc. If there were documents attached to those meetings, those are great links to include.
-- Documents: if there were new docs published in the last week or two that got a lot of attention, you can link them. These should be things like company-wide vision docs, plans for the upcoming quarter or half, things authored by critical executives, etc.
-- External press: if you see references to articles or press we've received over the past week, that could be really cool too.
+- Slack: 많은 사람이 있는 채널에서 많은 리액션이나 스레드 내 많은 답글이 있는 메시지를 찾으세요
+- 이메일: 전사 공지를 논의하는 임원의 메시지를 찾으세요
+- 캘린더: 전체 회의, 큰 회사 공지 등 대규모 참석자 목록이 있는 회의가 있었다면. 해당 회의에 첨부된 문서가 있으면 포함할 좋은 링크입니다.
+- 문서: 지난 1-2주 동안 많은 관심을 받은 새로 게시된 문서가 있다면 링크할 수 있습니다. 이것들은 전사 비전 문서, 다음 분기나 반기 계획, 핵심 임원이 작성한 것 등이어야 합니다.
+- 외부 보도: 지난 주에 우리가 받은 기사나 보도 참조가 보이면 그것도 매우 좋을 수 있습니다.
 
-If you don't have access to any of these things, you can ask the user for things they want to cover. In this case, you'll mostly just be polishing up and fitting to this format more directly.
+이러한 것들에 접근 권한이 없다면 사용자에게 다루고 싶은 내용을 물어볼 수 있습니다. 이 경우 주로 이 형식에 맞게 다듬고 맞추는 작업이 됩니다.
 
-## Sections
-The company is pretty big: 1000+ people. There are a variety of different teams and initiatives going on across the company. To make sure the update works well, try breaking it into sections of similar things. You might break into clusters like {product development, go to market, finance} or {recruiting, execution, vision}, or {external news, internal news} etc. Try to make sure the different areas of the company are highlighted well.
+## 섹션
+회사는 꽤 큽니다: 1000명 이상. 회사 전반에 다양한 팀과 이니셔티브가 진행 중입니다. 업데이트가 잘 작동하도록 유사한 것들의 섹션으로 나누세요. {제품 개발, 시장 진출, 재무} 또는 {채용, 실행, 비전} 또는 {외부 뉴스, 내부 뉴스} 등의 클러스터로 나눌 수 있습니다. 회사의 다양한 분야가 잘 강조되도록 하세요.
 
-## Prioritization
-Focus on:
-- Company-wide impact (not team-specific details)
-- Announcements from leadership
-- Major milestones and achievements
-- Information that affects most employees
-- External recognition or press
+## 우선순위
+집중할 것:
+- 전사적 영향 (팀별 세부사항이 아님)
+- 리더십의 공지
+- 주요 마일스톤 및 성과
+- 대부분의 직원에게 영향을 미치는 정보
+- 외부 인정 또는 보도
 
-Avoid:
-- Overly granular team updates (save those for 3Ps)
-- Information only relevant to small groups
-- Duplicate information already communicated
+피할 것:
+- 지나치게 세부적인 팀 업데이트 (3P용으로 남겨두세요)
+- 소규모 그룹에만 관련된 정보
+- 이미 전달된 중복 정보
 
-## Example Formats
+## 형식 예시
 
-:megaphone: Company Announcements
-- Announcement 1
-- Announcement 2
-- Announcement 3
+:megaphone: 회사 공지
+- 공지 1
+- 공지 2
+- 공지 3
 
-:dart: Progress on Priorities
-- Area 1
-    - Sub-area 1
-    - Sub-area 2
-    - Sub-area 3
-- Area 2
-    - Sub-area 1
-    - Sub-area 2
-    - Sub-area 3
-- Area 3
-    - Sub-area 1
-    - Sub-area 2
-    - Sub-area 3
+:dart: 우선순위 진행사항
+- 영역 1
+    - 하위 영역 1
+    - 하위 영역 2
+    - 하위 영역 3
+- 영역 2
+    - 하위 영역 1
+    - 하위 영역 2
+    - 하위 영역 3
+- 영역 3
+    - 하위 영역 1
+    - 하위 영역 2
+    - 하위 영역 3
 
-:pillar: Leadership Updates
-- Post 1
-- Post 2
-- Post 3
+:pillar: 리더십 업데이트
+- 게시물 1
+- 게시물 2
+- 게시물 3
 
-:thread: Social Updates
-- Update 1
-- Update 2
-- Update 3
+:thread: 소셜 업데이트
+- 업데이트 1
+- 업데이트 2
+- 업데이트 3

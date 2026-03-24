@@ -1,47 +1,46 @@
-## Instructions
-You are being asked to write a 3P update. 3P updates stand for "Progress, Plans, Problems." The main audience is for executives, leadership, other teammates, etc. They're meant to be very succinct and to-the-point: think something you can read in 30-60sec or less. They're also for people with some, but not a lot of context on what the team does.
+## 지침
+3P 업데이트를 작성하라는 요청을 받았습니다. 3P 업데이트는 "진행사항(Progress), 계획(Plans), 문제점(Problems)"을 의미합니다. 주요 대상은 임원, 리더십, 다른 팀원 등입니다. 매우 간결하고 요점에 맞아야 합니다: 30-60초 이내에 읽을 수 있는 분량을 생각하세요. 또한 팀이 하는 일에 대해 어느 정도는 알지만 깊이 알지는 못하는 사람들을 위한 것입니다.
 
-3Ps can cover a team of any size, ranging all the way up to the entire company. The bigger the team, the less granular the tasks should be. For example, "mobile team" might have "shipped feature" or "fixed bugs," whereas the company might have really meaty 3Ps, like "hired 20 new people" or "closed 10 new deals." 
+3P는 어떤 규모의 팀이든 다룰 수 있으며, 전체 회사까지 확장됩니다. 팀이 클수록 작업의 세부 수준은 낮아져야 합니다. 예를 들어, "모바일 팀"은 "기능 출시" 또는 "버그 수정"이 될 수 있지만, 회사 전체는 "20명의 신규 인원 채용" 또는 "10건의 새로운 거래 성사" 같은 정말 중요한 3P를 가져야 합니다.
 
-They represent the work of the team across a time period, almost always one week. They include three sections:
-1) Progress: what the team has accomplished over the next time period. Focus mainly on things shipped, milestones achieved, tasks created, etc.
-2) Plans: what the team plans to do over the next time period. Focus on what things are top-of-mind, really high priority, etc. for the team.
-3) Problems: anything that is slowing the team down. This could be things like too few people, bugs or blockers that are preventing the team from moving forward, some deal that fell through, etc.
+이것들은 특정 기간 동안의 팀 업무를 나타내며, 거의 항상 1주일입니다. 세 가지 섹션을 포함합니다:
+1) 진행사항(Progress): 다음 기간 동안 팀이 달성한 것. 주로 출시한 것, 달성한 마일스톤, 생성된 작업 등에 집중합니다.
+2) 계획(Plans): 다음 기간 동안 팀이 할 계획인 것. 팀에게 가장 중요하고 최우선인 것에 집중합니다.
+3) 문제점(Problems): 팀을 늦추는 모든 것. 인원 부족, 팀의 진행을 방해하는 버그나 차단 요인, 무산된 거래 등이 될 수 있습니다.
 
-Before writing them, make sure that you know the team name. If it's not specified, you can ask explicitly what the team name you're writing for is.
-
-
-## Tools Available
-Whenever possible, try to pull from available sources to get the information you need:
-- Slack: posts from team members with their updates - ideally look for posts in large channels with lots of reactions
-- Google Drive: docs written from critical team members with lots of views
-- Email: emails with lots of responses of lots of content that seems relevant
-- Calendar: non-recurring meetings that have a lot of importance, like product reviews, etc.
+작성 전에 팀 이름을 알고 있는지 확인하세요. 명시되지 않은 경우 작성 대상 팀 이름을 명시적으로 물어볼 수 있습니다.
 
 
-Try to gather as much context as you can, focusing on the things that covered the time period you're writing for:
-- Progress: anything between a week ago and today
-- Plans: anything from today to the next week
-- Problems: anything between a week ago and today
+## 사용 가능한 도구
+가능하면 사용 가능한 소스에서 필요한 정보를 가져오세요:
+- Slack: 팀원들의 업데이트 게시물 - 많은 리액션이 있는 대규모 채널의 게시물을 찾는 것이 이상적
+- Google Drive: 많은 조회수를 가진 핵심 팀원이 작성한 문서
+- 이메일: 많은 답장이나 관련성 높은 콘텐츠가 있는 이메일
+- 캘린더: 제품 리뷰 등 중요도가 높은 비반복 회의
 
 
-If you don't have access, you can ask the user for things they want to cover. They might also include these things to you directly, in which case you're mostly just formatting for this particular format.
+작성 기간에 해당하는 것들에 집중하여 가능한 많은 맥락을 수집하세요:
+- 진행사항: 일주일 전부터 오늘까지
+- 계획: 오늘부터 다음 주까지
+- 문제점: 일주일 전부터 오늘까지
 
-## Workflow
 
-1. **Clarify scope**: Confirm the team name and time period (usually past week for Progress/Problems, next
-week for Plans)
-2. **Gather information**: Use available tools or ask the user directly
-3. **Draft the update**: Follow the strict formatting guidelines
-4. **Review**: Ensure it's concise (30-60 seconds to read) and data-driven
+접근 권한이 없는 경우 사용자에게 다루고 싶은 내용을 물어볼 수 있습니다. 사용자가 직접 이러한 내용을 제공할 수도 있으며, 이 경우 주로 이 특정 형식에 맞게 서식을 지정하는 것입니다.
 
-## Formatting
+## 워크플로
 
-The format is always the same, very strict formatting. Never use any formatting other than this. Pick an emoji that is fun and captures the vibe of the team and update.
+1. **범위 명확화**: 팀 이름과 기간 확인 (보통 진행사항/문제점은 지난 주, 계획은 다음 주)
+2. **정보 수집**: 사용 가능한 도구를 사용하거나 사용자에게 직접 문의
+3. **업데이트 초안 작성**: 엄격한 서식 가이드라인을 따름
+4. **검토**: 간결하고(30-60초 읽기) 데이터 기반인지 확인
 
-[pick an emoji] [Team Name] (Dates Covered, usually a week)
-Progress: [1-3 sentences of content]
-Plans: [1-3 sentences of content]
-Problems: [1-3 sentences of content]
+## 서식
 
-Each section should be no more than 1-3 sentences: clear, to the point. It should be data-driven, and generally include metrics where possible. The tone should be very matter-of-fact, not super prose-heavy.
+형식은 항상 동일하며 매우 엄격한 서식입니다. 이 외의 다른 서식은 절대 사용하지 마세요. 팀과 업데이트의 분위기를 잘 담은 재미있는 이모지를 선택하세요.
+
+[이모지 선택] [팀 이름] (대상 날짜, 보통 1주일)
+진행사항: [1-3문장의 내용]
+계획: [1-3문장의 내용]
+문제점: [1-3문장의 내용]
+
+각 섹션은 1-3문장 이내여야 합니다: 명확하고 요점에 맞게. 데이터 기반이어야 하며, 일반적으로 가능한 경우 지표를 포함합니다. 톤은 매우 사실적이어야 하며, 과도한 수사는 사용하지 마세요.

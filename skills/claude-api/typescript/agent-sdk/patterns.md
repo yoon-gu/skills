@@ -1,6 +1,6 @@
-# Agent SDK Patterns — TypeScript
+# Agent SDK 패턴 — TypeScript
 
-## Basic Agent
+## 기본 에이전트
 
 ```typescript
 import { query } from "@anthropic-ai/claude-agent-sdk";
@@ -24,9 +24,9 @@ main();
 
 ---
 
-## Hooks
+## 훅
 
-### After Tool Use Hook
+### 도구 사용 후 훅
 
 ```typescript
 import { query, HookCallback } from "@anthropic-ai/claude-agent-sdk";
@@ -57,7 +57,7 @@ for await (const message of query({
 
 ---
 
-## Subagents
+## 하위 에이전트
 
 ```typescript
 import { query } from "@anthropic-ai/claude-agent-sdk";
@@ -81,9 +81,9 @@ for await (const message of query({
 
 ---
 
-## MCP Server Integration
+## MCP 서버 통합
 
-### Browser Automation (Playwright)
+### 브라우저 자동화 (Playwright)
 
 ```typescript
 for await (const message of query({
@@ -100,7 +100,7 @@ for await (const message of query({
 
 ---
 
-## Session Resumption
+## 세션 재개
 
 ```typescript
 import { query } from "@anthropic-ai/claude-agent-sdk";
@@ -128,7 +128,7 @@ for await (const message of query({
 
 ---
 
-## Session History
+## 세션 기록
 
 ```typescript
 import { listSessions, getSessionMessages, getSessionInfo } from "@anthropic-ai/claude-agent-sdk";
@@ -160,7 +160,7 @@ main();
 
 ---
 
-## Session Mutations
+## 세션 변경
 
 ```typescript
 import { renameSession, tagSession, forkSession } from "@anthropic-ai/claude-agent-sdk";
@@ -187,7 +187,7 @@ main();
 
 ---
 
-## Custom System Prompt
+## 커스텀 시스템 프롬프트
 
 ```typescript
 import { query } from "@anthropic-ai/claude-agent-sdk";

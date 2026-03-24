@@ -4,19 +4,19 @@ description: "Use this skill any time a .pptx file is involved in any way — as
 license: Proprietary. LICENSE.txt has complete terms
 ---
 
-# PPTX Skill
+# PPTX 스킬
 
-## Quick Reference
+## 빠른 참조
 
-| Task | Guide |
-|------|-------|
-| Read/analyze content | `python -m markitdown presentation.pptx` |
-| Edit or create from template | Read [editing.md](editing.md) |
-| Create from scratch | Read [pptxgenjs.md](pptxgenjs.md) |
+| 작업 | 가이드 |
+|------|--------|
+| 콘텐츠 읽기/분석 | `python -m markitdown presentation.pptx` |
+| 템플릿에서 편집 또는 생성 | [editing.md](editing.md) 읽기 |
+| 처음부터 생성 | [pptxgenjs.md](pptxgenjs.md) 읽기 |
 
 ---
 
-## Reading Content
+## 콘텐츠 읽기
 
 ```bash
 # Text extraction
@@ -31,76 +31,76 @@ python scripts/office/unpack.py presentation.pptx unpacked/
 
 ---
 
-## Editing Workflow
+## 편집 워크플로우
 
-**Read [editing.md](editing.md) for full details.**
+**자세한 내용은 [editing.md](editing.md)를 참조하세요.**
 
-1. Analyze template with `thumbnail.py`
-2. Unpack → manipulate slides → edit content → clean → pack
-
----
-
-## Creating from Scratch
-
-**Read [pptxgenjs.md](pptxgenjs.md) for full details.**
-
-Use when no template or reference presentation is available.
+1. `thumbnail.py`로 템플릿 분석
+2. 언팩 → 슬라이드 조작 → 콘텐츠 편집 → 정리 → 팩
 
 ---
 
-## Design Ideas
+## 처음부터 생성
 
-**Don't create boring slides.** Plain bullets on a white background won't impress anyone. Consider ideas from this list for each slide.
+**자세한 내용은 [pptxgenjs.md](pptxgenjs.md)를 참조하세요.**
 
-### Before Starting
+템플릿이나 참조 프레젠테이션이 없을 때 사용합니다.
 
-- **Pick a bold, content-informed color palette**: The palette should feel designed for THIS topic. If swapping your colors into a completely different presentation would still "work," you haven't made specific enough choices.
-- **Dominance over equality**: One color should dominate (60-70% visual weight), with 1-2 supporting tones and one sharp accent. Never give all colors equal weight.
-- **Dark/light contrast**: Dark backgrounds for title + conclusion slides, light for content ("sandwich" structure). Or commit to dark throughout for a premium feel.
-- **Commit to a visual motif**: Pick ONE distinctive element and repeat it — rounded image frames, icons in colored circles, thick single-side borders. Carry it across every slide.
+---
 
-### Color Palettes
+## 디자인 아이디어
 
-Choose colors that match your topic — don't default to generic blue. Use these palettes as inspiration:
+**지루한 슬라이드를 만들지 마세요.** 흰색 배경에 단순한 글머리 기호는 누구에게도 감명을 주지 못합니다. 각 슬라이드에 이 목록의 아이디어를 고려하세요.
 
-| Theme | Primary | Secondary | Accent |
-|-------|---------|-----------|--------|
-| **Midnight Executive** | `1E2761` (navy) | `CADCFC` (ice blue) | `FFFFFF` (white) |
-| **Forest & Moss** | `2C5F2D` (forest) | `97BC62` (moss) | `F5F5F5` (cream) |
-| **Coral Energy** | `F96167` (coral) | `F9E795` (gold) | `2F3C7E` (navy) |
-| **Warm Terracotta** | `B85042` (terracotta) | `E7E8D1` (sand) | `A7BEAE` (sage) |
-| **Ocean Gradient** | `065A82` (deep blue) | `1C7293` (teal) | `21295C` (midnight) |
-| **Charcoal Minimal** | `36454F` (charcoal) | `F2F2F2` (off-white) | `212121` (black) |
-| **Teal Trust** | `028090` (teal) | `00A896` (seafoam) | `02C39A` (mint) |
-| **Berry & Cream** | `6D2E46` (berry) | `A26769` (dusty rose) | `ECE2D0` (cream) |
-| **Sage Calm** | `84B59F` (sage) | `69A297` (eucalyptus) | `50808E` (slate) |
-| **Cherry Bold** | `990011` (cherry) | `FCF6F5` (off-white) | `2F3C7E` (navy) |
+### 시작하기 전에
 
-### For Each Slide
+- **대담하고 콘텐츠에 맞는 색상 팔레트 선택**: 팔레트는 이 주제를 위해 디자인된 느낌이어야 합니다. 색상을 완전히 다른 프레젠테이션에 넣어도 "잘 어울린다"면, 충분히 구체적인 선택을 하지 않은 것입니다.
+- **균등함보다 지배적 색상**: 하나의 색상이 지배적이어야 하며(시각적 비중 60-70%), 1-2개의 보조 톤과 하나의 강렬한 강조색을 사용하세요. 모든 색상에 동일한 비중을 부여하지 마세요.
+- **명암 대비**: 타이틀 + 결론 슬라이드에는 어두운 배경, 콘텐츠에는 밝은 배경("샌드위치" 구조). 또는 전체적으로 어두운 배경을 사용하여 프리미엄 느낌을 줍니다.
+- **시각적 모티프에 전념**: 하나의 독특한 요소를 선택하고 반복하세요 — 둥근 이미지 프레임, 색상 원 안의 아이콘, 두꺼운 단면 테두리. 모든 슬라이드에 적용하세요.
 
-**Every slide needs a visual element** — image, chart, icon, or shape. Text-only slides are forgettable.
+### 색상 팔레트
 
-**Layout options:**
-- Two-column (text left, illustration on right)
-- Icon + text rows (icon in colored circle, bold header, description below)
-- 2x2 or 2x3 grid (image on one side, grid of content blocks on other)
-- Half-bleed image (full left or right side) with content overlay
+주제에 맞는 색상을 선택하세요 — 기본 파란색을 사용하지 마세요. 다음 팔레트를 영감으로 활용하세요:
 
-**Data display:**
-- Large stat callouts (big numbers 60-72pt with small labels below)
-- Comparison columns (before/after, pros/cons, side-by-side options)
-- Timeline or process flow (numbered steps, arrows)
+| 테마 | 기본색 | 보조색 | 강조색 |
+|------|--------|--------|--------|
+| **Midnight Executive** | `1E2761` (네이비) | `CADCFC` (아이스 블루) | `FFFFFF` (화이트) |
+| **Forest & Moss** | `2C5F2D` (포레스트) | `97BC62` (모스) | `F5F5F5` (크림) |
+| **Coral Energy** | `F96167` (코랄) | `F9E795` (골드) | `2F3C7E` (네이비) |
+| **Warm Terracotta** | `B85042` (테라코타) | `E7E8D1` (샌드) | `A7BEAE` (세이지) |
+| **Ocean Gradient** | `065A82` (딥 블루) | `1C7293` (틸) | `21295C` (미드나이트) |
+| **Charcoal Minimal** | `36454F` (차콜) | `F2F2F2` (오프화이트) | `212121` (블랙) |
+| **Teal Trust** | `028090` (틸) | `00A896` (시폼) | `02C39A` (민트) |
+| **Berry & Cream** | `6D2E46` (베리) | `A26769` (더스티 로즈) | `ECE2D0` (크림) |
+| **Sage Calm** | `84B59F` (세이지) | `69A297` (유칼립투스) | `50808E` (슬레이트) |
+| **Cherry Bold** | `990011` (체리) | `FCF6F5` (오프화이트) | `2F3C7E` (네이비) |
 
-**Visual polish:**
-- Icons in small colored circles next to section headers
-- Italic accent text for key stats or taglines
+### 각 슬라이드에 대해
 
-### Typography
+**모든 슬라이드에는 시각적 요소가 필요합니다** — 이미지, 차트, 아이콘 또는 도형. 텍스트만 있는 슬라이드는 기억에 남지 않습니다.
 
-**Choose an interesting font pairing** — don't default to Arial. Pick a header font with personality and pair it with a clean body font.
+**레이아웃 옵션:**
+- 2단 구성 (왼쪽 텍스트, 오른쪽 일러스트레이션)
+- 아이콘 + 텍스트 행 (색상 원 안의 아이콘, 굵은 헤더, 아래 설명)
+- 2x2 또는 2x3 그리드 (한쪽은 이미지, 다른 쪽은 콘텐츠 블록 그리드)
+- 하프 블리드 이미지 (왼쪽 또는 오른쪽 전체) 위에 콘텐츠 오버레이
 
-| Header Font | Body Font |
-|-------------|-----------|
+**데이터 표시:**
+- 큰 통계 콜아웃 (큰 숫자 60-72pt, 아래 작은 라벨)
+- 비교 열 (전/후, 장단점, 나란히 옵션)
+- 타임라인 또는 프로세스 흐름 (번호 매긴 단계, 화살표)
+
+**시각적 완성도:**
+- 섹션 헤더 옆에 작은 색상 원 안의 아이콘
+- 핵심 통계나 태그라인을 위한 이탤릭 강조 텍스트
+
+### 타이포그래피
+
+**흥미로운 폰트 조합을 선택하세요** — Arial을 기본으로 사용하지 마세요. 개성 있는 헤더 폰트를 선택하고 깔끔한 본문 폰트와 조합하세요.
+
+| 헤더 폰트 | 본문 폰트 |
+|-----------|-----------|
 | Georgia | Calibri |
 | Arial Black | Arial |
 | Calibri | Calibri Light |
@@ -110,61 +110,61 @@ Choose colors that match your topic — don't default to generic blue. Use these
 | Palatino | Garamond |
 | Consolas | Calibri |
 
-| Element | Size |
-|---------|------|
-| Slide title | 36-44pt bold |
-| Section header | 20-24pt bold |
-| Body text | 14-16pt |
-| Captions | 10-12pt muted |
+| 요소 | 크기 |
+|------|------|
+| 슬라이드 제목 | 36-44pt 굵게 |
+| 섹션 헤더 | 20-24pt 굵게 |
+| 본문 텍스트 | 14-16pt |
+| 캡션 | 10-12pt 연하게 |
 
-### Spacing
+### 간격
 
-- 0.5" minimum margins
-- 0.3-0.5" between content blocks
-- Leave breathing room—don't fill every inch
+- 최소 0.5" 여백
+- 콘텐츠 블록 사이 0.3-0.5"
+- 여유 공간을 남기세요—모든 공간을 채우지 마세요
 
-### Avoid (Common Mistakes)
+### 피해야 할 것 (흔한 실수)
 
-- **Don't repeat the same layout** — vary columns, cards, and callouts across slides
-- **Don't center body text** — left-align paragraphs and lists; center only titles
-- **Don't skimp on size contrast** — titles need 36pt+ to stand out from 14-16pt body
-- **Don't default to blue** — pick colors that reflect the specific topic
-- **Don't mix spacing randomly** — choose 0.3" or 0.5" gaps and use consistently
-- **Don't style one slide and leave the rest plain** — commit fully or keep it simple throughout
-- **Don't create text-only slides** — add images, icons, charts, or visual elements; avoid plain title + bullets
-- **Don't forget text box padding** — when aligning lines or shapes with text edges, set `margin: 0` on the text box or offset the shape to account for padding
-- **Don't use low-contrast elements** — icons AND text need strong contrast against the background; avoid light text on light backgrounds or dark text on dark backgrounds
-- **NEVER use accent lines under titles** — these are a hallmark of AI-generated slides; use whitespace or background color instead
+- **같은 레이아웃을 반복하지 마세요** — 슬라이드마다 열, 카드, 콜아웃을 다양하게 하세요
+- **본문 텍스트를 가운데 정렬하지 마세요** — 단락과 목록은 왼쪽 정렬; 제목만 가운데 정렬
+- **크기 대비를 줄이지 마세요** — 제목은 14-16pt 본문과 구별되려면 36pt 이상이어야 합니다
+- **기본 파란색을 사용하지 마세요** — 특정 주제를 반영하는 색상을 선택하세요
+- **간격을 무작위로 섞지 마세요** — 0.3" 또는 0.5" 간격을 선택하고 일관되게 사용하세요
+- **한 슬라이드만 스타일링하고 나머지를 방치하지 마세요** — 완전히 적용하거나 전체적으로 심플하게 유지하세요
+- **텍스트만 있는 슬라이드를 만들지 마세요** — 이미지, 아이콘, 차트 또는 시각적 요소를 추가하세요; 단순한 제목 + 글머리 기호를 피하세요
+- **텍스트 박스 패딩을 잊지 마세요** — 선이나 도형을 텍스트 가장자리에 맞출 때, 텍스트 박스에 `margin: 0`을 설정하거나 패딩을 감안하여 도형을 오프셋하세요
+- **낮은 대비 요소를 사용하지 마세요** — 아이콘과 텍스트 모두 배경과 강한 대비가 필요합니다; 밝은 배경에 밝은 텍스트나 어두운 배경에 어두운 텍스트를 피하세요
+- **절대로 제목 아래에 강조선을 사용하지 마세요** — 이것은 AI가 생성한 슬라이드의 특징입니다; 대신 여백이나 배경색을 사용하세요
 
 ---
 
-## QA (Required)
+## QA (필수)
 
-**Assume there are problems. Your job is to find them.**
+**문제가 있다고 가정하세요. 당신의 임무는 그것을 찾는 것입니다.**
 
-Your first render is almost never correct. Approach QA as a bug hunt, not a confirmation step. If you found zero issues on first inspection, you weren't looking hard enough.
+첫 번째 렌더링은 거의 정확하지 않습니다. QA를 확인 단계가 아닌 버그 사냥으로 접근하세요. 첫 번째 검사에서 문제를 하나도 발견하지 못했다면, 충분히 꼼꼼하게 보지 않은 것입니다.
 
-### Content QA
+### 콘텐츠 QA
 
 ```bash
 python -m markitdown output.pptx
 ```
 
-Check for missing content, typos, wrong order.
+누락된 콘텐츠, 오타, 잘못된 순서를 확인하세요.
 
-**When using templates, check for leftover placeholder text:**
+**템플릿 사용 시 남은 플레이스홀더 텍스트를 확인하세요:**
 
 ```bash
 python -m markitdown output.pptx | grep -iE "xxxx|lorem|ipsum|this.*(page|slide).*layout"
 ```
 
-If grep returns results, fix them before declaring success.
+grep이 결과를 반환하면, 성공을 선언하기 전에 수정하세요.
 
-### Visual QA
+### 시각적 QA
 
-**⚠️ USE SUBAGENTS** — even for 2-3 slides. You've been staring at the code and will see what you expect, not what's there. Subagents have fresh eyes.
+**서브에이전트를 사용하세요** — 2-3개 슬라이드라도. 코드를 계속 보았기 때문에 실제로 있는 것이 아니라 기대하는 것을 보게 됩니다. 서브에이전트는 새로운 시각을 가지고 있습니다.
 
-Convert slides to images (see [Converting to Images](#converting-to-images)), then use this prompt:
+슬라이드를 이미지로 변환한 다음([이미지로 변환](#이미지로-변환) 참조), 이 프롬프트를 사용하세요:
 
 ```
 Visually inspect these slides. Assume there are issues — find them.
@@ -192,30 +192,30 @@ Read and analyze these images:
 Report ALL issues found, including minor ones.
 ```
 
-### Verification Loop
+### 검증 루프
 
-1. Generate slides → Convert to images → Inspect
-2. **List issues found** (if none found, look again more critically)
-3. Fix issues
-4. **Re-verify affected slides** — one fix often creates another problem
-5. Repeat until a full pass reveals no new issues
+1. 슬라이드 생성 → 이미지로 변환 → 검사
+2. **발견된 문제 목록** (문제를 발견하지 못했다면, 더 비판적으로 다시 살펴보세요)
+3. 문제 수정
+4. **영향받은 슬라이드 재검증** — 하나의 수정이 종종 다른 문제를 만듭니다
+5. 전체 점검에서 새로운 문제가 없을 때까지 반복
 
-**Do not declare success until you've completed at least one fix-and-verify cycle.**
+**최소한 한 번의 수정-검증 사이클을 완료할 때까지 성공을 선언하지 마세요.**
 
 ---
 
-## Converting to Images
+## 이미지로 변환
 
-Convert presentations to individual slide images for visual inspection:
+시각적 검사를 위해 프레젠테이션을 개별 슬라이드 이미지로 변환합니다:
 
 ```bash
 python scripts/office/soffice.py --headless --convert-to pdf output.pptx
 pdftoppm -jpeg -r 150 output.pdf slide
 ```
 
-This creates `slide-01.jpg`, `slide-02.jpg`, etc.
+이렇게 하면 `slide-01.jpg`, `slide-02.jpg` 등이 생성됩니다.
 
-To re-render specific slides after fixes:
+수정 후 특정 슬라이드를 다시 렌더링하려면:
 
 ```bash
 pdftoppm -jpeg -r 150 -f N -l N output.pdf slide-fixed
@@ -223,10 +223,10 @@ pdftoppm -jpeg -r 150 -f N -l N output.pdf slide-fixed
 
 ---
 
-## Dependencies
+## 의존성
 
-- `pip install "markitdown[pptx]"` - text extraction
-- `pip install Pillow` - thumbnail grids
-- `npm install -g pptxgenjs` - creating from scratch
-- LibreOffice (`soffice`) - PDF conversion (auto-configured for sandboxed environments via `scripts/office/soffice.py`)
-- Poppler (`pdftoppm`) - PDF to images
+- `pip install "markitdown[pptx]"` - 텍스트 추출
+- `pip install Pillow` - 썸네일 그리드
+- `npm install -g pptxgenjs` - 처음부터 생성
+- LibreOffice (`soffice`) - PDF 변환 (샌드박스 환경에서 `scripts/office/soffice.py`를 통해 자동 구성)
+- Poppler (`pdftoppm`) - PDF를 이미지로 변환

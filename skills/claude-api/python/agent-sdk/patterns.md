@@ -1,6 +1,6 @@
-# Agent SDK Patterns — Python
+# Agent SDK 패턴 — Python
 
-## Basic Agent
+## 기본 에이전트
 
 ```python
 import anyio
@@ -22,9 +22,9 @@ anyio.run(main)
 
 ---
 
-## Custom Tools
+## 사용자 정의 도구
 
-Custom tools require an MCP server. Use `ClaudeSDKClient` for full control (custom SDK MCP tools require `ClaudeSDKClient` — `query()` only supports external stdio/http MCP servers).
+사용자 정의 도구에는 MCP 서버가 필요합니다. 완전한 제어를 위해 `ClaudeSDKClient`를 사용합니다 (사용자 정의 SDK MCP 도구는 `ClaudeSDKClient`가 필요합니다 — `query()`는 외부 stdio/http MCP 서버만 지원합니다).
 
 ```python
 import anyio
@@ -59,11 +59,11 @@ anyio.run(main)
 
 ---
 
-## Hooks
+## 훅
 
-### After Tool Use Hook
+### 도구 사용 후 훅
 
-Log file changes after any edit:
+편집 후 파일 변경 사항을 기록합니다:
 
 ```python
 import anyio
@@ -95,7 +95,7 @@ anyio.run(main)
 
 ---
 
-## Subagents
+## 하위 에이전트
 
 ```python
 import anyio
@@ -123,9 +123,9 @@ anyio.run(main)
 
 ---
 
-## MCP Server Integration
+## MCP 서버 통합
 
-### Browser Automation (Playwright)
+### 브라우저 자동화 (Playwright)
 
 ```python
 import anyio
@@ -146,7 +146,7 @@ async def main():
 anyio.run(main)
 ```
 
-### Database Access (PostgreSQL)
+### 데이터베이스 액세스 (PostgreSQL)
 
 ```python
 import os
@@ -174,14 +174,14 @@ anyio.run(main)
 
 ---
 
-## Permission Modes
+## 권한 모드
 
 ```python
 import anyio
 from claude_agent_sdk import query, ClaudeAgentOptions
 
 async def main():
-    # Default: prompt for dangerous operations
+    # Default: 위험한 작업 시 확인 요청
     async for message in query(
         prompt="Delete all test files",
         options=ClaudeAgentOptions(
@@ -191,7 +191,7 @@ async def main():
     ):
         pass
 
-    # Plan: agent creates a plan before making changes
+    # Plan: 에이전트가 변경 전에 계획을 작성
     async for message in query(
         prompt="Refactor the auth system",
         options=ClaudeAgentOptions(
@@ -201,7 +201,7 @@ async def main():
     ):
         pass
 
-    # Accept edits: auto-accept file edits
+    # Accept edits: 파일 편집 자동 승인
     async for message in query(
         prompt="Refactor this module",
         options=ClaudeAgentOptions(
@@ -211,7 +211,7 @@ async def main():
     ):
         pass
 
-    # Bypass: skip all prompts (use with caution)
+    # Bypass: 모든 확인 건너뛰기 (주의해서 사용)
     async for message in query(
         prompt="Set up the development environment",
         options=ClaudeAgentOptions(
@@ -226,7 +226,7 @@ anyio.run(main)
 
 ---
 
-## Error Recovery
+## 오류 복구
 
 ```python
 import anyio
@@ -262,7 +262,7 @@ anyio.run(run_with_recovery)
 
 ---
 
-## Session Resumption
+## 세션 재개
 
 ```python
 import anyio
@@ -271,7 +271,7 @@ from claude_agent_sdk import query, ClaudeAgentOptions, ResultMessage, SystemMes
 async def main():
     session_id = None
 
-    # First query: capture the session ID
+    # 첫 번째 쿼리: 세션 ID 캡처
     async for message in query(
         prompt="Read the authentication module",
         options=ClaudeAgentOptions(allowed_tools=["Read", "Glob"])
@@ -279,7 +279,7 @@ async def main():
         if isinstance(message, SystemMessage) and message.subtype == "init":
             session_id = message.data.get("session_id")
 
-    # Resume with full context from the first query
+    # 첫 번째 쿼리의 전체 컨텍스트로 재개
     async for message in query(
         prompt="Now find all places that call it",  # "it" = auth module
         options=ClaudeAgentOptions(resume=session_id)
@@ -292,17 +292,17 @@ anyio.run(main)
 
 ---
 
-## Session History
+## 세션 기록
 
 ```python
 from claude_agent_sdk import list_sessions, get_session_messages
 
-# List past sessions (sync function — no await)
+# 과거 세션 목록 조회 (동기 함수 — await 불필요)
 sessions = list_sessions()
 for session in sessions:
     print(f"Session {session.session_id} in {session.cwd}")
 
-# Retrieve messages from the most recent session (sync function — no await)
+# 가장 최근 세션의 메시지 조회 (동기 함수 — await 불필요)
 if sessions:
     messages = get_session_messages(session_id=sessions[0].session_id)
     for msg in messages:
@@ -311,29 +311,29 @@ if sessions:
 
 ---
 
-## Session Mutations
+## 세션 변경
 
 ```python
 from claude_agent_sdk import rename_session, tag_session
 
 session_id = "your-session-id"
 
-# Rename a session
+# 세션 이름 변경
 rename_session(session_id=session_id, title="Refactoring auth module")
 
-# Tag a session for filtering
+# 필터링을 위한 세션 태그 지정
 tag_session(session_id=session_id, tag="experiment-v2")
 
-# Clear a tag
+# 태그 삭제
 tag_session(session_id=session_id, tag=None)
 
-# Scope to a specific project directory
+# 특정 프로젝트 디렉터리로 범위 지정
 rename_session(session_id=session_id, title="New title", directory="/path/to/project")
 ```
 
 ---
 
-## Custom System Prompt
+## 사용자 정의 시스템 프롬프트
 
 ```python
 import anyio

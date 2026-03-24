@@ -1,19 +1,19 @@
 # Ocean Depths
 
-A professional and calming maritime theme that evokes the serenity of deep ocean waters.
+깊은 바다의 고요함을 연상시키는 전문적이고 차분한 해양 테마입니다.
 
-## Color Palette
+## 색상 팔레트
 
-- **Deep Navy**: `#1a2332` - Primary background color
-- **Teal**: `#2d8b8b` - Accent color for highlights and emphasis
-- **Seafoam**: `#a8dadc` - Secondary accent for lighter elements
-- **Cream**: `#f1faee` - Text and light backgrounds
+- **Deep Navy**: `#1a2332` - 주요 배경 색상
+- **Teal**: `#2d8b8b` - 하이라이트 및 강조용 색상
+- **Seafoam**: `#a8dadc` - 밝은 요소용 보조 강조색
+- **Cream**: `#f1faee` - 텍스트 및 밝은 배경
 
-## Typography
+## 타이포그래피
 
-- **Headers**: DejaVu Sans Bold
-- **Body Text**: DejaVu Sans
+- **제목**: DejaVu Sans Bold
+- **본문**: DejaVu Sans
 
-## Best Used For
+## 최적 용도
 
-Corporate presentations, financial reports, professional consulting decks, trust-building content.
+기업 프레젠테이션, 재무 보고서, 전문 컨설팅 덱, 신뢰 구축 콘텐츠.

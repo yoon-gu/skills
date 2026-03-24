@@ -1,32 +1,32 @@
 ---
 name: internal-comms
-description: A set of resources to help me write all kinds of internal communications, using the formats that my company likes to use. Claude should use this skill whenever asked to write some sort of internal communications (status reports, leadership updates, 3P updates, company newsletters, FAQs, incident reports, project updates, etc.).
+description: 회사에서 선호하는 형식을 사용하여 모든 종류의 사내 커뮤니케이션을 작성하는 데 도움이 되는 리소스 모음입니다. 사내 커뮤니케이션(현황 보고서, 리더십 업데이트, 3P 업데이트, 회사 뉴스레터, FAQ, 인시던트 보고서, 프로젝트 업데이트 등)을 작성하라는 요청이 있을 때 Claude는 이 스킬을 사용해야 합니다.
 license: Complete terms in LICENSE.txt
 ---
 
-## When to use this skill
-To write internal communications, use this skill for:
-- 3P updates (Progress, Plans, Problems)
-- Company newsletters
-- FAQ responses
-- Status reports
-- Leadership updates
-- Project updates
-- Incident reports
+## 이 스킬을 사용할 때
+사내 커뮤니케이션을 작성할 때 이 스킬을 사용하세요:
+- 3P 업데이트 (진행사항, 계획, 문제점)
+- 회사 뉴스레터
+- FAQ 답변
+- 현황 보고서
+- 리더십 업데이트
+- 프로젝트 업데이트
+- 인시던트 보고서
 
-## How to use this skill
+## 이 스킬 사용 방법
 
-To write any internal communication:
+사내 커뮤니케이션을 작성하려면:
 
-1. **Identify the communication type** from the request
-2. **Load the appropriate guideline file** from the `examples/` directory:
-    - `examples/3p-updates.md` - For Progress/Plans/Problems team updates
-    - `examples/company-newsletter.md` - For company-wide newsletters
-    - `examples/faq-answers.md` - For answering frequently asked questions
-    - `examples/general-comms.md` - For anything else that doesn't explicitly match one of the above
-3. **Follow the specific instructions** in that file for formatting, tone, and content gathering
+1. **커뮤니케이션 유형 파악** - 요청에서 유형을 식별합니다
+2. **적절한 가이드라인 파일 로드** - `examples/` 디렉토리에서:
+    - `examples/3p-updates.md` - 진행사항/계획/문제점 팀 업데이트용
+    - `examples/company-newsletter.md` - 전사 뉴스레터용
+    - `examples/faq-answers.md` - 자주 묻는 질문 답변용
+    - `examples/general-comms.md` - 위의 어느 것에도 명시적으로 해당하지 않는 기타 커뮤니케이션용
+3. **해당 파일의 구체적인 지침을 따르세요** - 형식, 톤, 콘텐츠 수집에 대해
 
-If the communication type doesn't match any existing guideline, ask for clarification or more context about the desired format.
+커뮤니케이션 유형이 기존 가이드라인과 일치하지 않으면 원하는 형식에 대해 명확히 하거나 추가 맥락을 요청하세요.
 
-## Keywords
-3P updates, company newsletter, company comms, weekly update, faqs, common questions, updates, internal comms
+## 키워드
+3P 업데이트, 회사 뉴스레터, 회사 커뮤니케이션, 주간 업데이트, FAQ, 자주 묻는 질문, 업데이트, 사내 커뮤니케이션

@@ -1,42 +1,42 @@
 ---
 name: frontend-design
-description: Create distinctive, production-grade frontend interfaces with high design quality. Use this skill when the user asks to build web components, pages, artifacts, posters, or applications (examples include websites, landing pages, dashboards, React components, HTML/CSS layouts, or when styling/beautifying any web UI). Generates creative, polished code and UI design that avoids generic AI aesthetics.
+description: 높은 디자인 품질의 독특하고 프로덕션 수준의 프론트엔드 인터페이스를 만듭니다. 사용자가 웹 컴포넌트, 페이지, 아티팩트, 포스터 또는 애플리케이션(웹사이트, 랜딩 페이지, 대시보드, React 컴포넌트, HTML/CSS 레이아웃 등)을 구축하거나 웹 UI를 스타일링/미화할 때 이 스킬을 사용하세요. 일반적인 AI 미학을 피하는 창의적이고 세련된 코드와 UI 디자인을 생성합니다.
 license: Complete terms in LICENSE.txt
 ---
 
-This skill guides creation of distinctive, production-grade frontend interfaces that avoid generic "AI slop" aesthetics. Implement real working code with exceptional attention to aesthetic details and creative choices.
+이 스킬은 일반적인 "AI 슬롭" 미학을 피하는 독특하고 프로덕션 수준의 프론트엔드 인터페이스 제작을 안내합니다. 미적 세부사항과 창의적 선택에 탁월한 주의를 기울여 실제 작동하는 코드를 구현하세요.
 
-The user provides frontend requirements: a component, page, application, or interface to build. They may include context about the purpose, audience, or technical constraints.
+사용자는 프론트엔드 요구사항을 제공합니다: 구축할 컴포넌트, 페이지, 애플리케이션 또는 인터페이스. 목적, 대상, 기술적 제약에 대한 맥락을 포함할 수 있습니다.
 
-## Design Thinking
+## 디자인 사고
 
-Before coding, understand the context and commit to a BOLD aesthetic direction:
-- **Purpose**: What problem does this interface solve? Who uses it?
-- **Tone**: Pick an extreme: brutally minimal, maximalist chaos, retro-futuristic, organic/natural, luxury/refined, playful/toy-like, editorial/magazine, brutalist/raw, art deco/geometric, soft/pastel, industrial/utilitarian, etc. There are so many flavors to choose from. Use these for inspiration but design one that is true to the aesthetic direction.
-- **Constraints**: Technical requirements (framework, performance, accessibility).
-- **Differentiation**: What makes this UNFORGETTABLE? What's the one thing someone will remember?
+코딩 전에 맥락을 이해하고 **대담한** 미적 방향에 전념하세요:
+- **목적**: 이 인터페이스가 해결하는 문제는 무엇인가? 누가 사용하는가?
+- **톤**: 극단을 선택하세요: 극도로 미니멀한, 맥시멀리스트 카오스, 레트로 퓨처리스틱, 유기적/자연적, 럭셔리/세련된, 장난스러운/장난감 같은, 에디토리얼/매거진, 브루탈리스트/날것의, 아르데코/기하학적, 부드러운/파스텔, 산업적/실용적 등. 선택할 수 있는 많은 스타일이 있습니다. 이것들을 영감으로 사용하되 미적 방향에 충실한 디자인을 하세요.
+- **제약**: 기술적 요구사항(프레임워크, 성능, 접근성).
+- **차별화**: 이것을 **잊을 수 없게** 만드는 것은 무엇인가? 사람들이 기억할 한 가지는?
 
-**CRITICAL**: Choose a clear conceptual direction and execute it with precision. Bold maximalism and refined minimalism both work - the key is intentionality, not intensity.
+**중요**: 명확한 컨셉 방향을 선택하고 정밀하게 실행하세요. 대담한 맥시멀리즘과 세련된 미니멀리즘 모두 효과적입니다 - 핵심은 의도성이지 강도가 아닙니다.
 
-Then implement working code (HTML/CSS/JS, React, Vue, etc.) that is:
-- Production-grade and functional
-- Visually striking and memorable
-- Cohesive with a clear aesthetic point-of-view
-- Meticulously refined in every detail
+그런 다음 다음과 같은 작동 코드(HTML/CSS/JS, React, Vue 등)를 구현하세요:
+- 프로덕션 수준이며 기능적
+- 시각적으로 인상적이고 기억에 남는
+- 명확한 미적 관점이 있는 일관된
+- 모든 세부사항이 꼼꼼하게 다듬어진
 
-## Frontend Aesthetics Guidelines
+## 프론트엔드 미학 가이드라인
 
-Focus on:
-- **Typography**: Choose fonts that are beautiful, unique, and interesting. Avoid generic fonts like Arial and Inter; opt instead for distinctive choices that elevate the frontend's aesthetics; unexpected, characterful font choices. Pair a distinctive display font with a refined body font.
-- **Color & Theme**: Commit to a cohesive aesthetic. Use CSS variables for consistency. Dominant colors with sharp accents outperform timid, evenly-distributed palettes.
-- **Motion**: Use animations for effects and micro-interactions. Prioritize CSS-only solutions for HTML. Use Motion library for React when available. Focus on high-impact moments: one well-orchestrated page load with staggered reveals (animation-delay) creates more delight than scattered micro-interactions. Use scroll-triggering and hover states that surprise.
-- **Spatial Composition**: Unexpected layouts. Asymmetry. Overlap. Diagonal flow. Grid-breaking elements. Generous negative space OR controlled density.
-- **Backgrounds & Visual Details**: Create atmosphere and depth rather than defaulting to solid colors. Add contextual effects and textures that match the overall aesthetic. Apply creative forms like gradient meshes, noise textures, geometric patterns, layered transparencies, dramatic shadows, decorative borders, custom cursors, and grain overlays.
+다음에 집중하세요:
+- **타이포그래피**: 아름답고 독특하며 흥미로운 폰트를 선택하세요. Arial과 Inter 같은 일반적인 폰트를 피하고, 프론트엔드의 미학을 높이는 독특한 선택을 하세요; 예상치 못한, 개성 있는 폰트 선택. 독특한 디스플레이 폰트와 세련된 본문 폰트를 조합하세요.
+- **색상 & 테마**: 일관된 미학에 전념하세요. 일관성을 위해 CSS 변수를 사용하세요. 소심하고 균등하게 분배된 팔레트보다 지배적인 색상과 날카로운 강조색이 더 효과적입니다.
+- **모션**: 효과와 마이크로 인터랙션에 애니메이션을 사용하세요. HTML에는 CSS 전용 솔루션을 우선시하세요. React에서는 Motion 라이브러리를 사용하세요. 흩어진 마이크로 인터랙션보다 엇갈린 공개(animation-delay)가 있는 잘 조율된 페이지 로드가 더 즐거움을 줍니다. 스크롤 트리거링과 놀라움을 주는 호버 상태를 사용하세요.
+- **공간 구성**: 예상치 못한 레이아웃. 비대칭. 겹침. 대각선 흐름. 그리드를 깨는 요소. 넉넉한 여백 또는 제어된 밀도.
+- **배경 & 시각적 세부사항**: 단색 기본값 대신 분위기와 깊이를 만드세요. 전체 미학에 맞는 맥락적 효과와 텍스처를 추가하세요. 그라디언트 메시, 노이즈 텍스처, 기하학적 패턴, 레이어드 투명도, 극적인 그림자, 장식적 테두리, 커스텀 커서, 그레인 오버레이 같은 창의적 형태를 적용하세요.
 
-NEVER use generic AI-generated aesthetics like overused font families (Inter, Roboto, Arial, system fonts), cliched color schemes (particularly purple gradients on white backgrounds), predictable layouts and component patterns, and cookie-cutter design that lacks context-specific character.
+과도하게 사용되는 폰트 패밀리(Inter, Roboto, Arial, 시스템 폰트), 진부한 색상 구성(특히 흰색 배경에 보라색 그라디언트), 예측 가능한 레이아웃과 컴포넌트 패턴, 맥락에 맞는 개성이 없는 천편일률적인 디자인 같은 일반적인 AI 생성 미학을 절대 사용하지 마세요.
 
-Interpret creatively and make unexpected choices that feel genuinely designed for the context. No design should be the same. Vary between light and dark themes, different fonts, different aesthetics. NEVER converge on common choices (Space Grotesk, for example) across generations.
+창의적으로 해석하고 맥락에 진정으로 디자인된 것처럼 느껴지는 예상치 못한 선택을 하세요. 어떤 디자인도 같아서는 안 됩니다. 밝은 테마와 어두운 테마, 다른 폰트, 다른 미학 사이를 다양하게 하세요. 세대 간에 일반적인 선택(예: Space Grotesk)으로 수렴하지 마세요.
 
-**IMPORTANT**: Match implementation complexity to the aesthetic vision. Maximalist designs need elaborate code with extensive animations and effects. Minimalist or refined designs need restraint, precision, and careful attention to spacing, typography, and subtle details. Elegance comes from executing the vision well.
+**중요**: 구현 복잡도를 미적 비전에 맞추세요. 맥시멀리스트 디자인에는 광범위한 애니메이션과 효과가 있는 정교한 코드가 필요합니다. 미니멀리스트 또는 세련된 디자인에는 절제, 정밀함, 간격, 타이포그래피, 미묘한 세부사항에 대한 세심한 주의가 필요합니다. 우아함은 비전을 잘 실행하는 것에서 나옵니다.
 
-Remember: Claude is capable of extraordinary creative work. Don't hold back, show what can truly be created when thinking outside the box and committing fully to a distinctive vision.
+기억하세요: Claude는 탁월한 창작 작업이 가능합니다. 주저하지 말고, 틀 밖에서 생각하고 독특한 비전에 완전히 전념할 때 진정으로 만들어질 수 있는 것을 보여주세요.

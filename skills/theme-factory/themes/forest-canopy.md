@@ -1,19 +1,19 @@
 # Forest Canopy
 
-A natural and grounded theme featuring earth tones inspired by dense forest environments.
+울창한 숲 환경에서 영감을 받은 어스 톤이 특징인 자연적이고 안정감 있는 테마입니다.
 
-## Color Palette
+## 색상 팔레트
 
-- **Forest Green**: `#2d4a2b` - Primary dark green
-- **Sage**: `#7d8471` - Muted green accent
-- **Olive**: `#a4ac86` - Light accent color
-- **Ivory**: `#faf9f6` - Backgrounds and text
+- **Forest Green**: `#2d4a2b` - 주요 다크 그린
+- **Sage**: `#7d8471` - 차분한 녹색 강조
+- **Olive**: `#a4ac86` - 밝은 강조 색상
+- **Ivory**: `#faf9f6` - 배경 및 텍스트
 
-## Typography
+## 타이포그래피
 
-- **Headers**: FreeSerif Bold
-- **Body Text**: FreeSans
+- **제목**: FreeSerif Bold
+- **본문**: FreeSans
 
-## Best Used For
+## 최적 용도
 
-Environmental presentations, sustainability reports, outdoor brands, wellness content, organic products.
+환경 프레젠테이션, 지속가능성 보고서, 아웃도어 브랜드, 웰니스 콘텐츠, 유기농 제품.

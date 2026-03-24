@@ -1,19 +1,19 @@
 # Golden Hour
 
-A rich and warm autumnal palette that creates an inviting and sophisticated atmosphere.
+따뜻하고 세련된 분위기를 만드는 풍부하고 따뜻한 가을 팔레트입니다.
 
-## Color Palette
+## 색상 팔레트
 
-- **Mustard Yellow**: `#f4a900` - Bold primary accent
-- **Terracotta**: `#c1666b` - Warm secondary color
-- **Warm Beige**: `#d4b896` - Neutral backgrounds
-- **Chocolate Brown**: `#4a403a` - Dark text and anchors
+- **Mustard Yellow**: `#f4a900` - 대담한 주요 강조색
+- **Terracotta**: `#c1666b` - 따뜻한 보조 색상
+- **Warm Beige**: `#d4b896` - 중립 배경
+- **Chocolate Brown**: `#4a403a` - 어두운 텍스트 및 앵커
 
-## Typography
+## 타이포그래피
 
-- **Headers**: FreeSans Bold
-- **Body Text**: FreeSans
+- **제목**: FreeSans Bold
+- **본문**: FreeSans
 
-## Best Used For
+## 최적 용도
 
-Restaurant presentations, hospitality brands, fall campaigns, cozy lifestyle content, artisan products.
+레스토랑 프레젠테이션, 호스피탈리티 브랜드, 가을 캠페인, 아늑한 라이프스타일 콘텐츠, 장인 제품.

@@ -1,19 +1,19 @@
 # Modern Minimalist
 
-A clean and contemporary theme with a sophisticated grayscale palette for maximum versatility.
+최대의 다용도성을 위한 세련된 그레이스케일 팔레트의 깔끔하고 현대적인 테마입니다.
 
-## Color Palette
+## 색상 팔레트
 
-- **Charcoal**: `#36454f` - Primary dark color
-- **Slate Gray**: `#708090` - Medium gray for accents
-- **Light Gray**: `#d3d3d3` - Backgrounds and dividers
-- **White**: `#ffffff` - Text and clean backgrounds
+- **Charcoal**: `#36454f` - 주요 어두운 색상
+- **Slate Gray**: `#708090` - 강조용 미디엄 그레이
+- **Light Gray**: `#d3d3d3` - 배경 및 구분선
+- **White**: `#ffffff` - 텍스트 및 깔끔한 배경
 
-## Typography
+## 타이포그래피
 
-- **Headers**: DejaVu Sans Bold
-- **Body Text**: DejaVu Sans
+- **제목**: DejaVu Sans Bold
+- **본문**: DejaVu Sans
 
-## Best Used For
+## 최적 용도
 
-Tech presentations, architecture portfolios, design showcases, modern business proposals, data visualization.
+테크 프레젠테이션, 건축 포트폴리오, 디자인 쇼케이스, 현대적 비즈니스 제안서, 데이터 시각화.

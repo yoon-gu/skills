@@ -1,8 +1,8 @@
 # Claude API — Java
 
-> **Note:** The Java SDK supports the Claude API and beta tool use with annotated classes. Agent SDK is not yet available for Java.
+> **참고:** Java SDK는 Claude API와 어노테이션 클래스를 사용한 베타 도구 사용을 지원합니다. Agent SDK는 아직 Java에서 사용할 수 없습니다.
 
-## Installation
+## 설치
 
 Maven:
 
@@ -20,7 +20,7 @@ Gradle:
 implementation("com.anthropic:anthropic-java:2.16.1")
 ```
 
-## Client Initialization
+## 클라이언트 초기화
 
 ```java
 import com.anthropic.client.AnthropicClient;
@@ -37,7 +37,7 @@ AnthropicClient client = AnthropicOkHttpClient.builder()
 
 ---
 
-## Basic Message Request
+## 기본 메시지 요청
 
 ```java
 import com.anthropic.models.messages.MessageCreateParams;
@@ -58,7 +58,7 @@ response.content().stream()
 
 ---
 
-## Streaming
+## 스트리밍
 
 ```java
 import com.anthropic.core.http.StreamResponse;
@@ -80,9 +80,9 @@ try (StreamResponse<RawMessageStreamEvent> streamResponse = client.messages().cr
 
 ---
 
-## Thinking
+## 사고(Thinking)
 
-**Adaptive thinking is the recommended mode for Claude 4.6+ models.** Claude decides dynamically when and how much to think. The builder has a direct `.thinking(ThinkingConfigAdaptive)` overload — no manual union wrapping.
+**적응형 사고(Adaptive thinking)는 Claude 4.6+ 모델에 권장되는 모드입니다.** Claude가 언제, 얼마나 사고할지를 동적으로 결정합니다. 빌더에는 직접적인 `.thinking(ThinkingConfigAdaptive)` 오버로드가 있어 수동 유니온 래핑이 필요 없습니다.
 
 ```java
 import com.anthropic.models.messages.ContentBlock;
@@ -103,17 +103,17 @@ for (ContentBlock block : client.messages().create(params).content()) {
 }
 ```
 
-> **Deprecated:** `ThinkingConfigEnabled.builder().budgetTokens(N)` (and the `.enabledThinking(N)` shortcut) still works on Claude 4.6 but is deprecated. Use adaptive thinking above.
+> **지원 중단(Deprecated):** `ThinkingConfigEnabled.builder().budgetTokens(N)` (및 `.enabledThinking(N)` 단축 메서드)은 Claude 4.6에서 여전히 작동하지만 지원 중단되었습니다. 위의 적응형 사고를 사용하세요.
 
-`ContentBlock` narrowing: `.thinking()` / `.text()` return `Optional<T>` — use `.ifPresent(...)` or `.stream().flatMap(...)`. Alternative: `isThinking()` / `asThinking()` boolean+unwrap pairs (throws on wrong variant).
+`ContentBlock` 타입 축소: `.thinking()` / `.text()`는 `Optional<T>`를 반환합니다 — `.ifPresent(...)` 또는 `.stream().flatMap(...)`을 사용하세요. 대안: `isThinking()` / `asThinking()` boolean+unwrap 쌍 (잘못된 변형에서 예외 발생).
 
 ---
 
-## Tool Use (Beta)
+## 도구 사용 (베타)
 
-The Java SDK supports beta tool use with annotated classes. Tool classes implement `Supplier<String>` for automatic execution via `BetaToolRunner`.
+Java SDK는 어노테이션 클래스를 사용한 베타 도구 사용을 지원합니다. 도구 클래스는 `BetaToolRunner`를 통한 자동 실행을 위해 `Supplier<String>`을 구현합니다.
 
-### Tool Runner (automatic loop)
+### 도구 실행기 (자동 루프)
 
 ```java
 import com.anthropic.models.beta.messages.MessageCreateParams;
@@ -148,9 +148,9 @@ for (BetaMessage message : toolRunner) {
 }
 ```
 
-### Memory Tool
+### 메모리 도구
 
-The Java SDK provides `BetaMemoryToolHandler` for implementing the memory tool backend. You supply a handler that manages file storage, and the `BetaToolRunner` handles memory tool calls automatically.
+Java SDK는 메모리 도구 백엔드를 구현하기 위한 `BetaMemoryToolHandler`를 제공합니다. 파일 저장소를 관리하는 핸들러를 제공하면 `BetaToolRunner`가 메모리 도구 호출을 자동으로 처리합니다.
 
 ```java
 import com.anthropic.helpers.BetaMemoryToolHandler;
@@ -181,11 +181,11 @@ for (BetaMessage message : toolRunner) {
 }
 ```
 
-See the [shared memory tool concepts](../shared/tool-use-concepts.md) for more details on the memory tool.
+메모리 도구에 대한 자세한 내용은 [공유 메모리 도구 개념](../shared/tool-use-concepts.md)을 참조하세요.
 
-### Non-Beta Tool Declaration (manual JSON schema)
+### 비베타 도구 선언 (수동 JSON 스키마)
 
-`Tool.InputSchema.Properties` is a freeform `Map<String, JsonValue>` wrapper — build property schemas via `putAdditionalProperty`. `type: "object"` is the default. The builder has a direct `.addTool(Tool)` overload that wraps in `ToolUnion` automatically.
+`Tool.InputSchema.Properties`는 자유 형식 `Map<String, JsonValue>` 래퍼입니다 — `putAdditionalProperty`를 통해 속성 스키마를 구성합니다. `type: "object"`가 기본값입니다. 빌더에는 `ToolUnion`으로 자동 래핑하는 직접적인 `.addTool(Tool)` 오버로드가 있습니다.
 
 ```java
 import com.anthropic.core.JsonValue;
@@ -210,11 +210,11 @@ MessageCreateParams params = MessageCreateParams.builder()
     .build();
 ```
 
-For manual tool loops, handle `tool_use` blocks in the response, send `tool_result` back, loop until `stop_reason` is `"end_turn"`. See [shared tool use concepts](../shared/tool-use-concepts.md).
+수동 도구 루프의 경우, 응답에서 `tool_use` 블록을 처리하고, `tool_result`를 다시 전송하며, `stop_reason`이 `"end_turn"`이 될 때까지 반복합니다. [공유 도구 사용 개념](../shared/tool-use-concepts.md)을 참조하세요.
 
-### Building `MessageParam` with Content Blocks (Tool Result Round-Trip)
+### 콘텐츠 블록으로 `MessageParam` 구성 (도구 결과 왕복)
 
-`MessageParam.Content` is an inner union class (string | list). Use the builder's `.contentOfBlockParams(List<ContentBlockParam>)` alias — there is NO separate `MessageParamContent` class with a static `ofBlockParams`:
+`MessageParam.Content`는 내부 유니온 클래스(string | list)입니다. 빌더의 `.contentOfBlockParams(List<ContentBlockParam>)` 별칭을 사용하세요 — 정적 `ofBlockParams`를 가진 별도의 `MessageParamContent` 클래스는 없습니다:
 
 ```java
 import com.anthropic.models.messages.MessageParam;
@@ -236,9 +236,9 @@ MessageParam toolResultMsg = MessageParam.builder()
 
 ---
 
-## Effort Parameter
+## 노력(Effort) 매개변수
 
-Effort is nested inside `OutputConfig` — there is NO `.effort()` directly on `MessageCreateParams.Builder`.
+Effort는 `OutputConfig` 내부에 중첩되어 있습니다 — `MessageCreateParams.Builder`에 직접적인 `.effort()`는 없습니다.
 
 ```java
 import com.anthropic.models.messages.OutputConfig;
@@ -248,13 +248,13 @@ import com.anthropic.models.messages.OutputConfig;
     .build())
 ```
 
-Combine with `Thinking = ThinkingConfigAdaptive` for cost-quality control.
+비용-품질 제어를 위해 `Thinking = ThinkingConfigAdaptive`와 함께 사용합니다.
 
 ---
 
-## Prompt Caching
+## 프롬프트 캐싱
 
-System message as a list of `TextBlockParam` with `CacheControlEphemeral`. Use `.systemOfTextBlockParams(...)` — the plain `.system(String)` overload can't carry cache control.
+시스템 메시지를 `CacheControlEphemeral`이 포함된 `TextBlockParam` 목록으로 작성합니다. `.systemOfTextBlockParams(...)`를 사용하세요 — 일반 `.system(String)` 오버로드는 캐시 제어를 전달할 수 없습니다.
 
 ```java
 import com.anthropic.models.messages.TextBlockParam;
@@ -269,11 +269,11 @@ import com.anthropic.models.messages.CacheControlEphemeral;
         .build()))
 ```
 
-There's also a top-level `.cacheControl(CacheControlEphemeral)` on `MessageCreateParams.Builder` and on `Tool.builder()`.
+`MessageCreateParams.Builder`와 `Tool.builder()`에도 최상위 `.cacheControl(CacheControlEphemeral)`이 있습니다.
 
 ---
 
-## Token Counting
+## 토큰 카운팅
 
 ```java
 import com.anthropic.models.messages.MessageCountTokensParams;
@@ -288,9 +288,9 @@ long tokens = client.messages().countTokens(
 
 ---
 
-## Structured Output
+## 구조화된 출력
 
-The class-based overload auto-derives the JSON schema from your POJO and gives you a typed `.text()` return — no manual schema, no manual parsing.
+클래스 기반 오버로드는 POJO에서 JSON 스키마를 자동으로 도출하고 타입이 지정된 `.text()` 반환값을 제공합니다 — 수동 스키마나 수동 파싱이 필요 없습니다.
 
 ```java
 import com.anthropic.models.messages.StructuredMessageCreateParams;
@@ -313,13 +313,13 @@ client.messages().create(params).content().stream()
     });
 ```
 
-Supports Jackson annotations: `@JsonPropertyDescription`, `@JsonIgnore`, `@ArraySchema(minItems=...)`. Manual schema path: `OutputConfig.builder().format(JsonOutputFormat.builder().schema(...).build())`.
+Jackson 어노테이션 지원: `@JsonPropertyDescription`, `@JsonIgnore`, `@ArraySchema(minItems=...)`. 수동 스키마 경로: `OutputConfig.builder().format(JsonOutputFormat.builder().schema(...).build())`.
 
 ---
 
-## PDF / Document Input
+## PDF / 문서 입력
 
-`DocumentBlockParam` builder has source shortcuts. Wrap in `ContentBlockParam.ofDocument()` and pass via `.addUserMessageOfBlockParams()`.
+`DocumentBlockParam` 빌더에는 소스 단축 메서드가 있습니다. `ContentBlockParam.ofDocument()`로 래핑하고 `.addUserMessageOfBlockParams()`를 통해 전달합니다.
 
 ```java
 import com.anthropic.models.messages.DocumentBlockParam;
@@ -338,9 +338,9 @@ DocumentBlockParam doc = DocumentBlockParam.builder()
 
 ---
 
-## Server-Side Tools
+## 서버 측 도구
 
-Version-suffixed types; `name`/`type` auto-set by builder. Direct `.addTool()` overloads exist for every type — no manual `ToolUnion` wrapping.
+버전 접미사가 붙은 타입; `name`/`type`은 빌더에 의해 자동 설정됩니다. 모든 타입에 대해 직접적인 `.addTool()` 오버로드가 있어 수동 `ToolUnion` 래핑이 필요 없습니다.
 
 ```java
 import com.anthropic.models.messages.WebSearchTool20260209;
@@ -357,11 +357,11 @@ import com.anthropic.models.messages.CodeExecutionTool20260120;
 .addTool(CodeExecutionTool20260120.builder().build())
 ```
 
-Also available: `WebFetchTool20260209`, `MemoryTool20250818`, `ToolSearchToolBm25_20251119`.
+다음도 사용 가능: `WebFetchTool20260209`, `MemoryTool20250818`, `ToolSearchToolBm25_20251119`.
 
-### Beta namespace (MCP, compaction)
+### 베타 네임스페이스 (MCP, 압축)
 
-For beta-only features use `com.anthropic.models.beta.messages.*` — class names have a `Beta` prefix AND live in the beta package. The beta `MessageCreateParams.Builder` has direct `.addTool(BetaToolBash20250124)` overloads AND `.addMcpServer()`:
+베타 전용 기능에는 `com.anthropic.models.beta.messages.*`를 사용합니다 — 클래스 이름에 `Beta` 접두사가 있으며 beta 패키지에 위치합니다. 베타 `MessageCreateParams.Builder`에는 직접적인 `.addTool(BetaToolBash20250124)` 오버로드와 `.addMcpServer()`가 있습니다:
 
 ```java
 import com.anthropic.models.beta.messages.MessageCreateParams;
@@ -385,9 +385,9 @@ MessageCreateParams params = MessageCreateParams.builder()
 client.beta().messages().create(params);
 ```
 
-`BetaTool*` types are NOT interchangeable with non-beta `Tool*` — pick one namespace per request.
+`BetaTool*` 타입은 비베타 `Tool*`과 호환되지 않습니다 — 요청당 하나의 네임스페이스를 선택하세요.
 
-**Reading server-tool blocks in the response:** `ServerToolUseBlock` has `.id()`, `.name()` (enum), and `._input()` returning raw `JsonValue` — there is NO typed `.input()`. For code execution results, unwrap two levels:
+**응답에서 서버 도구 블록 읽기:** `ServerToolUseBlock`에는 `.id()`, `.name()` (enum), 그리고 원시 `JsonValue`를 반환하는 `._input()`이 있습니다 — 타입이 지정된 `.input()`은 없습니다. 코드 실행 결과의 경우 두 단계를 언래핑합니다:
 
 ```java
 for (ContentBlock block : response.content()) {
@@ -406,9 +406,9 @@ for (ContentBlock block : response.content()) {
 
 ---
 
-## Files API (Beta)
+## Files API (베타)
 
-Under `client.beta().files()`. File references in messages need the beta message types (non-beta `DocumentBlockParam.Source` has no file-ID variant).
+`client.beta().files()` 아래에 있습니다. 메시지에서 파일 참조는 베타 메시지 타입이 필요합니다 (비베타 `DocumentBlockParam.Source`에는 파일 ID 변형이 없습니다).
 
 ```java
 import com.anthropic.models.beta.files.FileUploadParams;
@@ -427,4 +427,4 @@ BetaRequestDocumentBlock doc = BetaRequestDocumentBlock.builder()
     .build();
 ```
 
-Other methods: `.list()`, `.delete(String fileId)`, `.download(String fileId)`, `.retrieveMetadata(String fileId)`.
+기타 메서드: `.list()`, `.delete(String fileId)`, `.download(String fileId)`, `.retrieveMetadata(String fileId)`.

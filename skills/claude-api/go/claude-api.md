@@ -1,14 +1,14 @@
 # Claude API — Go
 
-> **Note:** The Go SDK supports the Claude API and beta tool use with `BetaToolRunner`. Agent SDK is not yet available for Go.
+> **참고:** Go SDK는 Claude API와 `BetaToolRunner`를 통한 베타 도구 사용을 지원합니다. Agent SDK는 아직 Go에서 사용할 수 없습니다.
 
-## Installation
+## 설치
 
 ```bash
 go get github.com/anthropics/anthropic-sdk-go
 ```
 
-## Client Initialization
+## 클라이언트 초기화
 
 ```go
 import (
@@ -27,7 +27,7 @@ client := anthropic.NewClient(
 
 ---
 
-## Basic Message Request
+## 기본 메시지 요청
 
 ```go
 response, err := client.Messages.New(context.Background(), anthropic.MessageNewParams{
@@ -50,7 +50,7 @@ for _, block := range response.Content {
 
 ---
 
-## Streaming
+## 스트리밍
 
 ```go
 stream := client.Messages.NewStreaming(context.Background(), anthropic.MessageNewParams{
@@ -76,7 +76,7 @@ if err := stream.Err(); err != nil {
 }
 ```
 
-**Accumulating the final message** (there is no `GetFinalMessage()` on the stream):
+**최종 메시지 누적** (스트림에는 `GetFinalMessage()`가 없습니다):
 
 ```go
 stream := client.Messages.NewStreaming(ctx, params)
@@ -91,11 +91,11 @@ if err := stream.Err(); err != nil { log.Fatal(err) }
 
 ---
 
-## Tool Use
+## 도구 사용
 
-### Tool Runner (Beta — Recommended)
+### Tool Runner (Beta — 권장)
 
-**Beta:** The Go SDK provides `BetaToolRunner` for automatic tool use loops via the `toolrunner` package.
+**Beta:** Go SDK는 `toolrunner` 패키지를 통해 자동 도구 사용 루프를 위한 `BetaToolRunner`를 제공합니다.
 
 ```go
 import (
@@ -160,19 +160,19 @@ for _, block := range message.Content {
 }
 ```
 
-**Key features of the Go tool runner:**
+**Go tool runner의 주요 기능:**
 
-- Automatic schema generation from Go structs via `jsonschema` tags
-- `RunToCompletion()` for simple one-shot usage
-- `All()` iterator for processing each message in the conversation
-- `NextMessage()` for step-by-step iteration
-- Streaming variant via `NewToolRunnerStreaming()` with `AllStreaming()`
+- Go 구조체의 `jsonschema` 태그를 통한 자동 스키마 생성
+- 간단한 일회성 사용을 위한 `RunToCompletion()`
+- 대화의 각 메시지를 처리하기 위한 `All()` 이터레이터
+- 단계별 반복을 위한 `NextMessage()`
+- `NewToolRunnerStreaming()`과 `AllStreaming()`을 통한 스트리밍 변형
 
-### Manual Loop
+### 수동 루프
 
-For fine-grained control over the agentic loop, define tools with `ToolParam`, check `StopReason`, execute tools yourself, and feed `tool_result` blocks back. This is the pattern when you need to intercept, validate, or log tool calls.
+에이전트 루프를 세밀하게 제어하려면 `ToolParam`으로 도구를 정의하고, `StopReason`을 확인하고, 직접 도구를 실행한 후 `tool_result` 블록을 다시 전달합니다. 도구 호출을 가로채거나 검증하거나 로깅해야 할 때 사용하는 패턴입니다.
 
-Derived from `anthropic-sdk-go/examples/tools/main.go`.
+`anthropic-sdk-go/examples/tools/main.go`에서 파생되었습니다.
 
 ```go
 package main
@@ -258,27 +258,27 @@ func main() {
 }
 ```
 
-**Key API surface:**
+**주요 API 표면:**
 
-| Symbol | Purpose |
+| 심볼 | 용도 |
 |---|---|
-| `resp.ToParam()` | Convert `Message` response → `MessageParam` for history |
-| `block.AsAny().(type)` | Type-switch on `ContentBlockUnion` variants |
-| `variant.JSON.Input.Raw()` | Raw JSON string of tool input (for `json.Unmarshal`) |
-| `anthropic.NewToolResultBlock(id, content, isError)` | Build `tool_result` block |
-| `anthropic.NewUserMessage(blocks...)` | Wrap tool results as a user turn |
-| `anthropic.StopReasonToolUse` | `StopReason` constant to check loop termination |
-| `anthropic.ToolUnionParam{OfTool: &t}` | Wrap `ToolParam` in the union for `Tools:` |
+| `resp.ToParam()` | `Message` 응답을 기록용 `MessageParam`으로 변환 |
+| `block.AsAny().(type)` | `ContentBlockUnion` 변형에 대한 타입 스위치 |
+| `variant.JSON.Input.Raw()` | 도구 입력의 원시 JSON 문자열 (`json.Unmarshal`용) |
+| `anthropic.NewToolResultBlock(id, content, isError)` | `tool_result` 블록 생성 |
+| `anthropic.NewUserMessage(blocks...)` | 도구 결과를 사용자 턴으로 래핑 |
+| `anthropic.StopReasonToolUse` | 루프 종료를 확인하기 위한 `StopReason` 상수 |
+| `anthropic.ToolUnionParam{OfTool: &t}` | `ToolParam`을 `Tools:` 유니온으로 래핑 |
 
 ---
 
-## Thinking
+## 사고
 
-Enable Claude's internal reasoning by setting `Thinking` in `MessageNewParams`. The response will contain `ThinkingBlock` content before the final `TextBlock`.
+`MessageNewParams`에서 `Thinking`을 설정하여 Claude의 내부 추론을 활성화합니다. 응답에는 최종 `TextBlock` 앞에 `ThinkingBlock` 콘텐츠가 포함됩니다.
 
-**Adaptive thinking is the recommended mode for Claude 4.6+ models.** Claude decides dynamically when and how much to think. Combine with the `effort` parameter for cost-quality control.
+**적응형 사고는 Claude 4.6+ 모델에서 권장되는 모드입니다.** Claude가 언제, 얼마나 사고할지 동적으로 결정합니다. 비용-품질 제어를 위해 `effort` 매개변수와 함께 사용하세요.
 
-Derived from `anthropic-sdk-go/message.go` (`ThinkingConfigParamUnion`, `NewThinkingConfigAdaptiveParam`).
+`anthropic-sdk-go/message.go` (`ThinkingConfigParamUnion`, `NewThinkingConfigAdaptiveParam`)에서 파생되었습니다.
 
 ```go
 // There is no ThinkingConfigParamOfAdaptive helper — construct the union
@@ -309,15 +309,15 @@ for _, block := range resp.Content {
 }
 ```
 
-> **Deprecated:** `ThinkingConfigParamOfEnabled(budgetTokens)` (fixed-budget extended thinking) still works on Claude 4.6 but is deprecated. Use adaptive thinking above.
+> **지원 중단:** `ThinkingConfigParamOfEnabled(budgetTokens)` (고정 예산 확장 사고)는 Claude 4.6에서 여전히 작동하지만 지원 중단되었습니다. 위의 적응형 사고를 사용하세요.
 
-To disable: `anthropic.ThinkingConfigParamUnion{OfDisabled: &anthropic.ThinkingConfigDisabledParam{}}`.
+비활성화하려면: `anthropic.ThinkingConfigParamUnion{OfDisabled: &anthropic.ThinkingConfigDisabledParam{}}`.
 
 ---
 
-## Server-Side Tools
+## 서버 측 도구
 
-Version-suffixed struct names with `Param` suffix. `Name`/`Type` are `constant.*` types — zero value marshals correctly, so `{}` works. Wrap in `ToolUnionParam` with the matching `Of*` field.
+버전 접미사가 붙은 구조체 이름에 `Param` 접미사를 사용합니다. `Name`/`Type`은 `constant.*` 타입으로, 제로 값이 올바르게 마셜링되므로 `{}`가 작동합니다. 해당하는 `Of*` 필드와 함께 `ToolUnionParam`으로 래핑합니다.
 
 ```go
 Tools: []anthropic.ToolUnionParam{
@@ -328,13 +328,13 @@ Tools: []anthropic.ToolUnionParam{
 },
 ```
 
-Also available: `WebFetchTool20260209Param`, `MemoryTool20250818Param`, `ToolSearchToolBm25_20251119Param`, `ToolSearchToolRegex20251119Param`.
+다음도 사용 가능: `WebFetchTool20260209Param`, `MemoryTool20250818Param`, `ToolSearchToolBm25_20251119Param`, `ToolSearchToolRegex20251119Param`.
 
 ---
 
-## PDF / Document Input
+## PDF / 문서 입력
 
-`NewDocumentBlock` generic helper accepts any source type. `MediaType`/`Type` are auto-set.
+`NewDocumentBlock` 범용 헬퍼는 모든 소스 타입을 허용합니다. `MediaType`/`Type`은 자동으로 설정됩니다.
 
 ```go
 b64 := base64.StdEncoding.EncodeToString(pdfBytes)
@@ -345,13 +345,13 @@ msg := anthropic.NewUserMessage(
 )
 ```
 
-Other sources: `URLPDFSourceParam{URL: "https://..."}`, `PlainTextSourceParam{Data: "..."}`.
+기타 소스: `URLPDFSourceParam{URL: "https://..."}`, `PlainTextSourceParam{Data: "..."}`.
 
 ---
 
 ## Files API (Beta)
 
-Under `client.Beta.Files`. Method is **`Upload`** (NOT `New`/`Create`), params struct is `BetaFileUploadParams`. The `File` field takes an `io.Reader`; use `anthropic.File()` to attach a filename + content-type for the multipart encoding.
+`client.Beta.Files` 아래에 있습니다. 메서드는 **`Upload`**입니다 (`New`/`Create`가 아님). 매개변수 구조체는 `BetaFileUploadParams`입니다. `File` 필드는 `io.Reader`를 받습니다. 멀티파트 인코딩을 위해 파일명과 콘텐츠 타입을 첨부하려면 `anthropic.File()`을 사용하세요.
 
 ```go
 f, _ := os.Open("./upload_me.txt")
@@ -364,13 +364,13 @@ meta, err := client.Beta.Files.Upload(ctx, anthropic.BetaFileUploadParams{
 // meta.ID is the file_id to reference in subsequent message requests
 ```
 
-Other `Beta.Files` methods: `List`, `Delete`, `Download`, `GetMetadata`.
+기타 `Beta.Files` 메서드: `List`, `Delete`, `Download`, `GetMetadata`.
 
 ---
 
-## Context Editing / Compaction (Beta)
+## 컨텍스트 편집 / 압축 (Beta)
 
-Use `Beta.Messages.New` with `ContextManagement` on `BetaMessageNewParams`. There is no `NewBetaAssistantMessage` — use `.ToParam()` for the round-trip.
+`BetaMessageNewParams`에서 `ContextManagement`와 함께 `Beta.Messages.New`를 사용합니다. `NewBetaAssistantMessage`는 없습니다. 왕복 변환에는 `.ToParam()`을 사용하세요.
 
 ```go
 params := anthropic.BetaMessageNewParams{
@@ -401,4 +401,4 @@ for _, block := range resp.Content {
 }
 ```
 
-Other edit types: `BetaClearToolUses20250919EditParam`, `BetaClearThinking20251015EditParam`.
+기타 편집 타입: `BetaClearToolUses20250919EditParam`, `BetaClearThinking20251015EditParam`.

@@ -1,59 +1,59 @@
 ---
 name: theme-factory
-description: Toolkit for styling artifacts with a theme. These artifacts can be slides, docs, reportings, HTML landing pages, etc. There are 10 pre-set themes with colors/fonts that you can apply to any artifact that has been creating, or can generate a new theme on-the-fly.
+description: 아티팩트에 테마를 적용하기 위한 도구 모음입니다. 이 아티팩트는 슬라이드, 문서, 보고서, HTML 랜딩 페이지 등이 될 수 있습니다. 어떤 아티팩트에든 적용할 수 있는 색상/폰트가 포함된 10개의 사전 설정 테마가 있으며, 즉석에서 새 테마를 생성할 수도 있습니다.
 license: Complete terms in LICENSE.txt
 ---
 
 
-# Theme Factory Skill
+# 테마 팩토리 스킬
 
-This skill provides a curated collection of professional font and color themes themes, each with carefully selected color palettes and font pairings. Once a theme is chosen, it can be applied to any artifact.
+이 스킬은 신중하게 선택된 색상 팔레트와 폰트 조합이 포함된 전문적인 폰트 및 색상 테마 컬렉션을 제공합니다. 테마를 선택하면 모든 아티팩트에 적용할 수 있습니다.
 
-## Purpose
+## 목적
 
-To apply consistent, professional styling to presentation slide decks, use this skill. Each theme includes:
-- A cohesive color palette with hex codes
-- Complementary font pairings for headers and body text
-- A distinct visual identity suitable for different contexts and audiences
+프레젠테이션 슬라이드 덱에 일관되고 전문적인 스타일링을 적용하려면 이 스킬을 사용하세요. 각 테마에는 다음이 포함됩니다:
+- 헥스 코드가 포함된 일관된 색상 팔레트
+- 제목과 본문용 보완적인 폰트 조합
+- 다양한 맥락과 대상에 적합한 독특한 시각적 아이덴티티
 
-## Usage Instructions
+## 사용 지침
 
-To apply styling to a slide deck or other artifact:
+슬라이드 덱이나 기타 아티팩트에 스타일링을 적용하려면:
 
-1. **Show the theme showcase**: Display the `theme-showcase.pdf` file to allow users to see all available themes visually. Do not make any modifications to it; simply show the file for viewing.
-2. **Ask for their choice**: Ask which theme to apply to the deck
-3. **Wait for selection**: Get explicit confirmation about the chosen theme
-4. **Apply the theme**: Once a theme has been chosen, apply the selected theme's colors and fonts to the deck/artifact
+1. **테마 쇼케이스 표시**: `theme-showcase.pdf` 파일을 표시하여 사용자가 사용 가능한 모든 테마를 시각적으로 볼 수 있게 합니다. 수정하지 말고 단순히 파일을 보여주세요.
+2. **선택 요청**: 덱에 적용할 테마를 물어보세요
+3. **선택 대기**: 선택한 테마에 대한 명시적 확인을 받으세요
+4. **테마 적용**: 테마가 선택되면 선택한 테마의 색상과 폰트를 덱/아티팩트에 적용하세요
 
-## Themes Available
+## 사용 가능한 테마
 
-The following 10 themes are available, each showcased in `theme-showcase.pdf`:
+`theme-showcase.pdf`에 소개된 10개의 테마가 있습니다:
 
-1. **Ocean Depths** - Professional and calming maritime theme
-2. **Sunset Boulevard** - Warm and vibrant sunset colors
-3. **Forest Canopy** - Natural and grounded earth tones
-4. **Modern Minimalist** - Clean and contemporary grayscale
-5. **Golden Hour** - Rich and warm autumnal palette
-6. **Arctic Frost** - Cool and crisp winter-inspired theme
-7. **Desert Rose** - Soft and sophisticated dusty tones
-8. **Tech Innovation** - Bold and modern tech aesthetic
-9. **Botanical Garden** - Fresh and organic garden colors
-10. **Midnight Galaxy** - Dramatic and cosmic deep tones
+1. **Ocean Depths** - 전문적이고 차분한 해양 테마
+2. **Sunset Boulevard** - 따뜻하고 생동감 있는 일몰 색상
+3. **Forest Canopy** - 자연적이고 안정감 있는 어스 톤
+4. **Modern Minimalist** - 깔끔하고 현대적인 그레이스케일
+5. **Golden Hour** - 풍부하고 따뜻한 가을 팔레트
+6. **Arctic Frost** - 시원하고 산뜻한 겨울 영감 테마
+7. **Desert Rose** - 부드럽고 세련된 더스티 톤
+8. **Tech Innovation** - 대담하고 현대적인 테크 미학
+9. **Botanical Garden** - 신선하고 유기적인 정원 색상
+10. **Midnight Galaxy** - 극적이고 우주적인 딥 톤
 
-## Theme Details
+## 테마 세부사항
 
-Each theme is defined in the `themes/` directory with complete specifications including:
-- Cohesive color palette with hex codes
-- Complementary font pairings for headers and body text
-- Distinct visual identity suitable for different contexts and audiences
+각 테마는 `themes/` 디렉토리에 다음을 포함한 완전한 사양으로 정의되어 있습니다:
+- 헥스 코드가 포함된 일관된 색상 팔레트
+- 제목과 본문용 보완적인 폰트 조합
+- 다양한 맥락과 대상에 적합한 독특한 시각적 아이덴티티
 
-## Application Process
+## 적용 과정
 
-After a preferred theme is selected:
-1. Read the corresponding theme file from the `themes/` directory
-2. Apply the specified colors and fonts consistently throughout the deck
-3. Ensure proper contrast and readability
-4. Maintain the theme's visual identity across all slides
+선호하는 테마가 선택된 후:
+1. `themes/` 디렉토리에서 해당 테마 파일을 읽으세요
+2. 지정된 색상과 폰트를 덱 전체에 일관되게 적용하세요
+3. 적절한 대비와 가독성을 확보하세요
+4. 모든 슬라이드에서 테마의 시각적 아이덴티티를 유지하세요
 
-## Create your Own Theme
-To handle cases where none of the existing themes work for an artifact, create a custom theme. Based on provided inputs, generate a new theme similar to the ones above. Give the theme a similar name describing what the font/color combinations represent. Use any basic description provided to choose appropriate colors/fonts. After generating the theme, show it for review and verification. Following that, apply the theme as described above.
+## 나만의 테마 만들기
+기존 테마가 아티팩트에 적합하지 않은 경우 커스텀 테마를 만드세요. 제공된 입력에 기반하여 위와 유사한 새 테마를 생성하세요. 폰트/색상 조합이 나타내는 것을 설명하는 유사한 이름을 테마에 부여하세요. 제공된 기본 설명을 사용하여 적절한 색상/폰트를 선택하세요. 테마를 생성한 후 검토 및 확인을 위해 보여주세요. 그 후 위에서 설명한 대로 테마를 적용하세요.

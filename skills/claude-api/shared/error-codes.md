@@ -1,33 +1,33 @@
-# HTTP Error Codes Reference
+# HTTP 오류 코드 참조
 
-This file documents HTTP error codes returned by the Claude API, their common causes, and how to handle them. For language-specific error handling examples, see the `python/` or `typescript/` folders.
+이 파일은 Claude API가 반환하는 HTTP 오류 코드, 일반적인 원인, 그리고 처리 방법을 문서화합니다. 언어별 오류 처리 예제는 `python/` 또는 `typescript/` 폴더를 참조하세요.
 
-## Error Code Summary
+## 오류 코드 요약
 
-| Code | Error Type              | Retryable | Common Cause                         |
-| ---- | ----------------------- | --------- | ------------------------------------ |
-| 400  | `invalid_request_error` | No        | Invalid request format or parameters |
-| 401  | `authentication_error`  | No        | Invalid or missing API key           |
-| 403  | `permission_error`      | No        | API key lacks permission             |
-| 404  | `not_found_error`       | No        | Invalid endpoint or model ID         |
-| 413  | `request_too_large`     | No        | Request exceeds size limits          |
-| 429  | `rate_limit_error`      | Yes       | Too many requests                    |
-| 500  | `api_error`             | Yes       | Anthropic service issue              |
-| 529  | `overloaded_error`      | Yes       | API is temporarily overloaded        |
+| 코드 | 오류 유형                | 재시도 가능 | 일반적인 원인                        |
+| ---- | ----------------------- | ---------- | ------------------------------------ |
+| 400  | `invalid_request_error` | 아니오      | 잘못된 요청 형식 또는 매개변수        |
+| 401  | `authentication_error`  | 아니오      | 유효하지 않거나 누락된 API 키         |
+| 403  | `permission_error`      | 아니오      | API 키에 권한 없음                   |
+| 404  | `not_found_error`       | 아니오      | 잘못된 엔드포인트 또는 모델 ID        |
+| 413  | `request_too_large`     | 아니오      | 요청이 크기 제한 초과                 |
+| 429  | `rate_limit_error`      | 예          | 너무 많은 요청                       |
+| 500  | `api_error`             | 예          | Anthropic 서비스 문제                |
+| 529  | `overloaded_error`      | 예          | API가 일시적으로 과부하 상태          |
 
-## Detailed Error Information
+## 상세 오류 정보
 
 ### 400 Bad Request
 
-**Causes:**
+**원인:**
 
-- Malformed JSON in request body
-- Missing required parameters (`model`, `max_tokens`, `messages`)
-- Invalid parameter types (e.g., string where integer expected)
-- Empty messages array
-- Messages not alternating user/assistant
+- 요청 본문의 잘못된 JSON 형식
+- 필수 매개변수 누락 (`model`, `max_tokens`, `messages`)
+- 잘못된 매개변수 타입 (예: 정수가 필요한 곳에 문자열)
+- 빈 messages 배열
+- user/assistant가 번갈아 나오지 않는 messages
 
-**Example error:**
+**오류 예시:**
 
 ```json
 {
@@ -40,72 +40,72 @@ This file documents HTTP error codes returned by the Claude API, their common ca
 }
 ```
 
-**Fix:** Validate request structure before sending. Check that:
+**해결 방법:** 전송 전에 요청 구조를 검증하세요. 다음을 확인하세요:
 
-- `model` is a valid model ID
-- `max_tokens` is a positive integer
-- `messages` array is non-empty and alternates correctly
+- `model`이 유효한 모델 ID인지
+- `max_tokens`가 양의 정수인지
+- `messages` 배열이 비어 있지 않고 올바르게 번갈아 나오는지
 
 ---
 
 ### 401 Unauthorized
 
-**Causes:**
+**원인:**
 
-- Missing `x-api-key` header or `Authorization` header
-- Invalid API key format
-- Revoked or deleted API key
+- `x-api-key` 헤더 또는 `Authorization` 헤더 누락
+- 잘못된 API 키 형식
+- 취소되었거나 삭제된 API 키
 
-**Fix:** Ensure `ANTHROPIC_API_KEY` environment variable is set correctly.
+**해결 방법:** `ANTHROPIC_API_KEY` 환경 변수가 올바르게 설정되어 있는지 확인하세요.
 
 ---
 
 ### 403 Forbidden
 
-**Causes:**
+**원인:**
 
-- API key doesn't have access to the requested model
-- Organization-level restrictions
-- Attempting to access beta features without beta access
+- API 키가 요청한 모델에 대한 접근 권한이 없음
+- 조직 수준의 제한
+- 베타 접근 권한 없이 베타 기능에 접근 시도
 
-**Fix:** Check your API key permissions in the Console. You may need a different API key or to request access to specific features.
+**해결 방법:** Console에서 API 키 권한을 확인하세요. 다른 API 키가 필요하거나 특정 기능에 대한 접근 권한을 요청해야 할 수 있습니다.
 
 ---
 
 ### 404 Not Found
 
-**Causes:**
+**원인:**
 
-- Typo in model ID (e.g., `claude-sonnet-4.6` instead of `claude-sonnet-4-6`)
-- Using deprecated model ID
-- Invalid API endpoint
+- 모델 ID 오타 (예: `claude-sonnet-4.6` 대신 `claude-sonnet-4-6`)
+- 더 이상 사용되지 않는 모델 ID 사용
+- 잘못된 API 엔드포인트
 
-**Fix:** Use exact model IDs from the models documentation. You can use aliases (e.g., `claude-opus-4-6`).
+**해결 방법:** 모델 문서에서 정확한 모델 ID를 사용하세요. 별칭을 사용할 수 있습니다 (예: `claude-opus-4-6`).
 
 ---
 
 ### 413 Request Too Large
 
-**Causes:**
+**원인:**
 
-- Request body exceeds maximum size
-- Too many tokens in input
-- Image data too large
+- 요청 본문이 최대 크기 초과
+- 입력 토큰이 너무 많음
+- 이미지 데이터가 너무 큼
 
-**Fix:** Reduce input size — truncate conversation history, compress/resize images, or split large documents into chunks.
+**해결 방법:** 입력 크기를 줄이세요 — 대화 기록을 잘라내거나, 이미지를 압축/리사이즈하거나, 큰 문서를 청크로 분할하세요.
 
 ---
 
-### 400 Validation Errors
+### 400 유효성 검사 오류
 
-Some 400 errors are specifically related to parameter validation:
+일부 400 오류는 매개변수 유효성 검사와 관련이 있습니다:
 
-- `max_tokens` exceeds model's limit
-- Invalid `temperature` value (must be 0.0-1.0)
-- `budget_tokens` >= `max_tokens` in extended thinking
-- Invalid tool definition schema
+- `max_tokens`가 모델의 제한을 초과
+- 잘못된 `temperature` 값 (0.0-1.0이어야 함)
+- 확장된 사고에서 `budget_tokens` >= `max_tokens`
+- 잘못된 도구 정의 스키마
 
-**Common mistake with extended thinking:**
+**확장된 사고에서 흔한 실수:**
 
 ```
 # Wrong: budget_tokens must be < max_tokens
@@ -117,62 +117,62 @@ thinking: budget_tokens=10000, max_tokens=16000
 
 ---
 
-### 429 Rate Limited
+### 429 속도 제한
 
-**Causes:**
+**원인:**
 
-- Exceeded requests per minute (RPM)
-- Exceeded tokens per minute (TPM)
-- Exceeded tokens per day (TPD)
+- 분당 요청 수(RPM) 초과
+- 분당 토큰 수(TPM) 초과
+- 일당 토큰 수(TPD) 초과
 
-**Headers to check:**
+**확인할 헤더:**
 
-- `retry-after`: Seconds to wait before retrying
-- `x-ratelimit-limit-*`: Your limits
-- `x-ratelimit-remaining-*`: Remaining quota
+- `retry-after`: 재시도 전 대기할 초
+- `x-ratelimit-limit-*`: 제한량
+- `x-ratelimit-remaining-*`: 남은 할당량
 
-**Fix:** The Anthropic SDKs automatically retry 429 and 5xx errors with exponential backoff (default: `max_retries=2`). For custom retry behavior, see the language-specific error handling examples.
+**해결 방법:** Anthropic SDK는 429 및 5xx 오류를 지수 백오프로 자동 재시도합니다 (기본값: `max_retries=2`). 사용자 정의 재시도 동작은 언어별 오류 처리 예제를 참조하세요.
 
 ---
 
 ### 500 Internal Server Error
 
-**Causes:**
+**원인:**
 
-- Temporary Anthropic service issue
-- Bug in API processing
+- 일시적인 Anthropic 서비스 문제
+- API 처리 버그
 
-**Fix:** Retry with exponential backoff. If persistent, check [status.anthropic.com](https://status.anthropic.com).
+**해결 방법:** 지수 백오프로 재시도하세요. 지속되면 [status.anthropic.com](https://status.anthropic.com)을 확인하세요.
 
 ---
 
 ### 529 Overloaded
 
-**Causes:**
+**원인:**
 
-- High API demand
-- Service capacity reached
+- 높은 API 수요
+- 서비스 용량 도달
 
-**Fix:** Retry with exponential backoff. Consider using a different model (Haiku is often less loaded), spreading requests over time, or implementing request queuing.
+**해결 방법:** 지수 백오프로 재시도하세요. 다른 모델 사용 (Haiku는 일반적으로 부하가 적음), 요청을 시간에 걸쳐 분산, 또는 요청 큐잉 구현을 고려하세요.
 
 ---
 
-## Common Mistakes and Fixes
+## 흔한 실수와 해결 방법
 
-| Mistake                         | Error            | Fix                                                     |
-| ------------------------------- | ---------------- | ------------------------------------------------------- |
-| `budget_tokens` >= `max_tokens` | 400              | Ensure `budget_tokens` < `max_tokens`                   |
-| Typo in model ID                | 404              | Use valid model ID like `claude-opus-4-6`               |
-| First message is `assistant`    | 400              | First message must be `user`                            |
-| Consecutive same-role messages  | 400              | Alternate `user` and `assistant`                        |
-| API key in code                 | 401 (leaked key) | Use environment variable                                |
-| Custom retry needs              | 429/5xx          | SDK retries automatically; customize with `max_retries` |
+| 실수                            | 오류             | 해결 방법                                                    |
+| ------------------------------- | ---------------- | ----------------------------------------------------------- |
+| `budget_tokens` >= `max_tokens` | 400              | `budget_tokens` < `max_tokens`인지 확인                      |
+| 모델 ID 오타                     | 404              | `claude-opus-4-6` 같은 유효한 모델 ID 사용                    |
+| 첫 번째 메시지가 `assistant`     | 400              | 첫 번째 메시지는 `user`여야 함                                |
+| 같은 역할의 연속 메시지           | 400              | `user`와 `assistant`를 번갈아 사용                            |
+| 코드에 API 키 하드코딩           | 401 (키 유출)     | 환경 변수 사용                                               |
+| 사용자 정의 재시도 필요           | 429/5xx          | SDK가 자동 재시도; `max_retries`로 사용자 정의                 |
 
-## Typed Exceptions in SDKs
+## SDK의 타입 지정 예외
 
-**Always use the SDK's typed exception classes** instead of checking error messages with string matching. Each HTTP error code maps to a specific exception class:
+HTTP 오류 코드를 문자열 매칭으로 오류 메시지를 확인하는 대신 **항상 SDK의 타입 지정 예외 클래스를 사용하세요**. 각 HTTP 오류 코드는 특정 예외 클래스에 매핑됩니다:
 
-| HTTP Code | TypeScript Class                  | Python Class                      |
+| HTTP 코드 | TypeScript 클래스               | Python 클래스                     |
 | --------- | --------------------------------- | --------------------------------- |
 | 400       | `Anthropic.BadRequestError`       | `anthropic.BadRequestError`       |
 | 401       | `Anthropic.AuthenticationError`   | `anthropic.AuthenticationError`   |
@@ -203,4 +203,4 @@ try {
 }
 ```
 
-All exception classes extend `Anthropic.APIError`, which has a `status` property. Use `instanceof` checks from most specific to least specific (e.g., check `RateLimitError` before `APIError`).
+모든 예외 클래스는 `status` 속성을 가진 `Anthropic.APIError`를 확장합니다. `instanceof` 검사를 가장 구체적인 것에서 가장 일반적인 것 순으로 사용하세요 (예: `APIError` 전에 `RateLimitError`를 확인).

@@ -7,6 +7,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js"></script>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -344,7 +346,8 @@ body {
   overflow-x: auto;
   margin: 12px 0;
 }
-.md-content pre code { background: none; padding: 0; font-size: 0.82rem; line-height: 1.5; }
+.md-content pre code, .md-content pre code.hljs { background: none; padding: 0; font-size: 0.82rem; line-height: 1.5; }
+pre code.hljs { background: var(--bg); font-size: 0.82rem; line-height: 1.5; }
 .md-content blockquote {
   border-left: 3px solid var(--accent);
   padding-left: 16px;
@@ -665,11 +668,13 @@ function renderTree(entries, container) {
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
         <span>${entry.name}</span>
       `;
-      if (ext === 'md') {
+      const viewable = ['md','py','js','ts','json','html','css','sh','xml','yaml','yml','toml','cfg','ini','txt','xsd','rb','go','java','php','rs','sql'].includes(ext);
+      if (viewable) {
         item.onclick = (e) => {
           e.stopPropagation();
           openModal(entry.path);
         };
+        item.style.cursor = 'pointer';
       }
       wrapper.appendChild(item);
     }
@@ -690,6 +695,13 @@ function closePanel() {
   overlay.classList.remove('open');
 }
 
+const EXT_TO_LANG = {
+  py: 'python', js: 'javascript', ts: 'typescript', json: 'json',
+  html: 'xml', css: 'css', sh: 'bash', xml: 'xml', xsd: 'xml',
+  yaml: 'yaml', yml: 'yaml', toml: 'toml', rb: 'ruby', go: 'go',
+  java: 'java', php: 'php', rs: 'rust', sql: 'sql',
+};
+
 async function openModal(path) {
   modalPath.textContent = path.replace('skills/', '');
   modalContent.innerHTML = '<div class="file-loading"><div class="spinner"></div>Loading...</div>';
@@ -697,8 +709,17 @@ async function openModal(path) {
 
   try {
     const text = await fetchRawFile(path);
-    const cleaned = text.replace(/^---\s*\n[\s\S]*?\n---\n?/, '');
-    modalContent.innerHTML = marked.parse(cleaned);
+    const ext = path.split('.').pop().toLowerCase();
+
+    if (ext === 'md') {
+      const cleaned = text.replace(/^---\s*\n[\s\S]*?\n---\n?/, '');
+      modalContent.innerHTML = marked.parse(cleaned);
+      modalContent.querySelectorAll('pre code').forEach(block => hljs.highlightElement(block));
+    } else {
+      const lang = EXT_TO_LANG[ext] || 'plaintext';
+      const highlighted = hljs.highlight(text, { language: lang, ignoreIllegals: true });
+      modalContent.innerHTML = `<pre><code class="hljs language-${lang}">${highlighted.value}</code></pre>`;
+    }
   } catch (err) {
     modalContent.innerHTML = `<p style="color:var(--red)">Failed to load file: ${err.message}</p>`;
   }

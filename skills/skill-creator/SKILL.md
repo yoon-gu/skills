@@ -1,76 +1,76 @@
 ---
 name: skill-creator
-description: Create new skills, modify and improve existing skills, and measure skill performance. Use when users want to create a skill from scratch, edit, or optimize an existing skill, run evals to test a skill, benchmark skill performance with variance analysis, or optimize a skill's description for better triggering accuracy.
+description: 새로운 스킬을 생성하고, 기존 스킬을 수정 및 개선하며, 스킬 성능을 측정합니다. 사용자가 스킬을 처음부터 만들거나, 기존 스킬을 편집 또는 최적화하거나, 평가를 실행하여 스킬을 테스트하거나, 분산 분석을 통해 스킬 성능을 벤치마킹하거나, 더 나은 트리거링 정확도를 위해 스킬 설명을 최적화하려는 경우에 사용하세요.
 ---
 
-# Skill Creator
+# 스킬 크리에이터
 
-A skill for creating new skills and iteratively improving them.
+새로운 스킬을 만들고 반복적으로 개선하기 위한 스킬입니다.
 
-At a high level, the process of creating a skill goes like this:
+높은 수준에서 스킬을 만드는 과정은 다음과 같습니다:
 
-- Decide what you want the skill to do and roughly how it should do it
-- Write a draft of the skill
-- Create a few test prompts and run claude-with-access-to-the-skill on them
-- Help the user evaluate the results both qualitatively and quantitatively
-  - While the runs happen in the background, draft some quantitative evals if there aren't any (if there are some, you can either use as is or modify if you feel something needs to change about them). Then explain them to the user (or if they already existed, explain the ones that already exist)
-  - Use the `eval-viewer/generate_review.py` script to show the user the results for them to look at, and also let them look at the quantitative metrics
-- Rewrite the skill based on feedback from the user's evaluation of the results (and also if there are any glaring flaws that become apparent from the quantitative benchmarks)
-- Repeat until you're satisfied
-- Expand the test set and try again at larger scale
+- 스킬이 무엇을 해야 하는지, 대략 어떻게 해야 하는지 결정합니다
+- 스킬 초안을 작성합니다
+- 몇 가지 테스트 프롬프트를 만들고 claude-with-access-to-the-skill로 실행합니다
+- 사용자가 결과를 정성적, 정량적으로 평가하는 것을 도와줍니다
+  - 실행이 백그라운드에서 진행되는 동안, 정량적 평가가 없다면 초안을 작성합니다 (이미 있다면 그대로 사용하거나 변경이 필요하다고 느끼면 수정할 수 있습니다). 그런 다음 사용자에게 설명합니다 (이미 존재했다면 기존 것을 설명합니다)
+  - `eval-viewer/generate_review.py` 스크립트를 사용하여 사용자에게 결과를 보여주고, 정량적 지표도 확인할 수 있게 합니다
+- 사용자의 결과 평가 피드백을 기반으로 스킬을 다시 작성합니다 (정량적 벤치마크에서 명백한 결함이 드러난 경우도 포함)
+- 만족할 때까지 반복합니다
+- 테스트 세트를 확장하고 더 큰 규모로 다시 시도합니다
 
-Your job when using this skill is to figure out where the user is in this process and then jump in and help them progress through these stages. So for instance, maybe they're like "I want to make a skill for X". You can help narrow down what they mean, write a draft, write the test cases, figure out how they want to evaluate, run all the prompts, and repeat.
+이 스킬을 사용할 때 당신의 역할은 사용자가 이 과정에서 어디에 있는지 파악한 다음, 이 단계들을 진행하도록 돕는 것입니다. 예를 들어, 사용자가 "X를 위한 스킬을 만들고 싶어요"라고 할 수 있습니다. 그들이 의미하는 바를 좁히고, 초안을 작성하고, 테스트 케이스를 작성하고, 평가 방법을 파악하고, 모든 프롬프트를 실행하고, 반복하는 것을 도울 수 있습니다.
 
-On the other hand, maybe they already have a draft of the skill. In this case you can go straight to the eval/iterate part of the loop.
+반면에, 사용자가 이미 스킬 초안을 가지고 있을 수도 있습니다. 이 경우 평가/반복 부분으로 바로 갈 수 있습니다.
 
-Of course, you should always be flexible and if the user is like "I don't need to run a bunch of evaluations, just vibe with me", you can do that instead.
+물론, 항상 유연해야 하며 사용자가 "많은 평가를 실행할 필요 없어요, 그냥 같이 진행해요"라고 하면 그렇게 할 수 있습니다.
 
-Then after the skill is done (but again, the order is flexible), you can also run the skill description improver, which we have a whole separate script for, to optimize the triggering of the skill.
+그런 다음 스킬이 완성된 후 (하지만 순서는 유연합니다), 스킬 설명 개선 도구를 실행할 수도 있습니다. 이를 위한 별도의 스크립트가 있으며, 스킬의 트리거링을 최적화합니다.
 
-Cool? Cool.
+좋죠? 좋습니다.
 
-## Communicating with the user
+## 사용자와의 소통
 
-The skill creator is liable to be used by people across a wide range of familiarity with coding jargon. If you haven't heard (and how could you, it's only very recently that it started), there's a trend now where the power of Claude is inspiring plumbers to open up their terminals, parents and grandparents to google "how to install npm". On the other hand, the bulk of users are probably fairly computer-literate.
+스킬 크리에이터는 코딩 용어에 대한 친숙도가 매우 다양한 사람들이 사용할 수 있습니다. 아직 들어보지 못했을 수도 있지만 (최근에야 시작된 것이니), Claude의 힘이 배관공들이 터미널을 열고, 부모와 조부모가 "npm 설치하는 법"을 구글링하도록 영감을 주는 트렌드가 있습니다. 반면에, 대부분의 사용자는 아마 상당히 컴퓨터에 능숙할 것입니다.
 
-So please pay attention to context cues to understand how to phrase your communication! In the default case, just to give you some idea:
+따라서 소통 방식을 어떻게 할지 맥락 단서에 주의를 기울여 주세요! 기본적인 경우, 참고로:
 
-- "evaluation" and "benchmark" are borderline, but OK
-- for "JSON" and "assertion" you want to see serious cues from the user that they know what those things are before using them without explaining them
+- "evaluation"과 "benchmark"는 경계선이지만 괜찮습니다
+- "JSON"과 "assertion"의 경우, 사용자가 그것들이 무엇인지 알고 있다는 확실한 단서를 보기 전에는 설명 없이 사용하지 마세요
 
-It's OK to briefly explain terms if you're in doubt, and feel free to clarify terms with a short definition if you're unsure if the user will get it.
+의심스러울 때는 용어를 간단히 설명해도 괜찮으며, 사용자가 이해할지 확신이 없다면 짧은 정의로 용어를 명확히 해 주세요.
 
 ---
 
-## Creating a skill
+## 스킬 만들기
 
-### Capture Intent
+### 의도 파악
 
-Start by understanding the user's intent. The current conversation might already contain a workflow the user wants to capture (e.g., they say "turn this into a skill"). If so, extract answers from the conversation history first — the tools used, the sequence of steps, corrections the user made, input/output formats observed. The user may need to fill the gaps, and should confirm before proceeding to the next step.
+사용자의 의도를 이해하는 것부터 시작하세요. 현재 대화에 사용자가 캡처하고 싶은 워크플로우가 이미 포함되어 있을 수 있습니다 (예: "이것을 스킬로 만들어 줘"). 그렇다면 대화 기록에서 먼저 답을 추출하세요 — 사용된 도구, 단계의 순서, 사용자가 한 수정, 관찰된 입/출력 형식. 사용자가 빈 부분을 채워야 할 수도 있으며, 다음 단계로 진행하기 전에 확인해야 합니다.
 
-1. What should this skill enable Claude to do?
-2. When should this skill trigger? (what user phrases/contexts)
-3. What's the expected output format?
-4. Should we set up test cases to verify the skill works? Skills with objectively verifiable outputs (file transforms, data extraction, code generation, fixed workflow steps) benefit from test cases. Skills with subjective outputs (writing style, art) often don't need them. Suggest the appropriate default based on the skill type, but let the user decide.
+1. 이 스킬로 Claude가 무엇을 할 수 있어야 하나요?
+2. 이 스킬은 언제 트리거되어야 하나요? (어떤 사용자 문구/맥락)
+3. 예상되는 출력 형식은 무엇인가요?
+4. 스킬이 작동하는지 확인하기 위해 테스트 케이스를 설정해야 하나요? 객관적으로 검증 가능한 출력이 있는 스킬 (파일 변환, 데이터 추출, 코드 생성, 고정된 워크플로우 단계)은 테스트 케이스의 혜택을 받습니다. 주관적인 출력이 있는 스킬 (글쓰기 스타일, 예술)은 보통 필요하지 않습니다. 스킬 유형에 따라 적절한 기본값을 제안하되, 사용자가 결정하게 하세요.
 
-### Interview and Research
+### 인터뷰 및 조사
 
-Proactively ask questions about edge cases, input/output formats, example files, success criteria, and dependencies. Wait to write test prompts until you've got this part ironed out.
+엣지 케이스, 입/출력 형식, 예시 파일, 성공 기준, 의존성에 대해 능동적으로 질문하세요. 이 부분이 정리될 때까지 테스트 프롬프트 작성을 기다리세요.
 
-Check available MCPs - if useful for research (searching docs, finding similar skills, looking up best practices), research in parallel via subagents if available, otherwise inline. Come prepared with context to reduce burden on the user.
+사용 가능한 MCP를 확인하세요 - 조사에 유용하다면 (문서 검색, 유사한 스킬 찾기, 모범 사례 조회), 가능한 경우 서브에이전트를 통해 병렬로 조사하고, 그렇지 않으면 인라인으로 진행하세요. 사용자의 부담을 줄이기 위해 맥락을 준비해서 오세요.
 
-### Write the SKILL.md
+### SKILL.md 작성
 
-Based on the user interview, fill in these components:
+사용자 인터뷰를 기반으로 다음 구성 요소를 채우세요:
 
-- **name**: Skill identifier
-- **description**: When to trigger, what it does. This is the primary triggering mechanism - include both what the skill does AND specific contexts for when to use it. All "when to use" info goes here, not in the body. Note: currently Claude has a tendency to "undertrigger" skills -- to not use them when they'd be useful. To combat this, please make the skill descriptions a little bit "pushy". So for instance, instead of "How to build a simple fast dashboard to display internal Anthropic data.", you might write "How to build a simple fast dashboard to display internal Anthropic data. Make sure to use this skill whenever the user mentions dashboards, data visualization, internal metrics, or wants to display any kind of company data, even if they don't explicitly ask for a 'dashboard.'"
-- **compatibility**: Required tools, dependencies (optional, rarely needed)
-- **the rest of the skill :)**
+- **name**: 스킬 식별자
+- **description**: 언제 트리거할지, 무엇을 하는지. 이것이 주요 트리거링 메커니즘입니다 - 스킬이 하는 일과 사용할 특정 맥락을 모두 포함하세요. 모든 "언제 사용할지" 정보는 본문이 아닌 여기에 들어갑니다. 참고: 현재 Claude는 스킬을 "과소 트리거"하는 경향이 있습니다 -- 유용할 때 사용하지 않는 것입니다. 이를 방지하기 위해 스킬 설명을 약간 "적극적"으로 만드세요. 예를 들어, "How to build a simple fast dashboard to display internal Anthropic data." 대신 "How to build a simple fast dashboard to display internal Anthropic data. Make sure to use this skill whenever the user mentions dashboards, data visualization, internal metrics, or wants to display any kind of company data, even if they don't explicitly ask for a 'dashboard.'"라고 작성할 수 있습니다
+- **compatibility**: 필요한 도구, 의존성 (선택 사항, 거의 필요하지 않음)
+- **나머지 스킬 내용 :)**
 
-### Skill Writing Guide
+### 스킬 작성 가이드
 
-#### Anatomy of a Skill
+#### 스킬의 구조
 
 ```
 skill-name/

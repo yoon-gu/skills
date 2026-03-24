@@ -1,97 +1,97 @@
-# MCP Server Best Practices
+# MCP 서버 모범 사례
 
-## Quick Reference
+## 빠른 참조
 
-### Server Naming
-- **Python**: `{service}_mcp` (e.g., `slack_mcp`)
-- **Node/TypeScript**: `{service}-mcp-server` (e.g., `slack-mcp-server`)
+### 서버 네이밍
+- **Python**: `{service}_mcp` (예: `slack_mcp`)
+- **Node/TypeScript**: `{service}-mcp-server` (예: `slack-mcp-server`)
 
-### Tool Naming
-- Use snake_case with service prefix
-- Format: `{service}_{action}_{resource}`
-- Example: `slack_send_message`, `github_create_issue`
+### 도구 네이밍
+- snake_case와 서비스 접두사 사용
+- 형식: `{service}_{action}_{resource}`
+- 예: `slack_send_message`, `github_create_issue`
 
-### Response Formats
-- Support both JSON and Markdown formats
-- JSON for programmatic processing
-- Markdown for human readability
+### 응답 형식
+- JSON과 Markdown 형식 모두 지원
+- JSON은 프로그래밍 방식 처리용
+- Markdown은 사람이 읽기 쉬운 형태용
 
-### Pagination
-- Always respect `limit` parameter
-- Return `has_more`, `next_offset`, `total_count`
-- Default to 20-50 items
+### 페이지네이션
+- 항상 `limit` 매개변수를 준수
+- `has_more`, `next_offset`, `total_count` 반환
+- 기본값은 20-50개 항목
 
-### Transport
-- **Streamable HTTP**: For remote servers, multi-client scenarios
-- **stdio**: For local integrations, command-line tools
-- Avoid SSE (deprecated in favor of streamable HTTP)
-
----
-
-## Server Naming Conventions
-
-Follow these standardized naming patterns:
-
-**Python**: Use format `{service}_mcp` (lowercase with underscores)
-- Examples: `slack_mcp`, `github_mcp`, `jira_mcp`
-
-**Node/TypeScript**: Use format `{service}-mcp-server` (lowercase with hyphens)
-- Examples: `slack-mcp-server`, `github-mcp-server`, `jira-mcp-server`
-
-The name should be general, descriptive of the service being integrated, easy to infer from the task description, and without version numbers.
+### 전송 방식
+- **Streamable HTTP**: 원격 서버, 다중 클라이언트 시나리오용
+- **stdio**: 로컬 통합, 커맨드라인 도구용
+- SSE는 사용하지 않음 (Streamable HTTP로 대체되어 더 이상 사용되지 않음)
 
 ---
 
-## Tool Naming and Design
+## 서버 네이밍 규칙
 
-### Tool Naming
+다음 표준화된 네이밍 패턴을 따르세요:
 
-1. **Use snake_case**: `search_users`, `create_project`, `get_channel_info`
-2. **Include service prefix**: Anticipate that your MCP server may be used alongside other MCP servers
-   - Use `slack_send_message` instead of just `send_message`
-   - Use `github_create_issue` instead of just `create_issue`
-3. **Be action-oriented**: Start with verbs (get, list, search, create, etc.)
-4. **Be specific**: Avoid generic names that could conflict with other servers
+**Python**: `{service}_mcp` 형식 사용 (소문자와 밑줄)
+- 예: `slack_mcp`, `github_mcp`, `jira_mcp`
 
-### Tool Design
+**Node/TypeScript**: `{service}-mcp-server` 형식 사용 (소문자와 하이픈)
+- 예: `slack-mcp-server`, `github-mcp-server`, `jira-mcp-server`
 
-- Tool descriptions must narrowly and unambiguously describe functionality
-- Descriptions must precisely match actual functionality
-- Provide tool annotations (readOnlyHint, destructiveHint, idempotentHint, openWorldHint)
-- Keep tool operations focused and atomic
+이름은 일반적이고, 통합하려는 서비스를 잘 설명하며, 작업 설명에서 쉽게 유추할 수 있고, 버전 번호가 포함되지 않아야 합니다.
 
 ---
 
-## Response Formats
+## 도구 네이밍 및 설계
 
-All tools that return data should support multiple formats:
+### 도구 네이밍
 
-### JSON Format (`response_format="json"`)
-- Machine-readable structured data
-- Include all available fields and metadata
-- Consistent field names and types
-- Use for programmatic processing
+1. **snake_case 사용**: `search_users`, `create_project`, `get_channel_info`
+2. **서비스 접두사 포함**: MCP 서버가 다른 MCP 서버와 함께 사용될 수 있음을 고려하세요
+   - `send_message` 대신 `slack_send_message` 사용
+   - `create_issue` 대신 `github_create_issue` 사용
+3. **동작 중심으로 작성**: 동사로 시작 (get, list, search, create 등)
+4. **구체적으로 작성**: 다른 서버와 충돌할 수 있는 일반적인 이름 사용 금지
 
-### Markdown Format (`response_format="markdown"`, typically default)
-- Human-readable formatted text
-- Use headers, lists, and formatting for clarity
-- Convert timestamps to human-readable format
-- Show display names with IDs in parentheses
-- Omit verbose metadata
+### 도구 설계
+
+- 도구 설명은 기능을 좁고 명확하게 기술해야 함
+- 설명은 실제 기능과 정확히 일치해야 함
+- 도구 어노테이션 제공 (readOnlyHint, destructiveHint, idempotentHint, openWorldHint)
+- 도구 작업은 집중적이고 원자적으로 유지
 
 ---
 
-## Pagination
+## 응답 형식
 
-For tools that list resources:
+데이터를 반환하는 모든 도구는 여러 형식을 지원해야 합니다:
 
-- **Always respect the `limit` parameter**
-- **Implement pagination**: Use `offset` or cursor-based pagination
-- **Return pagination metadata**: Include `has_more`, `next_offset`/`next_cursor`, `total_count`
-- **Never load all results into memory**: Especially important for large datasets
-- **Default to reasonable limits**: 20-50 items is typical
+### JSON 형식 (`response_format="json"`)
+- 기계가 읽을 수 있는 구조화된 데이터
+- 사용 가능한 모든 필드와 메타데이터 포함
+- 일관된 필드 이름과 타입
+- 프로그래밍 방식 처리에 사용
 
-Example pagination response:
+### Markdown 형식 (`response_format="markdown"`, 일반적으로 기본값)
+- 사람이 읽을 수 있는 서식화된 텍스트
+- 명확성을 위해 헤더, 목록, 서식 사용
+- 타임스탬프를 사람이 읽을 수 있는 형식으로 변환
+- 괄호 안에 ID와 함께 표시 이름 표시
+- 장황한 메타데이터 생략
+
+---
+
+## 페이지네이션
+
+리소스를 나열하는 도구의 경우:
+
+- **항상 `limit` 매개변수를 준수**
+- **페이지네이션 구현**: `offset` 또는 커서 기반 페이지네이션 사용
+- **페이지네이션 메타데이터 반환**: `has_more`, `next_offset`/`next_cursor`, `total_count` 포함
+- **모든 결과를 메모리에 로드하지 않기**: 대규모 데이터셋에서 특히 중요
+- **합리적인 기본 제한값 설정**: 20-50개 항목이 일반적
+
+페이지네이션 응답 예시:
 ```json
 {
   "total": 150,
@@ -105,112 +105,112 @@ Example pagination response:
 
 ---
 
-## Transport Options
+## 전송 옵션
 
 ### Streamable HTTP
 
-**Best for**: Remote servers, web services, multi-client scenarios
+**적합한 경우**: 원격 서버, 웹 서비스, 다중 클라이언트 시나리오
 
-**Characteristics**:
-- Bidirectional communication over HTTP
-- Supports multiple simultaneous clients
-- Can be deployed as a web service
-- Enables server-to-client notifications
+**특징**:
+- HTTP를 통한 양방향 통신
+- 여러 클라이언트 동시 지원
+- 웹 서비스로 배포 가능
+- 서버에서 클라이언트로의 알림 지원
 
-**Use when**:
-- Serving multiple clients simultaneously
-- Deploying as a cloud service
-- Integration with web applications
+**사용 시기**:
+- 여러 클라이언트에 동시에 서비스 제공
+- 클라우드 서비스로 배포
+- 웹 애플리케이션과의 통합
 
 ### stdio
 
-**Best for**: Local integrations, command-line tools
+**적합한 경우**: 로컬 통합, 커맨드라인 도구
 
-**Characteristics**:
-- Standard input/output stream communication
-- Simple setup, no network configuration needed
-- Runs as a subprocess of the client
+**특징**:
+- 표준 입출력 스트림 통신
+- 간단한 설정, 네트워크 구성 불필요
+- 클라이언트의 서브프로세스로 실행
 
-**Use when**:
-- Building tools for local development environments
-- Integrating with desktop applications
-- Single-user, single-session scenarios
+**사용 시기**:
+- 로컬 개발 환경용 도구 구축
+- 데스크톱 애플리케이션과의 통합
+- 단일 사용자, 단일 세션 시나리오
 
-**Note**: stdio servers should NOT log to stdout (use stderr for logging)
+**참고**: stdio 서버는 stdout으로 로그를 출력하면 안 됩니다 (로깅에는 stderr 사용)
 
-### Transport Selection
+### 전송 방식 선택
 
-| Criterion | stdio | Streamable HTTP |
-|-----------|-------|-----------------|
-| **Deployment** | Local | Remote |
-| **Clients** | Single | Multiple |
-| **Complexity** | Low | Medium |
-| **Real-time** | No | Yes |
+| 기준 | stdio | Streamable HTTP |
+|------|-------|-----------------|
+| **배포** | 로컬 | 원격 |
+| **클라이언트** | 단일 | 다중 |
+| **복잡도** | 낮음 | 중간 |
+| **실시간** | 아니오 | 예 |
 
 ---
 
-## Security Best Practices
+## 보안 모범 사례
 
-### Authentication and Authorization
+### 인증 및 권한 부여
 
 **OAuth 2.1**:
-- Use secure OAuth 2.1 with certificates from recognized authorities
-- Validate access tokens before processing requests
-- Only accept tokens specifically intended for your server
+- 공인된 인증 기관의 인증서와 함께 안전한 OAuth 2.1 사용
+- 요청 처리 전에 액세스 토큰 검증
+- 해당 서버를 위해 발급된 토큰만 수락
 
-**API Keys**:
-- Store API keys in environment variables, never in code
-- Validate keys on server startup
-- Provide clear error messages when authentication fails
+**API 키**:
+- API 키는 환경 변수에 저장하고 코드에는 절대 포함하지 않음
+- 서버 시작 시 키 검증
+- 인증 실패 시 명확한 오류 메시지 제공
 
-### Input Validation
+### 입력 유효성 검사
 
-- Sanitize file paths to prevent directory traversal
-- Validate URLs and external identifiers
-- Check parameter sizes and ranges
-- Prevent command injection in system calls
-- Use schema validation (Pydantic/Zod) for all inputs
+- 디렉토리 탐색 공격을 방지하기 위해 파일 경로를 검사
+- URL 및 외부 식별자 검증
+- 매개변수 크기와 범위 확인
+- 시스템 호출에서 명령어 삽입 방지
+- 모든 입력에 대해 스키마 검증 (Pydantic/Zod) 사용
 
-### Error Handling
+### 오류 처리
 
-- Don't expose internal errors to clients
-- Log security-relevant errors server-side
-- Provide helpful but not revealing error messages
-- Clean up resources after errors
+- 내부 오류를 클라이언트에 노출하지 않음
+- 보안 관련 오류는 서버 측에서 로깅
+- 도움이 되지만 내부 정보를 드러내지 않는 오류 메시지 제공
+- 오류 발생 후 리소스 정리
 
-### DNS Rebinding Protection
+### DNS 리바인딩 보호
 
-For streamable HTTP servers running locally:
-- Enable DNS rebinding protection
-- Validate the `Origin` header on all incoming connections
-- Bind to `127.0.0.1` rather than `0.0.0.0`
-
----
-
-## Tool Annotations
-
-Provide annotations to help clients understand tool behavior:
-
-| Annotation | Type | Default | Description |
-|-----------|------|---------|-------------|
-| `readOnlyHint` | boolean | false | Tool does not modify its environment |
-| `destructiveHint` | boolean | true | Tool may perform destructive updates |
-| `idempotentHint` | boolean | false | Repeated calls with same args have no additional effect |
-| `openWorldHint` | boolean | true | Tool interacts with external entities |
-
-**Important**: Annotations are hints, not security guarantees. Clients should not make security-critical decisions based solely on annotations.
+로컬에서 실행되는 Streamable HTTP 서버의 경우:
+- DNS 리바인딩 보호 활성화
+- 모든 수신 연결에서 `Origin` 헤더 검증
+- `0.0.0.0` 대신 `127.0.0.1`에 바인딩
 
 ---
 
-## Error Handling
+## 도구 어노테이션
 
-- Use standard JSON-RPC error codes
-- Report tool errors within result objects (not protocol-level errors)
-- Provide helpful, specific error messages with suggested next steps
-- Don't expose internal implementation details
-- Clean up resources properly on errors
+클라이언트가 도구 동작을 이해할 수 있도록 어노테이션을 제공하세요:
 
-Example error handling:
+| 어노테이션 | 타입 | 기본값 | 설명 |
+|-----------|------|--------|------|
+| `readOnlyHint` | boolean | false | 도구가 환경을 수정하지 않음 |
+| `destructiveHint` | boolean | true | 도구가 파괴적인 업데이트를 수행할 수 있음 |
+| `idempotentHint` | boolean | false | 동일한 인자로 반복 호출해도 추가 효과 없음 |
+| `openWorldHint` | boolean | true | 도구가 외부 엔티티와 상호작용함 |
+
+**중요**: 어노테이션은 힌트이며 보안 보장이 아닙니다. 클라이언트는 어노테이션에만 기반하여 보안에 중요한 결정을 내려서는 안 됩니다.
+
+---
+
+## 오류 처리
+
+- 표준 JSON-RPC 오류 코드 사용
+- 도구 오류는 결과 객체 내에서 보고 (프로토콜 수준 오류가 아님)
+- 다음 단계를 제안하는 도움이 되고 구체적인 오류 메시지 제공
+- 내부 구현 세부사항을 노출하지 않음
+- 오류 발생 시 리소스를 적절히 정리
+
+오류 처리 예시:
 ```typescript
 try {
   const result = performOperation();
@@ -228,22 +228,22 @@ try {
 
 ---
 
-## Testing Requirements
+## 테스트 요구사항
 
-Comprehensive testing should cover:
+포괄적인 테스트는 다음을 포함해야 합니다:
 
-- **Functional testing**: Verify correct execution with valid/invalid inputs
-- **Integration testing**: Test interaction with external systems
-- **Security testing**: Validate auth, input sanitization, rate limiting
-- **Performance testing**: Check behavior under load, timeouts
-- **Error handling**: Ensure proper error reporting and cleanup
+- **기능 테스트**: 유효한/유효하지 않은 입력으로 올바른 실행 검증
+- **통합 테스트**: 외부 시스템과의 상호작용 테스트
+- **보안 테스트**: 인증, 입력 검사, 속도 제한 검증
+- **성능 테스트**: 부하 시 동작, 타임아웃 확인
+- **오류 처리**: 적절한 오류 보고 및 정리 보장
 
 ---
 
-## Documentation Requirements
+## 문서화 요구사항
 
-- Provide clear documentation of all tools and capabilities
-- Include working examples (at least 3 per major feature)
-- Document security considerations
-- Specify required permissions and access levels
-- Document rate limits and performance characteristics
+- 모든 도구와 기능에 대한 명확한 문서 제공
+- 동작하는 예제 포함 (주요 기능당 최소 3개)
+- 보안 고려사항 문서화
+- 필요한 권한 및 접근 수준 명시
+- 속도 제한 및 성능 특성 문서화

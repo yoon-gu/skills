@@ -1,225 +1,225 @@
-# MCP Server Evaluation Guide
+# MCP 서버 평가 가이드
 
-## Overview
+## 개요
 
-This document provides guidance on creating comprehensive evaluations for MCP servers. Evaluations test whether LLMs can effectively use your MCP server to answer realistic, complex questions using only the tools provided.
+이 문서는 MCP 서버에 대한 포괄적인 평가를 작성하는 방법에 대한 지침을 제공합니다. 평가는 LLM이 제공된 도구만을 사용하여 현실적이고 복잡한 질문에 효과적으로 답할 수 있는지를 테스트합니다.
 
 ---
 
-## Quick Reference
+## 빠른 참조
 
-### Evaluation Requirements
-- Create 10 human-readable questions
-- Questions must be READ-ONLY, INDEPENDENT, NON-DESTRUCTIVE
-- Each question requires multiple tool calls (potentially dozens)
-- Answers must be single, verifiable values
-- Answers must be STABLE (won't change over time)
+### 평가 요구사항
+- 사람이 읽을 수 있는 질문 10개 작성
+- 질문은 반드시 읽기 전용(READ-ONLY), 독립적(INDEPENDENT), 비파괴적(NON-DESTRUCTIVE)이어야 함
+- 각 질문은 여러 도구 호출이 필요 (수십 개가 될 수도 있음)
+- 답변은 단일하고 검증 가능한 값이어야 함
+- 답변은 안정적(STABLE)이어야 함 (시간이 지나도 변하지 않아야 함)
 
-### Output Format
+### 출력 형식
 ```xml
 <evaluation>
    <qa_pair>
-      <question>Your question here</question>
-      <answer>Single verifiable answer</answer>
+      <question>여기에 질문을 작성</question>
+      <answer>단일 검증 가능한 답변</answer>
    </qa_pair>
 </evaluation>
 ```
 
 ---
 
-## Purpose of Evaluations
+## 평가의 목적
 
-The measure of quality of an MCP server is NOT how well or comprehensively the server implements tools, but how well these implementations (input/output schemas, docstrings/descriptions, functionality) enable LLMs with no other context and access ONLY to the MCP servers to answer realistic and difficult questions.
+MCP 서버의 품질 측정 기준은 서버가 도구를 얼마나 잘 또는 포괄적으로 구현했는지가 아니라, 이러한 구현(입출력 스키마, 독스트링/설명, 기능)이 다른 컨텍스트 없이 MCP 서버에만 접근할 수 있는 LLM이 현실적이고 어려운 질문에 답하는 것을 얼마나 잘 가능하게 하는지입니다.
 
-## Evaluation Overview
+## 평가 개요
 
-Create 10 human-readable questions requiring ONLY READ-ONLY, INDEPENDENT, NON-DESTRUCTIVE, and IDEMPOTENT operations to answer. Each question should be:
-- Realistic
-- Clear and concise
-- Unambiguous
-- Complex, requiring potentially dozens of tool calls or steps
-- Answerable with a single, verifiable value that you identify in advance
+읽기 전용(READ-ONLY), 독립적(INDEPENDENT), 비파괴적(NON-DESTRUCTIVE), 멱등(IDEMPOTENT) 연산만 사용하여 답할 수 있는 사람이 읽을 수 있는 질문 10개를 작성합니다. 각 질문은 다음과 같아야 합니다:
+- 현실적
+- 명확하고 간결
+- 모호하지 않음
+- 복잡하며, 잠재적으로 수십 개의 도구 호출이나 단계가 필요
+- 사전에 식별한 단일하고 검증 가능한 값으로 답변 가능
 
-## Question Guidelines
+## 질문 가이드라인
 
-### Core Requirements
+### 핵심 요구사항
 
-1. **Questions MUST be independent**
-   - Each question should NOT depend on the answer to any other question
-   - Should not assume prior write operations from processing another question
+1. **질문은 반드시 독립적이어야 합니다**
+   - 각 질문은 다른 질문의 답변에 의존해서는 안 됩니다
+   - 다른 질문 처리로 인한 사전 쓰기 작업을 가정해서는 안 됩니다
 
-2. **Questions MUST require ONLY NON-DESTRUCTIVE AND IDEMPOTENT tool use**
-   - Should not instruct or require modifying state to arrive at the correct answer
+2. **질문은 반드시 비파괴적이고 멱등적인 도구 사용만 요구해야 합니다**
+   - 정답에 도달하기 위해 상태를 수정하도록 지시하거나 요구해서는 안 됩니다
 
-3. **Questions must be REALISTIC, CLEAR, CONCISE, and COMPLEX**
-   - Must require another LLM to use multiple (potentially dozens of) tools or steps to answer
+3. **질문은 현실적이고, 명확하고, 간결하며, 복잡해야 합니다**
+   - 다른 LLM이 답변하기 위해 여러 (잠재적으로 수십 개의) 도구나 단계를 사용해야 합니다
 
-### Complexity and Depth
+### 복잡성과 깊이
 
-4. **Questions must require deep exploration**
-   - Consider multi-hop questions requiring multiple sub-questions and sequential tool calls
-   - Each step should benefit from information found in previous questions
+4. **질문은 깊은 탐색을 요구해야 합니다**
+   - 여러 하위 질문과 순차적 도구 호출이 필요한 다중 홉(multi-hop) 질문을 고려하세요
+   - 각 단계는 이전 질문에서 찾은 정보를 활용해야 합니다
 
-5. **Questions may require extensive paging**
-   - May need paging through multiple pages of results
-   - May require querying old data (1-2 years out-of-date) to find niche information
-   - The questions must be DIFFICULT
+5. **질문은 광범위한 페이지네이션을 요구할 수 있습니다**
+   - 여러 페이지의 결과를 넘겨야 할 수 있습니다
+   - 틈새 정보를 찾기 위해 오래된 데이터(1-2년 전)를 조회해야 할 수 있습니다
+   - 질문은 반드시 어려워야 합니다
 
-6. **Questions must require deep understanding**
-   - Rather than surface-level knowledge
-   - May pose complex ideas as True/False questions requiring evidence
-   - May use multiple-choice format where LLM must search different hypotheses
+6. **질문은 깊은 이해를 요구해야 합니다**
+   - 표면적인 지식이 아닌 깊은 이해가 필요합니다
+   - 증거가 필요한 참/거짓 질문으로 복잡한 아이디어를 제시할 수 있습니다
+   - LLM이 다양한 가설을 탐색해야 하는 객관식 형식을 사용할 수 있습니다
 
-7. **Questions must not be solvable with straightforward keyword search**
-   - Do not include specific keywords from the target content
-   - Use synonyms, related concepts, or paraphrases
-   - Require multiple searches, analyzing multiple related items, extracting context, then deriving the answer
+7. **질문은 단순한 키워드 검색으로 풀 수 없어야 합니다**
+   - 대상 콘텐츠의 특정 키워드를 포함하지 마세요
+   - 동의어, 관련 개념 또는 바꿔 표현을 사용하세요
+   - 여러 번의 검색, 여러 관련 항목 분석, 컨텍스트 추출 후 답변 도출이 필요해야 합니다
 
-### Tool Testing
+### 도구 테스트
 
-8. **Questions should stress-test tool return values**
-   - May elicit tools returning large JSON objects or lists, overwhelming the LLM
-   - Should require understanding multiple modalities of data:
-     - IDs and names
-     - Timestamps and datetimes (months, days, years, seconds)
-     - File IDs, names, extensions, and mimetypes
-     - URLs, GIDs, etc.
-   - Should probe the tool's ability to return all useful forms of data
+8. **질문은 도구 반환 값을 스트레스 테스트해야 합니다**
+   - 큰 JSON 객체나 목록을 반환하여 LLM에 부하를 줄 수 있습니다
+   - 다양한 유형의 데이터 이해가 필요해야 합니다:
+     - ID와 이름
+     - 타임스탬프와 날짜/시간 (월, 일, 년, 초)
+     - 파일 ID, 이름, 확장자, MIME 타입
+     - URL, GID 등
+   - 도구가 모든 유용한 형태의 데이터를 반환하는 능력을 검증해야 합니다
 
-9. **Questions should MOSTLY reflect real human use cases**
-   - The kinds of information retrieval tasks that HUMANS assisted by an LLM would care about
+9. **질문은 대부분 실제 사용 사례를 반영해야 합니다**
+   - LLM의 도움을 받는 사람이 실제로 관심을 가질 정보 검색 작업이어야 합니다
 
-10. **Questions may require dozens of tool calls**
-    - This challenges LLMs with limited context
-    - Encourages MCP server tools to reduce information returned
+10. **질문은 수십 번의 도구 호출을 요구할 수 있습니다**
+    - 이는 제한된 컨텍스트를 가진 LLM에게 도전이 됩니다
+    - MCP 서버 도구가 반환하는 정보를 줄이도록 유도합니다
 
-11. **Include ambiguous questions**
-    - May be ambiguous OR require difficult decisions on which tools to call
-    - Force the LLM to potentially make mistakes or misinterpret
-    - Ensure that despite AMBIGUITY, there is STILL A SINGLE VERIFIABLE ANSWER
+11. **모호한 질문을 포함하세요**
+    - 모호하거나 어떤 도구를 호출할지 어려운 결정이 필요할 수 있습니다
+    - LLM이 실수하거나 잘못 해석할 가능성을 만드세요
+    - 모호성에도 불구하고 여전히 단일한 검증 가능한 답변이 있어야 합니다
 
-### Stability
+### 안정성
 
-12. **Questions must be designed so the answer DOES NOT CHANGE**
-    - Do not ask questions that rely on "current state" which is dynamic
-    - For example, do not count:
-      - Number of reactions to a post
-      - Number of replies to a thread
-      - Number of members in a channel
+12. **질문은 답변이 변하지 않도록 설계해야 합니다**
+    - 동적인 "현재 상태"에 의존하는 질문을 하지 마세요
+    - 예를 들어, 다음을 세지 마세요:
+      - 게시물의 반응 수
+      - 스레드의 답글 수
+      - 채널의 멤버 수
 
-13. **DO NOT let the MCP server RESTRICT the kinds of questions you create**
-    - Create challenging and complex questions
-    - Some may not be solvable with the available MCP server tools
-    - Questions may require specific output formats (datetime vs. epoch time, JSON vs. MARKDOWN)
-    - Questions may require dozens of tool calls to complete
+13. **MCP 서버가 생성하는 질문의 종류를 제한하도록 두지 마세요**
+    - 도전적이고 복잡한 질문을 만드세요
+    - 일부는 사용 가능한 MCP 서버 도구로 풀 수 없을 수도 있습니다
+    - 질문은 특정 출력 형식을 요구할 수 있습니다 (datetime vs. epoch time, JSON vs. MARKDOWN)
+    - 질문은 완료하기 위해 수십 번의 도구 호출을 요구할 수 있습니다
 
-## Answer Guidelines
+## 답변 가이드라인
 
-### Verification
+### 검증
 
-1. **Answers must be VERIFIABLE via direct string comparison**
-   - If the answer can be re-written in many formats, clearly specify the output format in the QUESTION
-   - Examples: "Use YYYY/MM/DD.", "Respond True or False.", "Answer A, B, C, or D and nothing else."
-   - Answer should be a single VERIFIABLE value such as:
-     - User ID, user name, display name, first name, last name
-     - Channel ID, channel name
-     - Message ID, string
-     - URL, title
-     - Numerical quantity
-     - Timestamp, datetime
-     - Boolean (for True/False questions)
-     - Email address, phone number
-     - File ID, file name, file extension
-     - Multiple choice answer
-   - Answers must not require special formatting or complex, structured output
-   - Answer will be verified using DIRECT STRING COMPARISON
+1. **답변은 직접 문자열 비교로 검증 가능해야 합니다**
+   - 답변이 여러 형식으로 다시 작성될 수 있는 경우, 질문에서 출력 형식을 명확히 지정하세요
+   - 예시: "YYYY/MM/DD 형식을 사용하세요.", "True 또는 False로 답하세요.", "A, B, C, 또는 D로만 답하세요."
+   - 답변은 다음과 같은 단일 검증 가능한 값이어야 합니다:
+     - 사용자 ID, 사용자 이름, 표시 이름, 이름, 성
+     - 채널 ID, 채널 이름
+     - 메시지 ID, 문자열
+     - URL, 제목
+     - 수량
+     - 타임스탬프, 날짜/시간
+     - 불리언 (참/거짓 질문용)
+     - 이메일 주소, 전화번호
+     - 파일 ID, 파일 이름, 파일 확장자
+     - 객관식 답변
+   - 답변에 특별한 서식이나 복잡하고 구조화된 출력이 필요해서는 안 됩니다
+   - 답변은 직접 문자열 비교를 사용하여 검증됩니다
 
-### Readability
+### 가독성
 
-2. **Answers should generally prefer HUMAN-READABLE formats**
-   - Examples: names, first name, last name, datetime, file name, message string, URL, yes/no, true/false, a/b/c/d
-   - Rather than opaque IDs (though IDs are acceptable)
-   - The VAST MAJORITY of answers should be human-readable
+2. **답변은 일반적으로 사람이 읽기 쉬운 형식을 선호해야 합니다**
+   - 예시: 이름, 성, 날짜/시간, 파일 이름, 메시지 문자열, URL, yes/no, true/false, a/b/c/d
+   - 불투명한 ID보다는 (ID도 허용 가능하지만)
+   - 대다수의 답변은 사람이 읽기 쉬워야 합니다
 
-### Stability
+### 안정성
 
-3. **Answers must be STABLE/STATIONARY**
-   - Look at old content (e.g., conversations that have ended, projects that have launched, questions answered)
-   - Create QUESTIONS based on "closed" concepts that will always return the same answer
-   - Questions may ask to consider a fixed time window to insulate from non-stationary answers
-   - Rely on context UNLIKELY to change
-   - Example: if finding a paper name, be SPECIFIC enough so answer is not confused with papers published later
+3. **답변은 안정적/고정적이어야 합니다**
+   - 오래된 콘텐츠를 살펴보세요 (예: 끝난 대화, 출시된 프로젝트, 답변된 질문)
+   - 항상 같은 답변을 반환하는 "완료된" 개념을 기반으로 질문을 만드세요
+   - 비고정적 답변으로부터 격리하기 위해 고정된 시간 범위를 고려하도록 질문할 수 있습니다
+   - 변경될 가능성이 낮은 컨텍스트에 의존하세요
+   - 예: 논문 이름을 찾는 경우, 나중에 출판된 논문과 혼동되지 않도록 충분히 구체적이어야 합니다
 
-4. **Answers must be CLEAR and UNAMBIGUOUS**
-   - Questions must be designed so there is a single, clear answer
-   - Answer can be derived from using the MCP server tools
+4. **답변은 명확하고 모호하지 않아야 합니다**
+   - 질문은 단일하고 명확한 답변이 있도록 설계해야 합니다
+   - 답변은 MCP 서버 도구를 사용하여 도출할 수 있어야 합니다
 
-### Diversity
+### 다양성
 
-5. **Answers must be DIVERSE**
-   - Answer should be a single VERIFIABLE value in diverse modalities and formats
-   - User concept: user ID, user name, display name, first name, last name, email address, phone number
-   - Channel concept: channel ID, channel name, channel topic
-   - Message concept: message ID, message string, timestamp, month, day, year
+5. **답변은 다양해야 합니다**
+   - 답변은 다양한 형태와 형식의 단일 검증 가능한 값이어야 합니다
+   - 사용자 관련: 사용자 ID, 사용자 이름, 표시 이름, 이름, 성, 이메일 주소, 전화번호
+   - 채널 관련: 채널 ID, 채널 이름, 채널 주제
+   - 메시지 관련: 메시지 ID, 메시지 문자열, 타임스탬프, 월, 일, 년
 
-6. **Answers must NOT be complex structures**
-   - Not a list of values
-   - Not a complex object
-   - Not a list of IDs or strings
-   - Not natural language text
-   - UNLESS the answer can be straightforwardly verified using DIRECT STRING COMPARISON
-   - And can be realistically reproduced
-   - It should be unlikely that an LLM would return the same list in any other order or format
+6. **답변은 복잡한 구조여서는 안 됩니다**
+   - 값의 목록이 아닌
+   - 복잡한 객체가 아닌
+   - ID나 문자열의 목록이 아닌
+   - 자연어 텍스트가 아닌
+   - 단, 직접 문자열 비교를 사용하여 간단하게 검증할 수 있고
+   - 현실적으로 재현할 수 있는 경우는 제외
+   - LLM이 같은 목록을 다른 순서나 형식으로 반환할 가능성이 낮아야 합니다
 
-## Evaluation Process
+## 평가 프로세스
 
-### Step 1: Documentation Inspection
+### 1단계: 문서 검토
 
-Read the documentation of the target API to understand:
-- Available endpoints and functionality
-- If ambiguity exists, fetch additional information from the web
-- Parallelize this step AS MUCH AS POSSIBLE
-- Ensure each subagent is ONLY examining documentation from the file system or on the web
+대상 API의 문서를 읽고 다음을 이해합니다:
+- 사용 가능한 엔드포인트와 기능
+- 모호한 부분이 있으면 웹에서 추가 정보를 가져오기
+- 이 단계를 가능한 한 많이 병렬화하기
+- 각 하위 에이전트가 파일 시스템이나 웹의 문서만 검토하도록 보장
 
-### Step 2: Tool Inspection
+### 2단계: 도구 검토
 
-List the tools available in the MCP server:
-- Inspect the MCP server directly
-- Understand input/output schemas, docstrings, and descriptions
-- WITHOUT calling the tools themselves at this stage
+MCP 서버에서 사용 가능한 도구를 나열합니다:
+- MCP 서버를 직접 검사
+- 입출력 스키마, 독스트링, 설명 이해
+- 이 단계에서는 도구 자체를 호출하지 않음
 
-### Step 3: Developing Understanding
+### 3단계: 이해도 심화
 
-Repeat steps 1 & 2 until you have a good understanding:
-- Iterate multiple times
-- Think about the kinds of tasks you want to create
-- Refine your understanding
-- At NO stage should you READ the code of the MCP server implementation itself
-- Use your intuition and understanding to create reasonable, realistic, but VERY challenging tasks
+충분한 이해를 얻을 때까지 1단계와 2단계를 반복합니다:
+- 여러 번 반복
+- 만들고 싶은 작업의 종류에 대해 생각
+- 이해도를 정제
+- 어떤 단계에서도 MCP 서버 구현의 코드 자체를 읽어서는 안 됩니다
+- 직관과 이해를 사용하여 합리적이고 현실적이지만 매우 도전적인 작업을 만드세요
 
-### Step 4: Read-Only Content Inspection
+### 4단계: 읽기 전용 콘텐츠 검사
 
-After understanding the API and tools, USE the MCP server tools:
-- Inspect content using READ-ONLY and NON-DESTRUCTIVE operations ONLY
-- Goal: identify specific content (e.g., users, channels, messages, projects, tasks) for creating realistic questions
-- Should NOT call any tools that modify state
-- Will NOT read the code of the MCP server implementation itself
-- Parallelize this step with individual sub-agents pursuing independent explorations
-- Ensure each subagent is only performing READ-ONLY, NON-DESTRUCTIVE, and IDEMPOTENT operations
-- BE CAREFUL: SOME TOOLS may return LOTS OF DATA which would cause you to run out of CONTEXT
-- Make INCREMENTAL, SMALL, AND TARGETED tool calls for exploration
-- In all tool call requests, use the `limit` parameter to limit results (<10)
-- Use pagination
+API와 도구를 이해한 후, MCP 서버 도구를 사용합니다:
+- 읽기 전용(READ-ONLY) 및 비파괴적(NON-DESTRUCTIVE) 작업만으로 콘텐츠 검사
+- 목표: 현실적인 질문을 만들기 위한 특정 콘텐츠(예: 사용자, 채널, 메시지, 프로젝트, 작업) 식별
+- 상태를 수정하는 도구를 호출해서는 안 됩니다
+- MCP 서버 구현의 코드 자체를 읽지 않습니다
+- 개별 하위 에이전트가 독립적인 탐색을 수행하도록 이 단계를 병렬화
+- 각 하위 에이전트가 읽기 전용, 비파괴적, 멱등 작업만 수행하도록 보장
+- 주의: 일부 도구는 많은 데이터를 반환하여 컨텍스트가 부족해질 수 있습니다
+- 증분적이고, 작고, 대상이 명확한 도구 호출로 탐색하세요
+- 모든 도구 호출 요청에서 `limit` 파라미터를 사용하여 결과를 제한하세요 (10개 미만)
+- 페이지네이션을 사용하세요
 
-### Step 5: Task Generation
+### 5단계: 작업 생성
 
-After inspecting the content, create 10 human-readable questions:
-- An LLM should be able to answer these with the MCP server
-- Follow all question and answer guidelines above
+콘텐츠를 검사한 후, 사람이 읽을 수 있는 질문 10개를 작성합니다:
+- LLM이 MCP 서버로 이 질문들에 답할 수 있어야 합니다
+- 위의 모든 질문 및 답변 가이드라인을 따르세요
 
-## Output Format
+## 출력 형식
 
-Each QA pair consists of a question and an answer. The output should be an XML file with this structure:
+각 QA 쌍은 질문과 답변으로 구성됩니다. 출력은 다음 구조의 XML 파일이어야 합니다:
 
 ```xml
 <evaluation>
@@ -242,11 +242,11 @@ Each QA pair consists of a question and an answer. The output should be an XML f
 </evaluation>
 ```
 
-## Evaluation Examples
+## 평가 예시
 
-### Good Questions
+### 좋은 질문
 
-**Example 1: Multi-hop question requiring deep exploration (GitHub MCP)**
+**예시 1: 깊은 탐색이 필요한 다중 홉 질문 (GitHub MCP)**
 ```xml
 <qa_pair>
    <question>Find the repository that was archived in Q3 2023 and had previously been the most forked project in the organization. What was the primary programming language used in that repository?</question>
@@ -254,14 +254,14 @@ Each QA pair consists of a question and an answer. The output should be an XML f
 </qa_pair>
 ```
 
-This question is good because:
-- Requires multiple searches to find archived repositories
-- Needs to identify which had the most forks before archival
-- Requires examining repository details for the language
-- Answer is a simple, verifiable value
-- Based on historical (closed) data that won't change
+이 질문이 좋은 이유:
+- 아카이브된 저장소를 찾기 위해 여러 번의 검색이 필요
+- 아카이브 전에 가장 많이 포크된 저장소를 식별해야 함
+- 프로그래밍 언어를 확인하기 위해 저장소 세부 정보를 검토해야 함
+- 답변이 단순하고 검증 가능한 값
+- 변하지 않는 과거(완료된) 데이터 기반
 
-**Example 2: Requires understanding context without keyword matching (Project Management MCP)**
+**예시 2: 키워드 매칭 없이 컨텍스트 이해가 필요한 질문 (프로젝트 관리 MCP)**
 ```xml
 <qa_pair>
    <question>Locate the initiative focused on improving customer onboarding that was completed in late 2023. The project lead created a retrospective document after completion. What was the lead's role title at that time?</question>
@@ -269,15 +269,15 @@ This question is good because:
 </qa_pair>
 ```
 
-This question is good because:
-- Doesn't use specific project name ("initiative focused on improving customer onboarding")
-- Requires finding completed projects from specific timeframe
-- Needs to identify the project lead and their role
-- Requires understanding context from retrospective documents
-- Answer is human-readable and stable
-- Based on completed work (won't change)
+이 질문이 좋은 이유:
+- 특정 프로젝트 이름을 사용하지 않음 ("고객 온보딩 개선에 초점을 맞춘 이니셔티브")
+- 특정 기간의 완료된 프로젝트를 찾아야 함
+- 프로젝트 리더와 그들의 역할을 식별해야 함
+- 회고 문서에서 컨텍스트를 이해해야 함
+- 답변이 사람이 읽기 쉽고 안정적
+- 완료된 작업 기반 (변하지 않음)
 
-**Example 3: Complex aggregation requiring multiple steps (Issue Tracker MCP)**
+**예시 3: 여러 단계가 필요한 복잡한 집계 (이슈 트래커 MCP)**
 ```xml
 <qa_pair>
    <question>Among all bugs reported in January 2024 that were marked as critical priority, which assignee resolved the highest percentage of their assigned bugs within 48 hours? Provide the assignee's username.</question>
@@ -285,15 +285,15 @@ This question is good because:
 </qa_pair>
 ```
 
-This question is good because:
-- Requires filtering bugs by date, priority, and status
-- Needs to group by assignee and calculate resolution rates
-- Requires understanding timestamps to determine 48-hour windows
-- Tests pagination (potentially many bugs to process)
-- Answer is a single username
-- Based on historical data from specific time period
+이 질문이 좋은 이유:
+- 날짜, 우선순위, 상태별로 버그를 필터링해야 함
+- 담당자별로 그룹화하고 해결률을 계산해야 함
+- 48시간 이내를 판단하기 위해 타임스탬프를 이해해야 함
+- 페이지네이션을 테스트 (처리할 버그가 잠재적으로 많음)
+- 답변이 단일 사용자 이름
+- 특정 기간의 과거 데이터 기반
 
-**Example 4: Requires synthesis across multiple data types (CRM MCP)**
+**예시 4: 여러 데이터 유형 간의 종합이 필요한 질문 (CRM MCP)**
 ```xml
 <qa_pair>
    <question>Find the account that upgraded from the Starter to Enterprise plan in Q4 2023 and had the highest annual contract value. What industry does this account operate in?</question>
@@ -301,17 +301,17 @@ This question is good because:
 </qa_pair>
 ```
 
-This question is good because:
-- Requires understanding subscription tier changes
-- Needs to identify upgrade events in specific timeframe
-- Requires comparing contract values
-- Must access account industry information
-- Answer is simple and verifiable
-- Based on completed historical transactions
+이 질문이 좋은 이유:
+- 구독 등급 변경을 이해해야 함
+- 특정 기간의 업그레이드 이벤트를 식별해야 함
+- 계약 금액을 비교해야 함
+- 계정 산업 정보에 접근해야 함
+- 답변이 단순하고 검증 가능
+- 완료된 과거 거래 기반
 
-### Poor Questions
+### 나쁜 질문
 
-**Example 1: Answer changes over time**
+**예시 1: 시간이 지나면 답변이 변함**
 ```xml
 <qa_pair>
    <question>How many open issues are currently assigned to the engineering team?</question>
@@ -319,12 +319,12 @@ This question is good because:
 </qa_pair>
 ```
 
-This question is poor because:
-- The answer will change as issues are created, closed, or reassigned
-- Not based on stable/stationary data
-- Relies on "current state" which is dynamic
+이 질문이 나쁜 이유:
+- 이슈가 생성, 닫히거나 재할당됨에 따라 답변이 변함
+- 안정적/고정적 데이터를 기반으로 하지 않음
+- 동적인 "현재 상태"에 의존
 
-**Example 2: Too easy with keyword search**
+**예시 2: 키워드 검색으로 너무 쉽게 풀림**
 ```xml
 <qa_pair>
    <question>Find the pull request with title "Add authentication feature" and tell me who created it.</question>
@@ -332,12 +332,12 @@ This question is poor because:
 </qa_pair>
 ```
 
-This question is poor because:
-- Can be solved with a straightforward keyword search for exact title
-- Doesn't require deep exploration or understanding
-- No synthesis or analysis needed
+이 질문이 나쁜 이유:
+- 정확한 제목으로 단순 키워드 검색하면 풀림
+- 깊은 탐색이나 이해가 필요하지 않음
+- 종합이나 분석이 필요하지 않음
 
-**Example 3: Ambiguous answer format**
+**예시 3: 모호한 답변 형식**
 ```xml
 <qa_pair>
    <question>List all the repositories that have Python as their primary language.</question>
@@ -345,62 +345,62 @@ This question is poor because:
 </qa_pair>
 ```
 
-This question is poor because:
-- Answer is a list that could be returned in any order
-- Difficult to verify with direct string comparison
-- LLM might format differently (JSON array, comma-separated, newline-separated)
-- Better to ask for a specific aggregate (count) or superlative (most stars)
+이 질문이 나쁜 이유:
+- 답변이 어떤 순서로든 반환될 수 있는 목록
+- 직접 문자열 비교로 검증하기 어려움
+- LLM이 다르게 형식화할 수 있음 (JSON 배열, 쉼표 구분, 줄바꿈 구분)
+- 특정 집계(개수)나 최상급(가장 많은 별)을 물어보는 것이 더 좋음
 
-## Verification Process
+## 검증 프로세스
 
-After creating evaluations:
+평가를 작성한 후:
 
-1. **Examine the XML file** to understand the schema
-2. **Load each task instruction** and in parallel using the MCP server and tools, identify the correct answer by attempting to solve the task YOURSELF
-3. **Flag any operations** that require WRITE or DESTRUCTIVE operations
-4. **Accumulate all CORRECT answers** and replace any incorrect answers in the document
-5. **Remove any `<qa_pair>`** that require WRITE or DESTRUCTIVE operations
+1. **XML 파일을 검토**하여 스키마를 이해합니다
+2. **각 작업 지시를 로드**하고 MCP 서버와 도구를 사용하여 병렬로 작업을 직접 풀어서 정답을 식별합니다
+3. **쓰기(WRITE) 또는 파괴적(DESTRUCTIVE) 작업**이 필요한 것을 표시합니다
+4. **모든 정답을 모아** 문서에서 잘못된 답변을 교체합니다
+5. **쓰기 또는 파괴적 작업이 필요한 `<qa_pair>`를 제거**합니다
 
-Remember to parallelize solving tasks to avoid running out of context, then accumulate all answers and make changes to the file at the end.
+컨텍스트가 부족해지지 않도록 작업 풀기를 병렬화하고, 모든 답변을 모은 후 마지막에 파일을 수정하세요.
 
-## Tips for Creating Quality Evaluations
+## 양질의 평가를 만들기 위한 팁
 
-1. **Think Hard and Plan Ahead** before generating tasks
-2. **Parallelize Where Opportunity Arises** to speed up the process and manage context
-3. **Focus on Realistic Use Cases** that humans would actually want to accomplish
-4. **Create Challenging Questions** that test the limits of the MCP server's capabilities
-5. **Ensure Stability** by using historical data and closed concepts
-6. **Verify Answers** by solving the questions yourself using the MCP server tools
-7. **Iterate and Refine** based on what you learn during the process
+1. **작업 생성 전에 깊이 생각하고 계획하세요**
+2. **기회가 있는 곳에서 병렬화하여** 프로세스 속도를 높이고 컨텍스트를 관리하세요
+3. **사람이 실제로 달성하고 싶어하는 현실적인 사용 사례에 집중하세요**
+4. **MCP 서버 기능의 한계를 테스트하는 도전적인 질문을 만드세요**
+5. **과거 데이터와 완료된 개념을 사용하여 안정성을 보장하세요**
+6. **MCP 서버 도구를 사용하여 직접 질문을 풀어 답변을 검증하세요**
+7. **프로세스에서 배운 것을 바탕으로 반복하고 개선하세요**
 
 ---
 
-# Running Evaluations
+# 평가 실행
 
-After creating your evaluation file, you can use the provided evaluation harness to test your MCP server.
+평가 파일을 작성한 후, 제공된 평가 하네스를 사용하여 MCP 서버를 테스트할 수 있습니다.
 
-## Setup
+## 설정
 
-1. **Install Dependencies**
+1. **의존성 설치**
 
    ```bash
    pip install -r scripts/requirements.txt
    ```
 
-   Or install manually:
+   또는 수동으로 설치:
    ```bash
    pip install anthropic mcp
    ```
 
-2. **Set API Key**
+2. **API 키 설정**
 
    ```bash
    export ANTHROPIC_API_KEY=your_api_key_here
    ```
 
-## Evaluation File Format
+## 평가 파일 형식
 
-Evaluation files use XML format with `<qa_pair>` elements:
+평가 파일은 `<qa_pair>` 요소가 포함된 XML 형식을 사용합니다:
 
 ```xml
 <evaluation>
@@ -415,17 +415,17 @@ Evaluation files use XML format with `<qa_pair>` elements:
 </evaluation>
 ```
 
-## Running Evaluations
+## 평가 실행
 
-The evaluation script (`scripts/evaluation.py`) supports three transport types:
+평가 스크립트(`scripts/evaluation.py`)는 세 가지 전송 유형을 지원합니다:
 
-**Important:**
-- **stdio transport**: The evaluation script automatically launches and manages the MCP server process for you. Do not run the server manually.
-- **sse/http transports**: You must start the MCP server separately before running the evaluation. The script connects to the already-running server at the specified URL.
+**중요:**
+- **stdio 전송**: 평가 스크립트가 자동으로 MCP 서버 프로세스를 실행하고 관리합니다. 서버를 수동으로 실행하지 마세요.
+- **sse/http 전송**: 평가를 실행하기 전에 MCP 서버를 별도로 시작해야 합니다. 스크립트는 지정된 URL에서 이미 실행 중인 서버에 연결합니다.
 
-### 1. Local STDIO Server
+### 1. 로컬 STDIO 서버
 
-For locally-run MCP servers (script launches the server automatically):
+로컬에서 실행하는 MCP 서버용 (스크립트가 서버를 자동으로 실행):
 
 ```bash
 python scripts/evaluation.py \
@@ -435,7 +435,7 @@ python scripts/evaluation.py \
   evaluation.xml
 ```
 
-With environment variables:
+환경 변수 포함:
 ```bash
 python scripts/evaluation.py \
   -t stdio \
@@ -448,7 +448,7 @@ python scripts/evaluation.py \
 
 ### 2. Server-Sent Events (SSE)
 
-For SSE-based MCP servers (you must start the server first):
+SSE 기반 MCP 서버용 (먼저 서버를 시작해야 함):
 
 ```bash
 python scripts/evaluation.py \
@@ -461,7 +461,7 @@ python scripts/evaluation.py \
 
 ### 3. HTTP (Streamable HTTP)
 
-For HTTP-based MCP servers (you must start the server first):
+HTTP 기반 MCP 서버용 (먼저 서버를 시작해야 함):
 
 ```bash
 python scripts/evaluation.py \
@@ -471,7 +471,7 @@ python scripts/evaluation.py \
   evaluation.xml
 ```
 
-## Command-Line Options
+## 명령줄 옵션
 
 ```
 usage: evaluation.py [-h] [-t {stdio,sse,http}] [-m MODEL] [-c COMMAND]
@@ -479,44 +479,44 @@ usage: evaluation.py [-h] [-t {stdio,sse,http}] [-m MODEL] [-c COMMAND]
                      [-H HEADERS [HEADERS ...]] [-o OUTPUT]
                      eval_file
 
-positional arguments:
-  eval_file             Path to evaluation XML file
+위치 인수:
+  eval_file             평가 XML 파일 경로
 
-optional arguments:
-  -h, --help            Show help message
-  -t, --transport       Transport type: stdio, sse, or http (default: stdio)
-  -m, --model           Claude model to use (default: claude-3-7-sonnet-20250219)
-  -o, --output          Output file for report (default: print to stdout)
+선택적 인수:
+  -h, --help            도움말 메시지 표시
+  -t, --transport       전송 유형: stdio, sse, 또는 http (기본값: stdio)
+  -m, --model           사용할 Claude 모델 (기본값: claude-3-7-sonnet-20250219)
+  -o, --output          보고서 출력 파일 (기본값: stdout에 출력)
 
-stdio options:
-  -c, --command         Command to run MCP server (e.g., python, node)
-  -a, --args            Arguments for the command (e.g., server.py)
-  -e, --env             Environment variables in KEY=VALUE format
+stdio 옵션:
+  -c, --command         MCP 서버를 실행할 명령 (예: python, node)
+  -a, --args            명령의 인수 (예: server.py)
+  -e, --env             KEY=VALUE 형식의 환경 변수
 
-sse/http options:
-  -u, --url             MCP server URL
-  -H, --header          HTTP headers in 'Key: Value' format
+sse/http 옵션:
+  -u, --url             MCP 서버 URL
+  -H, --header          'Key: Value' 형식의 HTTP 헤더
 ```
 
-## Output
+## 출력
 
-The evaluation script generates a detailed report including:
+평가 스크립트는 다음을 포함하는 상세 보고서를 생성합니다:
 
-- **Summary Statistics**:
-  - Accuracy (correct/total)
-  - Average task duration
-  - Average tool calls per task
-  - Total tool calls
+- **요약 통계**:
+  - 정확도 (정답/전체)
+  - 평균 작업 소요 시간
+  - 작업당 평균 도구 호출 수
+  - 총 도구 호출 수
 
-- **Per-Task Results**:
-  - Prompt and expected response
-  - Actual response from the agent
-  - Whether the answer was correct (✅/❌)
-  - Duration and tool call details
-  - Agent's summary of its approach
-  - Agent's feedback on the tools
+- **작업별 결과**:
+  - 프롬프트 및 예상 응답
+  - 에이전트의 실제 응답
+  - 답변 정답 여부 (✅/❌)
+  - 소요 시간 및 도구 호출 세부 정보
+  - 에이전트의 접근 방식 요약
+  - 에이전트의 도구에 대한 피드백
 
-### Save Report to File
+### 보고서를 파일로 저장
 
 ```bash
 python scripts/evaluation.py \
@@ -527,11 +527,11 @@ python scripts/evaluation.py \
   evaluation.xml
 ```
 
-## Complete Example Workflow
+## 전체 예시 워크플로우
 
-Here's a complete example of creating and running an evaluation:
+평가를 작성하고 실행하는 전체 예시입니다:
 
-1. **Create your evaluation file** (`my_evaluation.xml`):
+1. **평가 파일 작성** (`my_evaluation.xml`):
 
 ```xml
 <evaluation>
@@ -550,14 +550,14 @@ Here's a complete example of creating and running an evaluation:
 </evaluation>
 ```
 
-2. **Install dependencies**:
+2. **의존성 설치**:
 
 ```bash
 pip install -r scripts/requirements.txt
 export ANTHROPIC_API_KEY=your_api_key
 ```
 
-3. **Run evaluation**:
+3. **평가 실행**:
 
 ```bash
 python scripts/evaluation.py \
@@ -569,34 +569,34 @@ python scripts/evaluation.py \
   my_evaluation.xml
 ```
 
-4. **Review the report** in `github_eval_report.md` to:
-   - See which questions passed/failed
-   - Read the agent's feedback on your tools
-   - Identify areas for improvement
-   - Iterate on your MCP server design
+4. **보고서 검토** (`github_eval_report.md`):
+   - 어떤 질문이 통과/실패했는지 확인
+   - 도구에 대한 에이전트의 피드백 읽기
+   - 개선할 영역 식별
+   - MCP 서버 설계 반복 개선
 
-## Troubleshooting
+## 문제 해결
 
-### Connection Errors
+### 연결 오류
 
-If you get connection errors:
-- **STDIO**: Verify the command and arguments are correct
-- **SSE/HTTP**: Check the URL is accessible and headers are correct
-- Ensure any required API keys are set in environment variables or headers
+연결 오류가 발생하는 경우:
+- **STDIO**: 명령과 인수가 올바른지 확인
+- **SSE/HTTP**: URL에 접근 가능하고 헤더가 올바른지 확인
+- 필요한 API 키가 환경 변수나 헤더에 설정되어 있는지 확인
 
-### Low Accuracy
+### 낮은 정확도
 
-If many evaluations fail:
-- Review the agent's feedback for each task
-- Check if tool descriptions are clear and comprehensive
-- Verify input parameters are well-documented
-- Consider whether tools return too much or too little data
-- Ensure error messages are actionable
+많은 평가가 실패하는 경우:
+- 각 작업에 대한 에이전트의 피드백 검토
+- 도구 설명이 명확하고 포괄적인지 확인
+- 입력 파라미터가 잘 문서화되어 있는지 확인
+- 도구가 너무 많거나 너무 적은 데이터를 반환하는지 고려
+- 오류 메시지가 실행 가능한지 확인
 
-### Timeout Issues
+### 시간 초과 문제
 
-If tasks are timing out:
-- Use a more capable model (e.g., `claude-3-7-sonnet-20250219`)
-- Check if tools are returning too much data
-- Verify pagination is working correctly
-- Consider simplifying complex questions
+작업이 시간 초과되는 경우:
+- 더 강력한 모델을 사용 (예: `claude-3-7-sonnet-20250219`)
+- 도구가 너무 많은 데이터를 반환하는지 확인
+- 페이지네이션이 올바르게 작동하는지 확인
+- 복잡한 질문을 단순화하는 것을 고려

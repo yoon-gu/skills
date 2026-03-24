@@ -3,373 +3,373 @@ name: doc-coauthoring
 description: Guide users through a structured workflow for co-authoring documentation. Use when user wants to write documentation, proposals, technical specs, decision docs, or similar structured content. This workflow helps users efficiently transfer context, refine content through iteration, and verify the doc works for readers. Trigger when user mentions writing docs, creating proposals, drafting specs, or similar documentation tasks.
 ---
 
-# Doc Co-Authoring Workflow
+# 문서 공동 작성 워크플로우
 
-This skill provides a structured workflow for guiding users through collaborative document creation. Act as an active guide, walking users through three stages: Context Gathering, Refinement & Structure, and Reader Testing.
+이 스킬은 사용자와의 협업 문서 작성을 안내하는 구조화된 워크플로우를 제공합니다. 적극적인 가이드 역할을 하며, 사용자를 세 단계(컨텍스트 수집, 다듬기 및 구조화, 독자 테스트)를 통해 안내합니다.
 
-## When to Offer This Workflow
+## 이 워크플로우를 제안할 시점
 
-**Trigger conditions:**
-- User mentions writing documentation: "write a doc", "draft a proposal", "create a spec", "write up"
-- User mentions specific doc types: "PRD", "design doc", "decision doc", "RFC"
-- User seems to be starting a substantial writing task
+**트리거 조건:**
+- 사용자가 문서 작성을 언급할 때: "문서 작성", "제안서 초안", "스펙 작성", "정리해줘"
+- 사용자가 특정 문서 유형을 언급할 때: "PRD", "설계 문서", "결정 문서", "RFC"
+- 사용자가 상당한 분량의 글쓰기 작업을 시작하려는 것으로 보일 때
 
-**Initial offer:**
-Offer the user a structured workflow for co-authoring the document. Explain the three stages:
+**초기 제안:**
+사용자에게 문서 공동 작성을 위한 구조화된 워크플로우를 제안합니다. 세 단계를 설명합니다:
 
-1. **Context Gathering**: User provides all relevant context while Claude asks clarifying questions
-2. **Refinement & Structure**: Iteratively build each section through brainstorming and editing
-3. **Reader Testing**: Test the doc with a fresh Claude (no context) to catch blind spots before others read it
+1. **컨텍스트 수집**: 사용자가 관련 컨텍스트를 모두 제공하고 Claude가 명확화 질문을 합니다
+2. **다듬기 및 구조화**: 브레인스토밍과 편집을 통해 각 섹션을 반복적으로 구축합니다
+3. **독자 테스트**: 새로운 Claude(컨텍스트 없음)로 문서를 테스트하여 다른 사람이 읽기 전에 맹점을 찾아냅니다
 
-Explain that this approach helps ensure the doc works well when others read it (including when they paste it into Claude). Ask if they want to try this workflow or prefer to work freeform.
+이 접근 방식이 다른 사람이 읽을 때(Claude에 붙여넣기하는 경우 포함) 문서가 잘 작동하도록 보장하는 데 도움이 된다고 설명합니다. 이 워크플로우를 시도할지 자유 형식으로 작업할지 묻습니다.
 
-If user declines, work freeform. If user accepts, proceed to Stage 1.
+사용자가 거부하면 자유 형식으로 작업합니다. 수락하면 1단계로 진행합니다.
 
-## Stage 1: Context Gathering
+## 1단계: 컨텍스트 수집
 
-**Goal:** Close the gap between what the user knows and what Claude knows, enabling smart guidance later.
+**목표:** 사용자가 알고 있는 것과 Claude가 알고 있는 것 사이의 격차를 줄여, 이후 스마트한 안내가 가능하도록 합니다.
 
-### Initial Questions
+### 초기 질문
 
-Start by asking the user for meta-context about the document:
+사용자에게 문서에 대한 메타 컨텍스트를 묻는 것으로 시작합니다:
 
-1. What type of document is this? (e.g., technical spec, decision doc, proposal)
-2. Who's the primary audience?
-3. What's the desired impact when someone reads this?
-4. Is there a template or specific format to follow?
-5. Any other constraints or context to know?
+1. 어떤 유형의 문서인가요? (예: 기술 스펙, 결정 문서, 제안서)
+2. 주요 독자는 누구인가요?
+3. 누군가 이 문서를 읽었을 때 원하는 효과는 무엇인가요?
+4. 따라야 할 템플릿이나 특정 형식이 있나요?
+5. 알아야 할 다른 제약 사항이나 컨텍스트가 있나요?
 
-Inform them they can answer in shorthand or dump information however works best for them.
+약식으로 답하거나 편한 방식으로 정보를 쏟아내도 된다고 안내합니다.
 
-**If user provides a template or mentions a doc type:**
-- Ask if they have a template document to share
-- If they provide a link to a shared document, use the appropriate integration to fetch it
-- If they provide a file, read it
+**사용자가 템플릿을 제공하거나 문서 유형을 언급하는 경우:**
+- 공유할 템플릿 문서가 있는지 물어봅니다
+- 공유 문서 링크를 제공하면 적절한 연동 기능을 사용하여 가져옵니다
+- 파일을 제공하면 읽습니다
 
-**If user mentions editing an existing shared document:**
-- Use the appropriate integration to read the current state
-- Check for images without alt-text
-- If images exist without alt-text, explain that when others use Claude to understand the doc, Claude won't be able to see them. Ask if they want alt-text generated. If so, request they paste each image into chat for descriptive alt-text generation.
+**사용자가 기존 공유 문서 편집을 언급하는 경우:**
+- 적절한 연동 기능을 사용하여 현재 상태를 읽습니다
+- alt-text가 없는 이미지가 있는지 확인합니다
+- alt-text 없는 이미지가 있으면, 다른 사람이 Claude를 사용하여 문서를 이해할 때 Claude가 이미지를 볼 수 없다고 설명합니다. alt-text 생성을 원하는지 물어봅니다. 원한다면 각 이미지를 채팅에 붙여넣어 설명적인 alt-text를 생성하도록 요청합니다.
 
-### Info Dumping
+### 정보 덤프
 
-Once initial questions are answered, encourage the user to dump all the context they have. Request information such as:
-- Background on the project/problem
-- Related team discussions or shared documents
-- Why alternative solutions aren't being used
-- Organizational context (team dynamics, past incidents, politics)
-- Timeline pressures or constraints
-- Technical architecture or dependencies
-- Stakeholder concerns
+초기 질문에 대한 답변이 완료되면, 사용자에게 가지고 있는 모든 컨텍스트를 쏟아내도록 권장합니다. 다음과 같은 정보를 요청합니다:
+- 프로젝트/문제에 대한 배경
+- 관련 팀 논의 또는 공유 문서
+- 대안이 사용되지 않는 이유
+- 조직 컨텍스트(팀 역학, 과거 사건, 정치)
+- 일정 압박 또는 제약 사항
+- 기술 아키텍처 또는 종속성
+- 이해관계자 우려 사항
 
-Advise them not to worry about organizing it - just get it all out. Offer multiple ways to provide context:
-- Info dump stream-of-consciousness
-- Point to team channels or threads to read
-- Link to shared documents
+정리할 필요 없이 그냥 모두 내놓으라고 조언합니다. 컨텍스트를 제공하는 여러 방법을 제안합니다:
+- 의식의 흐름대로 정보 덤프
+- 읽어볼 팀 채널이나 스레드 안내
+- 공유 문서 링크
 
-**If integrations are available** (e.g., Slack, Teams, Google Drive, SharePoint, or other MCP servers), mention that these can be used to pull in context directly.
+**연동 기능을 사용할 수 있는 경우** (예: Slack, Teams, Google Drive, SharePoint 또는 기타 MCP 서버), 이를 통해 컨텍스트를 직접 가져올 수 있다고 언급합니다.
 
-**If no integrations are detected and in Claude.ai or Claude app:** Suggest they can enable connectors in their Claude settings to allow pulling context from messaging apps and document storage directly.
+**연동 기능이 감지되지 않고 Claude.ai 또는 Claude 앱인 경우:** Claude 설정에서 커넥터를 활성화하여 메시징 앱과 문서 저장소에서 직접 컨텍스트를 가져올 수 있다고 제안합니다.
 
-Inform them clarifying questions will be asked once they've done their initial dump.
+초기 덤프가 완료되면 명확화 질문을 할 것이라고 안내합니다.
 
-**During context gathering:**
+**컨텍스트 수집 중:**
 
-- If user mentions team channels or shared documents:
-  - If integrations available: Inform them the content will be read now, then use the appropriate integration
-  - If integrations not available: Explain lack of access. Suggest they enable connectors in Claude settings, or paste the relevant content directly.
+- 사용자가 팀 채널이나 공유 문서를 언급하는 경우:
+  - 연동 기능을 사용할 수 있는 경우: 지금 내용을 읽겠다고 알린 후 적절한 연동 기능을 사용합니다
+  - 연동 기능을 사용할 수 없는 경우: 접근 권한이 없음을 설명합니다. Claude 설정에서 커넥터를 활성화하거나 관련 내용을 직접 붙여넣도록 제안합니다.
 
-- If user mentions entities/projects that are unknown:
-  - Ask if connected tools should be searched to learn more
-  - Wait for user confirmation before searching
+- 사용자가 알 수 없는 엔티티/프로젝트를 언급하는 경우:
+  - 연결된 도구를 검색하여 더 알아볼지 물어봅니다
+  - 검색 전 사용자 확인을 기다립니다
 
-- As user provides context, track what's being learned and what's still unclear
+- 사용자가 컨텍스트를 제공함에 따라, 파악된 것과 아직 불명확한 것을 추적합니다
 
-**Asking clarifying questions:**
+**명확화 질문:**
 
-When user signals they've done their initial dump (or after substantial context provided), ask clarifying questions to ensure understanding:
+사용자가 초기 덤프를 완료했다고 신호를 보내면(또는 상당한 컨텍스트가 제공된 후), 이해를 확인하기 위한 명확화 질문을 합니다:
 
-Generate 5-10 numbered questions based on gaps in the context.
+컨텍스트의 공백을 기반으로 5-10개의 번호가 매겨진 질문을 생성합니다.
 
-Inform them they can use shorthand to answer (e.g., "1: yes, 2: see #channel, 3: no because backwards compat"), link to more docs, point to channels to read, or just keep info-dumping. Whatever's most efficient for them.
+약식으로 답해도 되고(예: "1: 예, 2: #channel 참고, 3: 하위 호환성 때문에 아니요"), 더 많은 문서에 링크하거나, 읽어볼 채널을 안내하거나, 계속 정보를 쏟아내도 된다고 안내합니다. 가장 효율적인 방식으로 하면 됩니다.
 
-**Exit condition:**
-Sufficient context has been gathered when questions show understanding - when edge cases and trade-offs can be asked about without needing basics explained.
+**종료 조건:**
+질문이 이해도를 보여줄 때 충분한 컨텍스트가 수집된 것입니다 - 기본 사항 설명 없이도 에지 케이스와 트레이드오프에 대해 질문할 수 있을 때입니다.
 
-**Transition:**
-Ask if there's any more context they want to provide at this stage, or if it's time to move on to drafting the document.
+**전환:**
+이 단계에서 더 제공하고 싶은 컨텍스트가 있는지, 아니면 문서 초안 작성으로 넘어갈 시간인지 물어봅니다.
 
-If user wants to add more, let them. When ready, proceed to Stage 2.
+사용자가 더 추가하고 싶으면 그렇게 합니다. 준비가 되면 2단계로 진행합니다.
 
-## Stage 2: Refinement & Structure
+## 2단계: 다듬기 및 구조화
 
-**Goal:** Build the document section by section through brainstorming, curation, and iterative refinement.
+**목표:** 브레인스토밍, 큐레이션, 반복적 다듬기를 통해 섹션별로 문서를 구축합니다.
 
-**Instructions to user:**
-Explain that the document will be built section by section. For each section:
-1. Clarifying questions will be asked about what to include
-2. 5-20 options will be brainstormed
-3. User will indicate what to keep/remove/combine
-4. The section will be drafted
-5. It will be refined through surgical edits
+**사용자에게 안내:**
+문서를 섹션별로 구축할 것이라고 설명합니다. 각 섹션에 대해:
+1. 포함할 내용에 대한 명확화 질문을 합니다
+2. 5-20개의 옵션을 브레인스토밍합니다
+3. 사용자가 유지/제거/결합할 항목을 표시합니다
+4. 섹션을 초안 작성합니다
+5. 정밀한 편집을 통해 다듬습니다
 
-Start with whichever section has the most unknowns (usually the core decision/proposal), then work through the rest.
+가장 불확실한 부분이 많은 섹션(보통 핵심 결정/제안)부터 시작하여 나머지를 진행합니다.
 
-**Section ordering:**
+**섹션 순서:**
 
-If the document structure is clear:
-Ask which section they'd like to start with.
+문서 구조가 명확한 경우:
+어떤 섹션부터 시작하고 싶은지 물어봅니다.
 
-Suggest starting with whichever section has the most unknowns. For decision docs, that's usually the core proposal. For specs, it's typically the technical approach. Summary sections are best left for last.
+가장 불확실한 부분이 많은 섹션부터 시작하도록 제안합니다. 결정 문서의 경우 보통 핵심 제안이고, 스펙의 경우 일반적으로 기술적 접근 방식입니다. 요약 섹션은 마지막에 하는 것이 좋습니다.
 
-If user doesn't know what sections they need:
-Based on the type of document and template, suggest 3-5 sections appropriate for the doc type.
+사용자가 어떤 섹션이 필요한지 모르는 경우:
+문서 유형과 템플릿에 따라 적절한 3-5개 섹션을 제안합니다.
 
-Ask if this structure works, or if they want to adjust it.
+이 구조가 괜찮은지, 조정하고 싶은지 물어봅니다.
 
-**Once structure is agreed:**
+**구조가 합의되면:**
 
-Create the initial document structure with placeholder text for all sections.
+모든 섹션에 플레이스홀더 텍스트가 포함된 초기 문서 구조를 생성합니다.
 
-**If access to artifacts is available:**
-Use `create_file` to create an artifact. This gives both Claude and the user a scaffold to work from.
+**아티팩트에 접근할 수 있는 경우:**
+`create_file`을 사용하여 아티팩트를 생성합니다. 이를 통해 Claude와 사용자 모두 작업할 뼈대를 갖게 됩니다.
 
-Inform them that the initial structure with placeholders for all sections will be created.
+모든 섹션에 플레이스홀더가 포함된 초기 구조를 생성할 것이라고 안내합니다.
 
-Create artifact with all section headers and brief placeholder text like "[To be written]" or "[Content here]".
+모든 섹션 헤더와 "[작성 예정]" 또는 "[내용 입력]"과 같은 간략한 플레이스홀더 텍스트로 아티팩트를 생성합니다.
 
-Provide the scaffold link and indicate it's time to fill in each section.
+뼈대 링크를 제공하고 각 섹션을 채울 시간이라고 알립니다.
 
-**If no access to artifacts:**
-Create a markdown file in the working directory. Name it appropriately (e.g., `decision-doc.md`, `technical-spec.md`).
+**아티팩트에 접근할 수 없는 경우:**
+작업 디렉토리에 markdown 파일을 생성합니다. 적절한 이름을 붙입니다 (예: `decision-doc.md`, `technical-spec.md`).
 
-Inform them that the initial structure with placeholders for all sections will be created.
+모든 섹션에 플레이스홀더가 포함된 초기 구조를 생성할 것이라고 안내합니다.
 
-Create file with all section headers and placeholder text.
+모든 섹션 헤더와 플레이스홀더 텍스트로 파일을 생성합니다.
 
-Confirm the filename has been created and indicate it's time to fill in each section.
+파일명이 생성되었음을 확인하고 각 섹션을 채울 시간이라고 알립니다.
 
-**For each section:**
+**각 섹션에 대해:**
 
-### Step 1: Clarifying Questions
+### 1단계: 명확화 질문
 
-Announce work will begin on the [SECTION NAME] section. Ask 5-10 clarifying questions about what should be included:
+[섹션 이름] 섹션 작업을 시작한다고 알립니다. 포함할 내용에 대해 5-10개의 명확화 질문을 합니다:
 
-Generate 5-10 specific questions based on context and section purpose.
+컨텍스트와 섹션 목적에 기반하여 5-10개의 구체적인 질문을 생성합니다.
 
-Inform them they can answer in shorthand or just indicate what's important to cover.
+약식으로 답하거나 다룰 중요 사항만 표시해도 된다고 안내합니다.
 
-### Step 2: Brainstorming
+### 2단계: 브레인스토밍
 
-For the [SECTION NAME] section, brainstorm [5-20] things that might be included, depending on the section's complexity. Look for:
-- Context shared that might have been forgotten
-- Angles or considerations not yet mentioned
+[섹션 이름] 섹션에 대해, 섹션의 복잡도에 따라 포함할 수 있는 [5-20]가지 항목을 브레인스토밍합니다. 다음을 찾습니다:
+- 잊혀졌을 수 있는 공유된 컨텍스트
+- 아직 언급되지 않은 각도나 고려 사항
 
-Generate 5-20 numbered options based on section complexity. At the end, offer to brainstorm more if they want additional options.
+섹션 복잡도에 따라 5-20개의 번호가 매겨진 옵션을 생성합니다. 마지막에 추가 옵션을 원하면 더 브레인스토밍하겠다고 제안합니다.
 
-### Step 3: Curation
+### 3단계: 큐레이션
 
-Ask which points should be kept, removed, or combined. Request brief justifications to help learn priorities for the next sections.
+어떤 항목을 유지, 제거 또는 결합할지 물어봅니다. 다음 섹션의 우선순위 학습에 도움이 되도록 간단한 근거를 요청합니다.
 
-Provide examples:
-- "Keep 1,4,7,9"
-- "Remove 3 (duplicates 1)"
-- "Remove 6 (audience already knows this)"
-- "Combine 11 and 12"
+예시를 제공합니다:
+- "1,4,7,9 유지"
+- "3 제거 (1과 중복)"
+- "6 제거 (독자가 이미 알고 있음)"
+- "11과 12 결합"
 
-**If user gives freeform feedback** (e.g., "looks good" or "I like most of it but...") instead of numbered selections, extract their preferences and proceed. Parse what they want kept/removed/changed and apply it.
+**사용자가 번호 선택 대신 자유 형식 피드백을 주는 경우** (예: "좋아 보입니다" 또는 "대부분 마음에 들지만..."), 선호도를 추출하여 진행합니다. 유지/제거/변경하고 싶은 것을 파악하여 적용합니다.
 
-### Step 4: Gap Check
+### 4단계: 갭 체크
 
-Based on what they've selected, ask if there's anything important missing for the [SECTION NAME] section.
+선택한 내용을 기반으로, [섹션 이름] 섹션에서 빠진 중요한 내용이 있는지 물어봅니다.
 
-### Step 5: Drafting
+### 5단계: 초안 작성
 
-Use `str_replace` to replace the placeholder text for this section with the actual drafted content.
+`str_replace`를 사용하여 이 섹션의 플레이스홀더 텍스트를 실제 초안 내용으로 교체합니다.
 
-Announce the [SECTION NAME] section will be drafted now based on what they've selected.
+선택한 내용을 기반으로 [섹션 이름] 섹션을 지금 초안 작성한다고 알립니다.
 
-**If using artifacts:**
-After drafting, provide a link to the artifact.
+**아티팩트를 사용하는 경우:**
+초안 작성 후 아티팩트 링크를 제공합니다.
 
-Ask them to read through it and indicate what to change. Note that being specific helps learning for the next sections.
+읽어보고 변경할 부분을 알려달라고 요청합니다. 구체적으로 알려줄수록 다음 섹션을 위한 학습에 도움이 된다고 안내합니다.
 
-**If using a file (no artifacts):**
-After drafting, confirm completion.
+**파일을 사용하는 경우 (아티팩트 없음):**
+초안 작성 후 완료를 확인합니다.
 
-Inform them the [SECTION NAME] section has been drafted in [filename]. Ask them to read through it and indicate what to change. Note that being specific helps learning for the next sections.
+[파일명]에 [섹션 이름] 섹션이 초안 작성되었다고 안내합니다. 읽어보고 변경할 부분을 알려달라고 요청합니다. 구체적으로 알려줄수록 다음 섹션을 위한 학습에 도움이 된다고 안내합니다.
 
-**Key instruction for user (include when drafting the first section):**
-Provide a note: Instead of editing the doc directly, ask them to indicate what to change. This helps learning of their style for future sections. For example: "Remove the X bullet - already covered by Y" or "Make the third paragraph more concise".
+**사용자에게 핵심 안내 (첫 번째 섹션 초안 작성 시 포함):**
+참고 사항을 제공합니다: 문서를 직접 편집하는 대신 변경할 부분을 알려달라고 요청합니다. 이는 향후 섹션을 위한 스타일 학습에 도움이 됩니다. 예: "X 항목 제거 - Y에서 이미 다뤘음" 또는 "세 번째 단락을 더 간결하게".
 
-### Step 6: Iterative Refinement
+### 6단계: 반복적 다듬기
 
-As user provides feedback:
-- Use `str_replace` to make edits (never reprint the whole doc)
-- **If using artifacts:** Provide link to artifact after each edit
-- **If using files:** Just confirm edits are complete
-- If user edits doc directly and asks to read it: mentally note the changes they made and keep them in mind for future sections (this shows their preferences)
+사용자가 피드백을 제공하면:
+- `str_replace`를 사용하여 편집합니다 (전체 문서를 다시 출력하지 않습니다)
+- **아티팩트를 사용하는 경우:** 매 편집 후 아티팩트 링크를 제공합니다
+- **파일을 사용하는 경우:** 편집 완료를 확인합니다
+- 사용자가 문서를 직접 편집하고 읽어달라고 요청하면: 변경 사항을 머릿속으로 메모하고 향후 섹션에 반영합니다 (이는 사용자의 선호도를 보여줍니다)
 
-**Continue iterating** until user is satisfied with the section.
+**사용자가 섹션에 만족할 때까지 반복합니다.**
 
-### Quality Checking
+### 품질 검사
 
-After 3 consecutive iterations with no substantial changes, ask if anything can be removed without losing important information.
+실질적인 변경 없이 3회 연속 반복 후, 중요한 정보 손실 없이 제거할 수 있는 내용이 있는지 물어봅니다.
 
-When section is done, confirm [SECTION NAME] is complete. Ask if ready to move to the next section.
+섹션이 완료되면 [섹션 이름]이 완료되었음을 확인합니다. 다음 섹션으로 넘어갈 준비가 되었는지 물어봅니다.
 
-**Repeat for all sections.**
+**모든 섹션에 대해 반복합니다.**
 
-### Near Completion
+### 완료 임박
 
-As approaching completion (80%+ of sections done), announce intention to re-read the entire document and check for:
-- Flow and consistency across sections
-- Redundancy or contradictions
-- Anything that feels like "slop" or generic filler
-- Whether every sentence carries weight
+완료에 근접하면(80% 이상의 섹션 완료), 전체 문서를 다시 읽고 다음을 확인하겠다고 알립니다:
+- 섹션 간 흐름과 일관성
+- 중복이나 모순
+- "군더더기"나 일반적인 채우기처럼 느껴지는 부분
+- 모든 문장이 무게감을 가지는지
 
-Read entire document and provide feedback.
+전체 문서를 읽고 피드백을 제공합니다.
 
-**When all sections are drafted and refined:**
-Announce all sections are drafted. Indicate intention to review the complete document one more time.
+**모든 섹션이 초안 작성되고 다듬어지면:**
+모든 섹션이 초안 작성되었다고 알립니다. 완성된 문서를 한 번 더 검토하겠다고 알립니다.
 
-Review for overall coherence, flow, completeness.
+전반적인 일관성, 흐름, 완전성을 검토합니다.
 
-Provide any final suggestions.
+최종 제안 사항을 제공합니다.
 
-Ask if ready to move to Reader Testing, or if they want to refine anything else.
+독자 테스트로 넘어갈 준비가 되었는지, 다른 부분을 더 다듬고 싶은지 물어봅니다.
 
-## Stage 3: Reader Testing
+## 3단계: 독자 테스트
 
-**Goal:** Test the document with a fresh Claude (no context bleed) to verify it works for readers.
+**목표:** 새로운 Claude(컨텍스트 유출 없음)로 문서를 테스트하여 독자에게 잘 작동하는지 검증합니다.
 
-**Instructions to user:**
-Explain that testing will now occur to see if the document actually works for readers. This catches blind spots - things that make sense to the authors but might confuse others.
+**사용자에게 안내:**
+이제 문서가 실제로 독자에게 잘 작동하는지 테스트한다고 설명합니다. 이를 통해 맹점, 즉 저자에게는 이해되지만 다른 사람에게는 혼란을 줄 수 있는 부분을 찾아냅니다.
 
-### Testing Approach
+### 테스트 접근 방식
 
-**If access to sub-agents is available (e.g., in Claude Code):**
+**서브 에이전트에 접근할 수 있는 경우 (예: Claude Code):**
 
-Perform the testing directly without user involvement.
+사용자 개입 없이 직접 테스트를 수행합니다.
 
-### Step 1: Predict Reader Questions
+### 1단계: 독자 질문 예측
 
-Announce intention to predict what questions readers might ask when trying to discover this document.
+독자가 이 문서를 찾으려 할 때 어떤 질문을 할지 예측하겠다고 알립니다.
 
-Generate 5-10 questions that readers would realistically ask.
+독자가 현실적으로 할 만한 5-10개의 질문을 생성합니다.
 
-### Step 2: Test with Sub-Agent
+### 2단계: 서브 에이전트로 테스트
 
-Announce that these questions will be tested with a fresh Claude instance (no context from this conversation).
+이 질문들을 새로운 Claude 인스턴스(이 대화의 컨텍스트 없음)로 테스트하겠다고 알립니다.
 
-For each question, invoke a sub-agent with just the document content and the question.
+각 질문에 대해 문서 내용과 질문만으로 서브 에이전트를 호출합니다.
 
-Summarize what Reader Claude got right/wrong for each question.
+각 질문에 대해 Reader Claude가 맞힌 것과 틀린 것을 요약합니다.
 
-### Step 3: Run Additional Checks
+### 3단계: 추가 검사 실행
 
-Announce additional checks will be performed.
+추가 검사를 수행하겠다고 알립니다.
 
-Invoke sub-agent to check for ambiguity, false assumptions, contradictions.
+모호성, 잘못된 가정, 모순을 확인하기 위해 서브 에이전트를 호출합니다.
 
-Summarize any issues found.
+발견된 문제를 요약합니다.
 
-### Step 4: Report and Fix
+### 4단계: 보고 및 수정
 
-If issues found:
-Report that Reader Claude struggled with specific issues.
+문제가 발견된 경우:
+Reader Claude가 특정 문제에서 어려움을 겪었다고 보고합니다.
 
-List the specific issues.
+구체적인 문제를 나열합니다.
 
-Indicate intention to fix these gaps.
+이 갭을 수정하겠다고 알립니다.
 
-Loop back to refinement for problematic sections.
+문제가 있는 섹션의 다듬기로 돌아갑니다.
 
 ---
 
-**If no access to sub-agents (e.g., claude.ai web interface):**
+**서브 에이전트에 접근할 수 없는 경우 (예: claude.ai 웹 인터페이스):**
 
-The user will need to do the testing manually.
+사용자가 수동으로 테스트를 수행해야 합니다.
 
-### Step 1: Predict Reader Questions
+### 1단계: 독자 질문 예측
 
-Ask what questions people might ask when trying to discover this document. What would they type into Claude.ai?
+이 문서를 찾으려 할 때 어떤 질문을 할지 물어봅니다. Claude.ai에 무엇을 입력할까요?
 
-Generate 5-10 questions that readers would realistically ask.
+독자가 현실적으로 할 만한 5-10개의 질문을 생성합니다.
 
-### Step 2: Setup Testing
+### 2단계: 테스트 설정
 
-Provide testing instructions:
-1. Open a fresh Claude conversation: https://claude.ai
-2. Paste or share the document content (if using a shared doc platform with connectors enabled, provide the link)
-3. Ask Reader Claude the generated questions
+테스트 지침을 제공합니다:
+1. 새로운 Claude 대화를 엽니다: https://claude.ai
+2. 문서 내용을 붙여넣거나 공유합니다 (커넥터가 활성화된 공유 문서 플랫폼을 사용하는 경우 링크를 제공합니다)
+3. Reader Claude에게 생성된 질문을 합니다
 
-For each question, instruct Reader Claude to provide:
-- The answer
-- Whether anything was ambiguous or unclear
-- What knowledge/context the doc assumes is already known
+각 질문에 대해 Reader Claude가 다음을 제공하도록 지시합니다:
+- 답변
+- 모호하거나 불명확한 부분이 있었는지
+- 문서가 이미 알려져 있다고 가정하는 지식/컨텍스트
 
-Check if Reader Claude gives correct answers or misinterprets anything.
+Reader Claude가 올바른 답변을 하는지 또는 잘못 해석하는 부분이 있는지 확인합니다.
 
-### Step 3: Additional Checks
+### 3단계: 추가 검사
 
-Also ask Reader Claude:
-- "What in this doc might be ambiguous or unclear to readers?"
-- "What knowledge or context does this doc assume readers already have?"
-- "Are there any internal contradictions or inconsistencies?"
+Reader Claude에게 다음도 물어봅니다:
+- "이 문서에서 독자에게 모호하거나 불명확할 수 있는 부분은 무엇인가요?"
+- "이 문서가 독자에게 이미 있다고 가정하는 지식이나 컨텍스트는 무엇인가요?"
+- "내부 모순이나 불일치가 있나요?"
 
-### Step 4: Iterate Based on Results
+### 4단계: 결과에 따른 반복
 
-Ask what Reader Claude got wrong or struggled with. Indicate intention to fix those gaps.
+Reader Claude가 무엇을 틀렸거나 어려워했는지 물어봅니다. 그 갭을 수정하겠다고 알립니다.
 
-Loop back to refinement for any problematic sections.
+문제가 있는 섹션의 다듬기로 돌아갑니다.
 
 ---
 
-### Exit Condition (Both Approaches)
+### 종료 조건 (두 접근 방식 모두)
 
-When Reader Claude consistently answers questions correctly and doesn't surface new gaps or ambiguities, the doc is ready.
+Reader Claude가 일관되게 질문에 올바르게 답하고 새로운 갭이나 모호성이 발견되지 않으면, 문서가 준비된 것입니다.
 
-## Final Review
+## 최종 검토
 
-When Reader Testing passes:
-Announce the doc has passed Reader Claude testing. Before completion:
+독자 테스트가 통과되면:
+문서가 Reader Claude 테스트를 통과했다고 알립니다. 완료 전:
 
-1. Recommend they do a final read-through themselves - they own this document and are responsible for its quality
-2. Suggest double-checking any facts, links, or technical details
-3. Ask them to verify it achieves the impact they wanted
+1. 직접 최종 읽기를 하도록 권장합니다 - 이 문서의 소유자이며 품질에 대한 책임이 있습니다
+2. 사실, 링크 또는 기술적 세부 사항을 다시 확인하도록 제안합니다
+3. 원했던 효과를 달성하는지 확인하도록 요청합니다
 
-Ask if they want one more review, or if the work is done.
+한 번 더 검토를 원하는지, 작업이 완료되었는지 물어봅니다.
 
-**If user wants final review, provide it. Otherwise:**
-Announce document completion. Provide a few final tips:
-- Consider linking this conversation in an appendix so readers can see how the doc was developed
-- Use appendices to provide depth without bloating the main doc
-- Update the doc as feedback is received from real readers
+**사용자가 최종 검토를 원하면 제공합니다. 그렇지 않으면:**
+문서 완성을 알립니다. 몇 가지 최종 팁을 제공합니다:
+- 부록에 이 대화를 링크하여 독자가 문서가 어떻게 개발되었는지 볼 수 있게 하는 것을 고려합니다
+- 부록을 활용하여 본문을 부풀리지 않으면서 깊이를 제공합니다
+- 실제 독자로부터 피드백을 받으면 문서를 업데이트합니다
 
-## Tips for Effective Guidance
+## 효과적인 안내를 위한 팁
 
-**Tone:**
-- Be direct and procedural
-- Explain rationale briefly when it affects user behavior
-- Don't try to "sell" the approach - just execute it
+**어조:**
+- 직접적이고 절차적으로 합니다
+- 사용자 행동에 영향을 미칠 때 근거를 간략히 설명합니다
+- 접근 방식을 "팔려고" 하지 마세요 - 그냥 실행합니다
 
-**Handling Deviations:**
-- If user wants to skip a stage: Ask if they want to skip this and write freeform
-- If user seems frustrated: Acknowledge this is taking longer than expected. Suggest ways to move faster
-- Always give user agency to adjust the process
+**이탈 처리:**
+- 사용자가 단계를 건너뛰고 싶은 경우: 이것을 건너뛰고 자유 형식으로 작성할지 물어봅니다
+- 사용자가 답답해하는 것 같은 경우: 예상보다 오래 걸리고 있음을 인정합니다. 더 빠르게 진행하는 방법을 제안합니다
+- 항상 사용자에게 프로세스를 조정할 수 있는 주도권을 줍니다
 
-**Context Management:**
-- Throughout, if context is missing on something mentioned, proactively ask
-- Don't let gaps accumulate - address them as they come up
+**컨텍스트 관리:**
+- 전체 과정에서 언급된 내용에 대한 컨텍스트가 부족하면 사전에 물어봅니다
+- 갭이 쌓이지 않도록 합니다 - 발생하는 대로 해결합니다
 
-**Artifact Management:**
-- Use `create_file` for drafting full sections
-- Use `str_replace` for all edits
-- Provide artifact link after every change
-- Never use artifacts for brainstorming lists - that's just conversation
+**아티팩트 관리:**
+- 전체 섹션 초안 작성에 `create_file`을 사용합니다
+- 모든 편집에 `str_replace`를 사용합니다
+- 변경할 때마다 아티팩트 링크를 제공합니다
+- 브레인스토밍 목록에는 아티팩트를 사용하지 않습니다 - 그것은 대화일 뿐입니다
 
-**Quality over Speed:**
-- Don't rush through stages
-- Each iteration should make meaningful improvements
-- The goal is a document that actually works for readers
+**속도보다 품질:**
+- 단계를 서두르지 않습니다
+- 각 반복은 의미 있는 개선을 이루어야 합니다
+- 목표는 독자에게 실제로 잘 작동하는 문서입니다

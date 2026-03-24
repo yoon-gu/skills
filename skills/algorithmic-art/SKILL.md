@@ -4,135 +4,135 @@ description: Creating algorithmic art using p5.js with seeded randomness and int
 license: Complete terms in LICENSE.txt
 ---
 
-Algorithmic philosophies are computational aesthetic movements that are then expressed through code. Output .md files (philosophy), .html files (interactive viewer), and .js files (generative algorithms).
+알고리즘 철학은 코드를 통해 표현되는 컴퓨터 미학 운동이다. .md 파일(철학), .html 파일(인터랙티브 뷰어), .js 파일(제너레이티브 알고리즘)을 출력한다.
 
-This happens in two steps:
-1. Algorithmic Philosophy Creation (.md file)
-2. Express by creating p5.js generative art (.html + .js files)
+이 과정은 두 단계로 이루어진다:
+1. 알고리즘 철학 생성 (.md 파일)
+2. p5.js 제너레이티브 아트를 만들어 표현 (.html + .js 파일)
 
-First, undertake this task:
+먼저 다음 작업을 수행한다:
 
-## ALGORITHMIC PHILOSOPHY CREATION
+## 알고리즘 철학 생성
 
-To begin, create an ALGORITHMIC PHILOSOPHY (not static images or templates) that will be interpreted through:
-- Computational processes, emergent behavior, mathematical beauty
-- Seeded randomness, noise fields, organic systems
-- Particles, flows, fields, forces
-- Parametric variation and controlled chaos
+시작하려면 다음을 통해 해석될 알고리즘 철학(정적 이미지나 템플릿이 아님)을 생성한다:
+- 컴퓨터 프로세스, 창발적 행동, 수학적 아름다움
+- 시드 기반 무작위성, 노이즈 필드, 유기적 시스템
+- 파티클, 흐름, 필드, 힘
+- 파라메트릭 변형과 제어된 혼돈
 
-### THE CRITICAL UNDERSTANDING
-- What is received: Some subtle input or instructions by the user to take into account, but use as a foundation; it should not constrain creative freedom.
-- What is created: An algorithmic philosophy/generative aesthetic movement.
-- What happens next: The same version receives the philosophy and EXPRESSES IT IN CODE - creating p5.js sketches that are 90% algorithmic generation, 10% essential parameters.
+### 핵심 이해
+- 수신하는 것: 사용자의 미묘한 입력이나 지시사항을 고려하되, 기초로 활용한다. 이것이 창의적 자유를 제약해서는 안 된다.
+- 생성하는 것: 알고리즘 철학/제너레이티브 미학 운동.
+- 다음에 일어나는 것: 동일한 버전이 철학을 수신하고 코드로 표현한다 - 90%는 알고리즘 생성, 10%는 필수 파라미터로 구성된 p5.js 스케치를 만든다.
 
-Consider this approach:
-- Write a manifesto for a generative art movement
-- The next phase involves writing the algorithm that brings it to life
+다음 접근 방식을 고려한다:
+- 제너레이티브 아트 운동을 위한 선언문을 작성한다
+- 다음 단계에서는 이를 구현하는 알고리즘을 작성한다
 
-The philosophy must emphasize: Algorithmic expression. Emergent behavior. Computational beauty. Seeded variation.
+철학은 다음을 강조해야 한다: 알고리즘적 표현. 창발적 행동. 컴퓨터 미학. 시드 기반 변형.
 
-### HOW TO GENERATE AN ALGORITHMIC PHILOSOPHY
+### 알고리즘 철학 생성 방법
 
-**Name the movement** (1-2 words): "Organic Turbulence" / "Quantum Harmonics" / "Emergent Stillness"
+**운동에 이름을 붙인다** (1-2단어): "Organic Turbulence" / "Quantum Harmonics" / "Emergent Stillness"
 
-**Articulate the philosophy** (4-6 paragraphs - concise but complete):
+**철학을 표현한다** (4-6문단 - 간결하지만 완전하게):
 
-To capture the ALGORITHMIC essence, express how this philosophy manifests through:
-- Computational processes and mathematical relationships?
-- Noise functions and randomness patterns?
-- Particle behaviors and field dynamics?
-- Temporal evolution and system states?
-- Parametric variation and emergent complexity?
+알고리즘적 본질을 포착하기 위해, 이 철학이 다음을 통해 어떻게 발현되는지 표현한다:
+- 컴퓨터 프로세스와 수학적 관계?
+- 노이즈 함수와 무작위성 패턴?
+- 파티클 행동과 필드 역학?
+- 시간적 진화와 시스템 상태?
+- 파라메트릭 변형과 창발적 복잡성?
 
-**CRITICAL GUIDELINES:**
-- **Avoid redundancy**: Each algorithmic aspect should be mentioned once. Avoid repeating concepts about noise theory, particle dynamics, or mathematical principles unless adding new depth.
-- **Emphasize craftsmanship REPEATEDLY**: The philosophy MUST stress multiple times that the final algorithm should appear as though it took countless hours to develop, was refined with care, and comes from someone at the absolute top of their field. This framing is essential - repeat phrases like "meticulously crafted algorithm," "the product of deep computational expertise," "painstaking optimization," "master-level implementation."
-- **Leave creative space**: Be specific about the algorithmic direction, but concise enough that the next Claude has room to make interpretive implementation choices at an extremely high level of craftsmanship.
+**핵심 가이드라인:**
+- **중복 회피**: 각 알고리즘적 측면은 한 번만 언급한다. 새로운 깊이를 추가하지 않는 한, 노이즈 이론, 파티클 역학, 수학적 원리에 대한 개념을 반복하지 않는다.
+- **장인 정신을 반복적으로 강조**: 철학은 최종 알고리즘이 수많은 시간을 들여 개발하고, 세심하게 다듬었으며, 해당 분야의 절대적 정상에 있는 사람이 만든 것처럼 보여야 한다는 점을 여러 번 강조해야 한다. 이 프레이밍은 필수적이다 - "정밀하게 만들어진 알고리즘", "깊은 컴퓨터 전문성의 산물", "고된 최적화", "마스터 수준의 구현"과 같은 표현을 반복한다.
+- **창의적 공간 확보**: 알고리즘 방향에 대해 구체적이되, 다음 Claude가 극히 높은 수준의 장인 정신으로 해석적 구현 선택을 할 수 있을 정도로 간결하게 유지한다.
 
-The philosophy must guide the next version to express ideas ALGORITHMICALLY, not through static images. Beauty lives in the process, not the final frame.
+철학은 다음 버전이 아이디어를 정적 이미지가 아닌 알고리즘적으로 표현하도록 안내해야 한다. 아름다움은 최종 프레임이 아닌 프로세스 안에 있다.
 
-### PHILOSOPHY EXAMPLES
+### 철학 예시
 
 **"Organic Turbulence"**
-Philosophy: Chaos constrained by natural law, order emerging from disorder.
-Algorithmic expression: Flow fields driven by layered Perlin noise. Thousands of particles following vector forces, their trails accumulating into organic density maps. Multiple noise octaves create turbulent regions and calm zones. Color emerges from velocity and density - fast particles burn bright, slow ones fade to shadow. The algorithm runs until equilibrium - a meticulously tuned balance where every parameter was refined through countless iterations by a master of computational aesthetics.
+철학: 자연 법칙에 의해 제약된 혼돈, 무질서에서 질서가 출현.
+알고리즘적 표현: 다층 Perlin 노이즈로 구동되는 플로우 필드. 수천 개의 파티클이 벡터 힘을 따르며, 그 궤적이 유기적 밀도 맵으로 축적된다. 다중 노이즈 옥타브가 난류 영역과 고요한 영역을 생성한다. 색상은 속도와 밀도에서 나온다 - 빠른 파티클은 밝게 빛나고, 느린 것은 그림자로 사라진다. 알고리즘은 평형에 도달할 때까지 실행된다 - 컴퓨터 미학의 마스터가 수많은 반복을 통해 모든 파라미터를 다듬은, 정밀하게 조율된 균형.
 
 **"Quantum Harmonics"**
-Philosophy: Discrete entities exhibiting wave-like interference patterns.
-Algorithmic expression: Particles initialized on a grid, each carrying a phase value that evolves through sine waves. When particles are near, their phases interfere - constructive interference creates bright nodes, destructive creates voids. Simple harmonic motion generates complex emergent mandalas. The result of painstaking frequency calibration where every ratio was carefully chosen to produce resonant beauty.
+철학: 파동과 같은 간섭 패턴을 보이는 이산 개체.
+알고리즘적 표현: 그리드 위에 초기화된 파티클, 각각 사인파를 통해 진화하는 위상 값을 지닌다. 파티클이 가까이 있으면 위상이 간섭한다 - 보강 간섭은 밝은 노드를, 상쇄 간섭은 공백을 만든다. 단순한 조화 운동이 복잡한 창발적 만다라를 생성한다. 공명하는 아름다움을 만들기 위해 모든 비율이 신중하게 선택된, 고된 주파수 보정의 결과물.
 
 **"Recursive Whispers"**
-Philosophy: Self-similarity across scales, infinite depth in finite space.
-Algorithmic expression: Branching structures that subdivide recursively. Each branch slightly randomized but constrained by golden ratios. L-systems or recursive subdivision generate tree-like forms that feel both mathematical and organic. Subtle noise perturbations break perfect symmetry. Line weights diminish with each recursion level. Every branching angle the product of deep mathematical exploration.
+철학: 스케일 간 자기 유사성, 유한한 공간 안의 무한한 깊이.
+알고리즘적 표현: 재귀적으로 세분화되는 가지 구조. 각 가지는 약간의 무작위성을 갖지만 황금비에 의해 제약된다. L-system 또는 재귀적 세분화가 수학적이면서도 유기적으로 느껴지는 나무 형태를 생성한다. 미묘한 노이즈 섭동이 완벽한 대칭을 깨뜨린다. 선 두께는 각 재귀 수준마다 감소한다. 모든 가지 각도는 깊은 수학적 탐구의 산물.
 
 **"Field Dynamics"**
-Philosophy: Invisible forces made visible through their effects on matter.
-Algorithmic expression: Vector fields constructed from mathematical functions or noise. Particles born at edges, flowing along field lines, dying when they reach equilibrium or boundaries. Multiple fields can attract, repel, or rotate particles. The visualization shows only the traces - ghost-like evidence of invisible forces. A computational dance meticulously choreographed through force balance.
+철학: 물질에 미치는 영향을 통해 가시화되는 보이지 않는 힘.
+알고리즘적 표현: 수학 함수나 노이즈로 구성된 벡터 필드. 가장자리에서 태어난 파티클이 필드 라인을 따라 흐르다가, 평형이나 경계에 도달하면 소멸한다. 다중 필드가 파티클을 끌어당기거나, 밀어내거나, 회전시킬 수 있다. 시각화는 오직 궤적만을 보여준다 - 보이지 않는 힘의 유령 같은 증거. 힘의 균형을 통해 정밀하게 안무된 컴퓨터 무용.
 
 **"Stochastic Crystallization"**
-Philosophy: Random processes crystallizing into ordered structures.
-Algorithmic expression: Randomized circle packing or Voronoi tessellation. Start with random points, let them evolve through relaxation algorithms. Cells push apart until equilibrium. Color based on cell size, neighbor count, or distance from center. The organic tiling that emerges feels both random and inevitable. Every seed produces unique crystalline beauty - the mark of a master-level generative algorithm.
+철학: 질서 있는 구조로 결정화되는 무작위 프로세스.
+알고리즘적 표현: 무작위 원 패킹 또는 Voronoi 테셀레이션. 무작위 점에서 시작하여 이완 알고리즘을 통해 진화시킨다. 셀이 평형에 도달할 때까지 서로 밀어낸다. 색상은 셀 크기, 이웃 수, 또는 중심으로부터의 거리에 기반한다. 출현하는 유기적 타일링은 무작위이면서도 필연적으로 느껴진다. 모든 시드가 고유한 결정질의 아름다움을 만들어낸다 - 마스터 수준 제너레이티브 알고리즘의 표식.
 
-*These are condensed examples. The actual algorithmic philosophy should be 4-6 substantial paragraphs.*
+*이것들은 축약된 예시이다. 실제 알고리즘 철학은 4-6개의 충실한 문단이어야 한다.*
 
-### ESSENTIAL PRINCIPLES
-- **ALGORITHMIC PHILOSOPHY**: Creating a computational worldview to be expressed through code
-- **PROCESS OVER PRODUCT**: Always emphasize that beauty emerges from the algorithm's execution - each run is unique
-- **PARAMETRIC EXPRESSION**: Ideas communicate through mathematical relationships, forces, behaviors - not static composition
-- **ARTISTIC FREEDOM**: The next Claude interprets the philosophy algorithmically - provide creative implementation room
-- **PURE GENERATIVE ART**: This is about making LIVING ALGORITHMS, not static images with randomness
-- **EXPERT CRAFTSMANSHIP**: Repeatedly emphasize the final algorithm must feel meticulously crafted, refined through countless iterations, the product of deep expertise by someone at the absolute top of their field in computational aesthetics
+### 핵심 원칙
+- **알고리즘 철학**: 코드를 통해 표현될 컴퓨터적 세계관 만들기
+- **결과물보다 과정**: 아름다움은 알고리즘 실행에서 나온다는 점을 항상 강조 - 매 실행이 유일무이하다
+- **파라메트릭 표현**: 아이디어는 정적 구성이 아닌 수학적 관계, 힘, 행동을 통해 소통한다
+- **예술적 자유**: 다음 Claude가 철학을 알고리즘적으로 해석한다 - 창의적 구현 공간을 제공한다
+- **순수 제너레이티브 아트**: 이것은 무작위성을 가진 정적 이미지가 아닌, 살아있는 알고리즘을 만드는 것이다
+- **전문가 수준의 장인 정신**: 최종 알고리즘이 정밀하게 만들어지고, 수많은 반복을 통해 다듬어지며, 컴퓨터 미학 분야의 절대적 정상에 있는 사람의 깊은 전문성의 산물이어야 함을 반복적으로 강조한다
 
-**The algorithmic philosophy should be 4-6 paragraphs long.** Fill it with poetic computational philosophy that brings together the intended vision. Avoid repeating the same points. Output this algorithmic philosophy as a .md file.
-
----
-
-## DEDUCING THE CONCEPTUAL SEED
-
-**CRITICAL STEP**: Before implementing the algorithm, identify the subtle conceptual thread from the original request.
-
-**THE ESSENTIAL PRINCIPLE**:
-The concept is a **subtle, niche reference embedded within the algorithm itself** - not always literal, always sophisticated. Someone familiar with the subject should feel it intuitively, while others simply experience a masterful generative composition. The algorithmic philosophy provides the computational language. The deduced concept provides the soul - the quiet conceptual DNA woven invisibly into parameters, behaviors, and emergence patterns.
-
-This is **VERY IMPORTANT**: The reference must be so refined that it enhances the work's depth without announcing itself. Think like a jazz musician quoting another song through algorithmic harmony - only those who know will catch it, but everyone appreciates the generative beauty.
+**알고리즘 철학은 4-6문단이어야 한다.** 의도한 비전을 하나로 묶는 시적인 컴퓨터 철학으로 채운다. 같은 요점을 반복하지 않는다. 이 알고리즘 철학을 .md 파일로 출력한다.
 
 ---
 
-## P5.JS IMPLEMENTATION
+## 개념적 시드 추론
 
-With the philosophy AND conceptual framework established, express it through code. Pause to gather thoughts before proceeding. Use only the algorithmic philosophy created and the instructions below.
+**핵심 단계**: 알고리즘을 구현하기 전에, 원래 요청에서 미묘한 개념적 실마리를 파악한다.
 
-### ⚠️ STEP 0: READ THE TEMPLATE FIRST ⚠️
+**필수 원칙**:
+개념은 **알고리즘 자체에 내장된 미묘하고 틈새적인 레퍼런스**이다 - 항상 직접적이지는 않으며, 항상 정교하다. 해당 주제에 익숙한 사람은 직관적으로 느낄 수 있고, 다른 사람은 단순히 마스터급 제너레이티브 작품을 경험하게 된다. 알고리즘 철학은 컴퓨터적 언어를 제공한다. 추론된 개념은 영혼을 제공한다 - 파라미터, 행동, 출현 패턴 속에 보이지 않게 짜여진 조용한 개념적 DNA.
 
-**CRITICAL: BEFORE writing any HTML:**
-
-1. **Read** `templates/viewer.html` using the Read tool
-2. **Study** the exact structure, styling, and Anthropic branding
-3. **Use that file as the LITERAL STARTING POINT** - not just inspiration
-4. **Keep all FIXED sections exactly as shown** (header, sidebar structure, Anthropic colors/fonts, seed controls, action buttons)
-5. **Replace only the VARIABLE sections** marked in the file's comments (algorithm, parameters, UI controls for parameters)
-
-**Avoid:**
-- ❌ Creating HTML from scratch
-- ❌ Inventing custom styling or color schemes
-- ❌ Using system fonts or dark themes
-- ❌ Changing the sidebar structure
-
-**Follow these practices:**
-- ✅ Copy the template's exact HTML structure
-- ✅ Keep Anthropic branding (Poppins/Lora fonts, light colors, gradient backdrop)
-- ✅ Maintain the sidebar layout (Seed → Parameters → Colors? → Actions)
-- ✅ Replace only the p5.js algorithm and parameter controls
-
-The template is the foundation. Build on it, don't rebuild it.
+이것은 **매우 중요하다**: 레퍼런스는 스스로를 드러내지 않으면서 작품의 깊이를 향상시킬 만큼 정제되어야 한다. 알고리즘적 하모니를 통해 다른 곡을 인용하는 재즈 뮤지션처럼 생각하라 - 아는 사람만 알아챌 수 있지만, 모든 사람이 제너레이티브의 아름다움을 감상한다.
 
 ---
 
-To create gallery-quality computational art that lives and breathes, use the algorithmic philosophy as the foundation.
+## P5.JS 구현
 
-### TECHNICAL REQUIREMENTS
+철학과 개념적 프레임워크가 수립되었으면, 코드를 통해 표현한다. 진행하기 전에 잠시 생각을 정리한다. 생성된 알고리즘 철학과 아래 지침만 사용한다.
 
-**Seeded Randomness (Art Blocks Pattern)**:
+### STEP 0: 먼저 템플릿을 읽는다
+
+**중요: HTML을 작성하기 전에:**
+
+1. Read 도구를 사용하여 `templates/viewer.html`을 **읽는다**
+2. 정확한 구조, 스타일링, Anthropic 브랜딩을 **분석한다**
+3. **해당 파일을 문자 그대로의 시작점으로 사용한다** - 단순한 영감이 아니다
+4. 모든 **고정 섹션을 표시된 그대로 유지한다** (헤더, 사이드바 구조, Anthropic 색상/폰트, 시드 컨트롤, 액션 버튼)
+5. 파일의 주석에 표시된 **가변 섹션만 교체한다** (알고리즘, 파라미터, 파라미터용 UI 컨트롤)
+
+**피해야 할 것:**
+- HTML을 처음부터 작성하는 것
+- 커스텀 스타일링이나 색상 체계를 만드는 것
+- 시스템 폰트나 다크 테마를 사용하는 것
+- 사이드바 구조를 변경하는 것
+
+**따라야 할 사항:**
+- 템플릿의 정확한 HTML 구조를 복사한다
+- Anthropic 브랜딩을 유지한다 (Poppins/Lora 폰트, 밝은 색상, 그래디언트 배경)
+- 사이드바 레이아웃을 유지한다 (Seed → Parameters → Colors? → Actions)
+- p5.js 알고리즘과 파라미터 컨트롤만 교체한다
+
+템플릿이 기초이다. 그 위에 구축하되, 다시 만들지 않는다.
+
+---
+
+갤러리 수준의 살아 숨쉬는 컴퓨터 아트를 만들기 위해, 알고리즘 철학을 기초로 사용한다.
+
+### 기술 요구사항
+
+**시드 기반 무작위성 (Art Blocks 패턴)**:
 ```javascript
 // ALWAYS use a seed for reproducibility
 let seed = 12345; // or hash from user input
@@ -140,9 +140,9 @@ randomSeed(seed);
 noiseSeed(seed);
 ```
 
-**Parameter Structure - FOLLOW THE PHILOSOPHY**:
+**파라미터 구조 - 철학을 따른다**:
 
-To establish parameters that emerge naturally from the algorithmic philosophy, consider: "What qualities of this system can be adjusted?"
+알고리즘 철학에서 자연스럽게 나오는 파라미터를 설정하려면 다음을 고려한다: "이 시스템에서 어떤 특성을 조정할 수 있는가?"
 
 ```javascript
 let params = {
@@ -158,34 +158,34 @@ let params = {
 };
 ```
 
-**To design effective parameters, focus on the properties the system needs to be tunable rather than thinking in terms of "pattern types".**
+**효과적인 파라미터를 설계하려면, "패턴 유형"의 관점이 아닌 시스템이 조정 가능해야 하는 속성에 집중한다.**
 
-**Core Algorithm - EXPRESS THE PHILOSOPHY**:
+**핵심 알고리즘 - 철학을 표현한다**:
 
-**CRITICAL**: The algorithmic philosophy should dictate what to build.
+**중요**: 알고리즘 철학이 무엇을 만들지 지시해야 한다.
 
-To express the philosophy through code, avoid thinking "which pattern should I use?" and instead think "how to express this philosophy through code?"
+철학을 코드로 표현하려면, "어떤 패턴을 사용할까?"가 아닌 "이 철학을 코드로 어떻게 표현할까?"를 생각한다.
 
-If the philosophy is about **organic emergence**, consider using:
-- Elements that accumulate or grow over time
-- Random processes constrained by natural rules
-- Feedback loops and interactions
+철학이 **유기적 출현**에 관한 것이라면, 다음을 고려한다:
+- 시간이 지남에 따라 축적되거나 성장하는 요소
+- 자연 법칙에 의해 제약된 무작위 프로세스
+- 피드백 루프와 상호작용
 
-If the philosophy is about **mathematical beauty**, consider using:
-- Geometric relationships and ratios
-- Trigonometric functions and harmonics
-- Precise calculations creating unexpected patterns
+철학이 **수학적 아름다움**에 관한 것이라면, 다음을 고려한다:
+- 기하학적 관계와 비율
+- 삼각 함수와 하모닉스
+- 예상치 못한 패턴을 만드는 정밀한 계산
 
-If the philosophy is about **controlled chaos**, consider using:
-- Random variation within strict boundaries
-- Bifurcation and phase transitions
-- Order emerging from disorder
+철학이 **제어된 혼돈**에 관한 것이라면, 다음을 고려한다:
+- 엄격한 경계 안의 무작위 변형
+- 분기와 상전이
+- 무질서에서 출현하는 질서
 
-**The algorithm flows from the philosophy, not from a menu of options.**
+**알고리즘은 선택지 메뉴가 아닌, 철학에서 흘러나온다.**
 
-To guide the implementation, let the conceptual essence inform creative and original choices. Build something that expresses the vision for this particular request.
+구현을 안내하려면, 개념적 본질이 창의적이고 독창적인 선택을 이끌도록 한다. 이 특정 요청의 비전을 표현하는 것을 만든다.
 
-**Canvas Setup**: Standard p5.js structure:
+**캔버스 설정**: 표준 p5.js 구조:
 ```javascript
 function setup() {
   createCanvas(1200, 1200);
@@ -198,80 +198,80 @@ function draw() {
 }
 ```
 
-### CRAFTSMANSHIP REQUIREMENTS
+### 장인 정신 요구사항
 
-**CRITICAL**: To achieve mastery, create algorithms that feel like they emerged through countless iterations by a master generative artist. Tune every parameter carefully. Ensure every pattern emerges with purpose. This is NOT random noise - this is CONTROLLED CHAOS refined through deep expertise.
+**중요**: 마스터리를 달성하기 위해, 마스터 제너레이티브 아티스트의 수많은 반복을 통해 나온 것처럼 느껴지는 알고리즘을 만든다. 모든 파라미터를 주의 깊게 튜닝한다. 모든 패턴이 목적을 가지고 출현하도록 한다. 이것은 무작위 노이즈가 아니다 - 이것은 깊은 전문성을 통해 다듬어진 제어된 혼돈이다.
 
-- **Balance**: Complexity without visual noise, order without rigidity
-- **Color Harmony**: Thoughtful palettes, not random RGB values
-- **Composition**: Even in randomness, maintain visual hierarchy and flow
-- **Performance**: Smooth execution, optimized for real-time if animated
-- **Reproducibility**: Same seed ALWAYS produces identical output
+- **균형**: 시각적 노이즈 없는 복잡성, 경직성 없는 질서
+- **색상 조화**: 무작위 RGB 값이 아닌, 사려 깊은 팔레트
+- **구성**: 무작위성 속에서도 시각적 위계와 흐름을 유지한다
+- **성능**: 부드러운 실행, 애니메이션인 경우 실시간 최적화
+- **재현성**: 동일한 시드는 항상 동일한 출력을 생성한다
 
-### OUTPUT FORMAT
+### 출력 형식
 
-Output:
-1. **Algorithmic Philosophy** - As markdown or text explaining the generative aesthetic
-2. **Single HTML Artifact** - Self-contained interactive generative art built from `templates/viewer.html` (see STEP 0 and next section)
+출력:
+1. **알고리즘 철학** - 제너레이티브 미학을 설명하는 마크다운 또는 텍스트
+2. **단일 HTML 아티팩트** - `templates/viewer.html`에서 구축된 자체 완결형 인터랙티브 제너레이티브 아트 (STEP 0 및 다음 섹션 참조)
 
-The HTML artifact contains everything: p5.js (from CDN), the algorithm, parameter controls, and UI - all in one file that works immediately in claude.ai artifacts or any browser. Start from the template file, not from scratch.
+HTML 아티팩트는 모든 것을 포함한다: p5.js (CDN에서), 알고리즘, 파라미터 컨트롤, UI - 모두 하나의 파일에 담겨 claude.ai 아티팩트나 모든 브라우저에서 즉시 작동한다. 처음부터가 아닌, 템플릿 파일에서 시작한다.
 
 ---
 
-## INTERACTIVE ARTIFACT CREATION
+## 인터랙티브 아티팩트 생성
 
-**REMINDER: `templates/viewer.html` should have already been read (see STEP 0). Use that file as the starting point.**
+**참고: `templates/viewer.html`은 이미 읽었어야 한다 (STEP 0 참조). 해당 파일을 시작점으로 사용한다.**
 
-To allow exploration of the generative art, create a single, self-contained HTML artifact. Ensure this artifact works immediately in claude.ai or any browser - no setup required. Embed everything inline.
+제너레이티브 아트의 탐색을 허용하기 위해, 단일 자체 완결형 HTML 아티팩트를 만든다. 이 아티팩트가 claude.ai나 모든 브라우저에서 즉시 작동하도록 한다 - 설정 불필요. 모든 것을 인라인으로 임베드한다.
 
-### CRITICAL: WHAT'S FIXED VS VARIABLE
+### 핵심: 고정 vs 가변
 
-The `templates/viewer.html` file is the foundation. It contains the exact structure and styling needed.
+`templates/viewer.html` 파일이 기초이다. 필요한 정확한 구조와 스타일링을 포함하고 있다.
 
-**FIXED (always include exactly as shown):**
-- Layout structure (header, sidebar, main canvas area)
-- Anthropic branding (UI colors, fonts, gradients)
-- Seed section in sidebar:
-  - Seed display
-  - Previous/Next buttons
-  - Random button
-  - Jump to seed input + Go button
-- Actions section in sidebar:
-  - Regenerate button
-  - Reset button
+**고정 (항상 표시된 그대로 포함):**
+- 레이아웃 구조 (헤더, 사이드바, 메인 캔버스 영역)
+- Anthropic 브랜딩 (UI 색상, 폰트, 그래디언트)
+- 사이드바의 시드 섹션:
+  - 시드 표시
+  - Previous/Next 버튼
+  - Random 버튼
+  - 시드 이동 입력 + Go 버튼
+- 사이드바의 액션 섹션:
+  - Regenerate 버튼
+  - Reset 버튼
 
-**VARIABLE (customize for each artwork):**
-- The entire p5.js algorithm (setup/draw/classes)
-- The parameters object (define what the art needs)
-- The Parameters section in sidebar:
-  - Number of parameter controls
-  - Parameter names
-  - Min/max/step values for sliders
-  - Control types (sliders, inputs, etc.)
-- Colors section (optional):
-  - Some art needs color pickers
-  - Some art might use fixed colors
-  - Some art might be monochrome (no color controls needed)
-  - Decide based on the art's needs
+**가변 (각 작품에 맞게 커스터마이즈):**
+- 전체 p5.js 알고리즘 (setup/draw/classes)
+- 파라미터 객체 (아트에 필요한 것을 정의)
+- 사이드바의 파라미터 섹션:
+  - 파라미터 컨트롤 수
+  - 파라미터 이름
+  - 슬라이더의 min/max/step 값
+  - 컨트롤 유형 (슬라이더, 입력 등)
+- 색상 섹션 (선택사항):
+  - 일부 아트는 색상 선택기가 필요하다
+  - 일부 아트는 고정 색상을 사용할 수 있다
+  - 일부 아트는 단색일 수 있다 (색상 컨트롤 불필요)
+  - 아트의 필요에 따라 결정한다
 
-**Every artwork should have unique parameters and algorithm!** The fixed parts provide consistent UX - everything else expresses the unique vision.
+**모든 작품은 고유한 파라미터와 알고리즘을 가져야 한다!** 고정 부분은 일관된 UX를 제공하고 - 나머지 모든 것이 고유한 비전을 표현한다.
 
-### REQUIRED FEATURES
+### 필수 기능
 
-**1. Parameter Controls**
-- Sliders for numeric parameters (particle count, noise scale, speed, etc.)
-- Color pickers for palette colors
-- Real-time updates when parameters change
-- Reset button to restore defaults
+**1. 파라미터 컨트롤**
+- 숫자 파라미터용 슬라이더 (파티클 수, 노이즈 스케일, 속도 등)
+- 팔레트 색상용 색상 선택기
+- 파라미터 변경 시 실시간 업데이트
+- 기본값 복원을 위한 리셋 버튼
 
-**2. Seed Navigation**
-- Display current seed number
-- "Previous" and "Next" buttons to cycle through seeds
-- "Random" button for random seed
-- Input field to jump to specific seed
-- Generate 100 variations when requested (seeds 1-100)
+**2. 시드 내비게이션**
+- 현재 시드 번호 표시
+- 시드를 순환하는 "Previous"와 "Next" 버튼
+- 무작위 시드를 위한 "Random" 버튼
+- 특정 시드로 이동하는 입력 필드
+- 요청 시 100개 변형 생성 (시드 1-100)
 
-**3. Single Artifact Structure**
+**3. 단일 아티팩트 구조**
 ```html
 <!DOCTYPE html>
 <html>
@@ -299,17 +299,17 @@ The `templates/viewer.html` file is the foundation. It contains the exact struct
 </html>
 ```
 
-**CRITICAL**: This is a single artifact. No external files, no imports (except p5.js CDN). Everything inline.
+**중요**: 이것은 단일 아티팩트이다. 외부 파일 없음, 임포트 없음 (p5.js CDN 제외). 모든 것이 인라인.
 
-**4. Implementation Details - BUILD THE SIDEBAR**
+**4. 구현 세부사항 - 사이드바 구축**
 
-The sidebar structure:
+사이드바 구조:
 
-**1. Seed (FIXED)** - Always include exactly as shown:
-- Seed display
-- Prev/Next/Random/Jump buttons
+**1. Seed (고정)** - 항상 표시된 그대로 포함:
+- 시드 표시
+- Prev/Next/Random/Jump 버튼
 
-**2. Parameters (VARIABLE)** - Create controls for the art:
+**2. Parameters (가변)** - 아트를 위한 컨트롤 생성:
 ```html
 <div class="control-group">
     <label>Parameter Name</label>
@@ -317,89 +317,89 @@ The sidebar structure:
     <span class="value-display" id="param-value">...</span>
 </div>
 ```
-Add as many control-group divs as there are parameters.
+파라미터 수만큼 control-group div를 추가한다.
 
-**3. Colors (OPTIONAL/VARIABLE)** - Include if the art needs adjustable colors:
-- Add color pickers if users should control palette
-- Skip this section if the art uses fixed colors
-- Skip if the art is monochrome
+**3. Colors (선택/가변)** - 아트에 조정 가능한 색상이 필요하면 포함:
+- 사용자가 팔레트를 제어해야 하면 색상 선택기를 추가한다
+- 아트가 고정 색상을 사용하면 이 섹션을 건너뛴다
+- 아트가 단색이면 건너뛴다
 
-**4. Actions (FIXED)** - Always include exactly as shown:
-- Regenerate button
-- Reset button
-- Download PNG button
+**4. Actions (고정)** - 항상 표시된 그대로 포함:
+- Regenerate 버튼
+- Reset 버튼
+- Download PNG 버튼
 
-**Requirements**:
-- Seed controls must work (prev/next/random/jump/display)
-- All parameters must have UI controls
-- Regenerate, Reset, Download buttons must work
-- Keep Anthropic branding (UI styling, not art colors)
+**요구사항**:
+- 시드 컨트롤이 작동해야 한다 (prev/next/random/jump/display)
+- 모든 파라미터에 UI 컨트롤이 있어야 한다
+- Regenerate, Reset, Download 버튼이 작동해야 한다
+- Anthropic 브랜딩을 유지한다 (UI 스타일링, 아트 색상 아님)
 
-### USING THE ARTIFACT
+### 아티팩트 사용
 
-The HTML artifact works immediately:
-1. **In claude.ai**: Displayed as an interactive artifact - runs instantly
-2. **As a file**: Save and open in any browser - no server needed
-3. **Sharing**: Send the HTML file - it's completely self-contained
-
----
-
-## VARIATIONS & EXPLORATION
-
-The artifact includes seed navigation by default (prev/next/random buttons), allowing users to explore variations without creating multiple files. If the user wants specific variations highlighted:
-
-- Include seed presets (buttons for "Variation 1: Seed 42", "Variation 2: Seed 127", etc.)
-- Add a "Gallery Mode" that shows thumbnails of multiple seeds side-by-side
-- All within the same single artifact
-
-This is like creating a series of prints from the same plate - the algorithm is consistent, but each seed reveals different facets of its potential. The interactive nature means users discover their own favorites by exploring the seed space.
+HTML 아티팩트는 즉시 작동한다:
+1. **claude.ai에서**: 인터랙티브 아티팩트로 표시 - 즉시 실행
+2. **파일로**: 저장하고 아무 브라우저에서 열기 - 서버 불필요
+3. **공유**: HTML 파일을 보내기 - 완전히 자체 완결형
 
 ---
 
-## THE CREATIVE PROCESS
+## 변형 및 탐색
 
-**User request** → **Algorithmic philosophy** → **Implementation**
+아티팩트는 기본적으로 시드 내비게이션을 포함하며 (prev/next/random 버튼), 사용자가 여러 파일을 만들지 않고도 변형을 탐색할 수 있다. 사용자가 특정 변형을 강조하고 싶다면:
 
-Each request is unique. The process involves:
+- 시드 프리셋을 포함한다 ("변형 1: Seed 42", "변형 2: Seed 127" 등의 버튼)
+- 여러 시드의 썸네일을 나란히 보여주는 "갤러리 모드"를 추가한다
+- 모두 동일한 단일 아티팩트 내에서
 
-1. **Interpret the user's intent** - What aesthetic is being sought?
-2. **Create an algorithmic philosophy** (4-6 paragraphs) describing the computational approach
-3. **Implement it in code** - Build the algorithm that expresses this philosophy
-4. **Design appropriate parameters** - What should be tunable?
-5. **Build matching UI controls** - Sliders/inputs for those parameters
-
-**The constants**:
-- Anthropic branding (colors, fonts, layout)
-- Seed navigation (always present)
-- Self-contained HTML artifact
-
-**Everything else is variable**:
-- The algorithm itself
-- The parameters
-- The UI controls
-- The visual outcome
-
-To achieve the best results, trust creativity and let the philosophy guide the implementation.
+이것은 같은 판에서 일련의 판화를 만드는 것과 같다 - 알고리즘은 일관되지만, 각 시드는 잠재력의 다른 면을 드러낸다. 인터랙티브한 특성 덕분에 사용자는 시드 공간을 탐색하며 자신만의 즐겨찾기를 발견한다.
 
 ---
 
-## RESOURCES
+## 창작 과정
 
-This skill includes helpful templates and documentation:
+**사용자 요청** → **알고리즘 철학** → **구현**
 
-- **templates/viewer.html**: REQUIRED STARTING POINT for all HTML artifacts.
-  - This is the foundation - contains the exact structure and Anthropic branding
-  - **Keep unchanged**: Layout structure, sidebar organization, Anthropic colors/fonts, seed controls, action buttons
-  - **Replace**: The p5.js algorithm, parameter definitions, and UI controls in Parameters section
-  - The extensive comments in the file mark exactly what to keep vs replace
+각 요청은 고유하다. 과정은 다음을 포함한다:
 
-- **templates/generator_template.js**: Reference for p5.js best practices and code structure principles.
-  - Shows how to organize parameters, use seeded randomness, structure classes
-  - NOT a pattern menu - use these principles to build unique algorithms
-  - Embed algorithms inline in the HTML artifact (don't create separate .js files)
+1. **사용자의 의도를 해석한다** - 어떤 미학을 추구하는가?
+2. **알고리즘 철학을 생성한다** (4-6문단) 컴퓨터적 접근 방식을 설명
+3. **코드로 구현한다** - 이 철학을 표현하는 알고리즘을 만든다
+4. **적절한 파라미터를 설계한다** - 무엇이 조정 가능해야 하는가?
+5. **매칭되는 UI 컨트롤을 만든다** - 해당 파라미터를 위한 슬라이더/입력
 
-**Critical reminder**:
-- The **template is the STARTING POINT**, not inspiration
-- The **algorithm is where to create** something unique
-- Don't copy the flow field example - build what the philosophy demands
-- But DO keep the exact UI structure and Anthropic branding from the template
+**상수**:
+- Anthropic 브랜딩 (색상, 폰트, 레이아웃)
+- 시드 내비게이션 (항상 존재)
+- 자체 완결형 HTML 아티팩트
+
+**나머지 모든 것은 가변**:
+- 알고리즘 자체
+- 파라미터
+- UI 컨트롤
+- 시각적 결과물
+
+최상의 결과를 얻으려면, 창의성을 신뢰하고 철학이 구현을 안내하도록 한다.
+
+---
+
+## 리소스
+
+이 스킬은 유용한 템플릿과 문서를 포함한다:
+
+- **templates/viewer.html**: 모든 HTML 아티팩트의 필수 시작점.
+  - 이것이 기초이다 - 정확한 구조와 Anthropic 브랜딩을 포함
+  - **변경하지 않을 것**: 레이아웃 구조, 사이드바 구성, Anthropic 색상/폰트, 시드 컨트롤, 액션 버튼
+  - **교체할 것**: p5.js 알고리즘, 파라미터 정의, 파라미터 섹션의 UI 컨트롤
+  - 파일의 상세한 주석이 유지할 것과 교체할 것을 정확히 표시한다
+
+- **templates/generator_template.js**: p5.js 모범 사례와 코드 구조 원칙을 위한 참조.
+  - 파라미터 구성, 시드 기반 무작위성 사용, 클래스 구조화 방법을 보여준다
+  - 패턴 메뉴가 아니다 - 이 원칙을 사용하여 고유한 알고리즘을 만든다
+  - 알고리즘을 HTML 아티팩트 내에 인라인으로 임베드한다 (별도의 .js 파일을 만들지 않는다)
+
+**핵심 알림**:
+- **템플릿은 시작점**이지, 영감이 아니다
+- **알고리즘이 고유한 것을 만드는 곳**이다
+- 플로우 필드 예제를 복사하지 않는다 - 철학이 요구하는 것을 만든다
+- 그러나 템플릿의 정확한 UI 구조와 Anthropic 브랜딩은 반드시 유지한다

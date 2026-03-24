@@ -1,4 +1,4 @@
-> **참고:** 이 저장소는 Anthropic의 Claude용 스킬 구현체를 포함하고 있습니다. Agent Skills 표준에 대한 정보는 [agentskills.io](http://agentskills.io)를 참조하세요.
+> **참고:** 이 저장소는 Anthropic의 Claude용 스킬 구현체를 포함하고 있습니다. Agent Skills 표준에 대한 정보는 [agentskills.io](https://yoon-gu.github.io/agentskills/)를 참조하세요.
 
 # 스킬
 

@@ -1,13 +1,13 @@
-# PDF Processing Advanced Reference
+# PDF 처리 고급 참조
 
-This document contains advanced PDF processing features, detailed examples, and additional libraries not covered in the main skill instructions.
+이 문서에는 메인 스킬 지침에서 다루지 않는 고급 PDF 처리 기능, 상세 예제 및 추가 라이브러리가 포함되어 있습니다.
 
-## pypdfium2 Library (Apache/BSD License)
+## pypdfium2 라이브러리 (Apache/BSD 라이선스)
 
-### Overview
-pypdfium2 is a Python binding for PDFium (Chromium's PDF library). It's excellent for fast PDF rendering, image generation, and serves as a PyMuPDF replacement.
+### 개요
+pypdfium2는 PDFium(Chromium의 PDF 라이브러리)의 Python 바인딩입니다. 빠른 PDF 렌더링, 이미지 생성에 뛰어나며 PyMuPDF 대체로 사용할 수 있습니다.
 
-### Render PDF to Images
+### PDF를 이미지로 렌더링
 ```python
 import pypdfium2 as pdfium
 from PIL import Image
@@ -33,7 +33,7 @@ for i, page in enumerate(pdf):
     img.save(f"page_{i+1}.jpg", "JPEG", quality=90)
 ```
 
-### Extract Text with pypdfium2
+### pypdfium2로 텍스트 추출
 ```python
 import pypdfium2 as pdfium
 
@@ -43,13 +43,13 @@ for i, page in enumerate(pdf):
     print(f"Page {i+1} text length: {len(text)} chars")
 ```
 
-## JavaScript Libraries
+## JavaScript 라이브러리
 
-### pdf-lib (MIT License)
+### pdf-lib (MIT 라이선스)
 
-pdf-lib is a powerful JavaScript library for creating and modifying PDF documents in any JavaScript environment.
+pdf-lib는 모든 JavaScript 환경에서 PDF 문서를 생성하고 수정할 수 있는 강력한 JavaScript 라이브러리입니다.
 
-#### Load and Manipulate Existing PDF
+#### 기존 PDF 로드 및 조작
 ```javascript
 import { PDFDocument } from 'pdf-lib';
 import fs from 'fs';
@@ -77,7 +77,7 @@ async function manipulatePDF() {
 }
 ```
 
-#### Create Complex PDFs from Scratch
+#### 처음부터 복잡한 PDF 생성
 ```javascript
 import { PDFDocument, rgb, StandardFonts } from 'pdf-lib';
 import fs from 'fs';
@@ -138,7 +138,7 @@ async function createPDF() {
 }
 ```
 
-#### Advanced Merge and Split Operations
+#### 고급 병합 및 분할 작업
 ```javascript
 import { PDFDocument } from 'pdf-lib';
 import fs from 'fs';
@@ -167,11 +167,11 @@ async function mergePDFs() {
 }
 ```
 
-### pdfjs-dist (Apache License)
+### pdfjs-dist (Apache 라이선스)
 
-PDF.js is Mozilla's JavaScript library for rendering PDFs in the browser.
+PDF.js는 브라우저에서 PDF를 렌더링하기 위한 Mozilla의 JavaScript 라이브러리입니다.
 
-#### Basic PDF Loading and Rendering
+#### 기본 PDF 로드 및 렌더링
 ```javascript
 import * as pdfjsLib from 'pdfjs-dist';
 
@@ -205,7 +205,7 @@ async function renderPDF() {
 }
 ```
 
-#### Extract Text with Coordinates
+#### 좌표와 함께 텍스트 추출
 ```javascript
 import * as pdfjsLib from 'pdfjs-dist';
 
@@ -241,7 +241,7 @@ async function extractText() {
 }
 ```
 
-#### Extract Annotations and Forms
+#### 주석 및 양식 추출
 ```javascript
 import * as pdfjsLib from 'pdfjs-dist';
 
@@ -262,11 +262,11 @@ async function extractAnnotations() {
 }
 ```
 
-## Advanced Command-Line Operations
+## 고급 명령줄 작업
 
-### poppler-utils Advanced Features
+### poppler-utils 고급 기능
 
-#### Extract Text with Bounding Box Coordinates
+#### 바운딩 박스 좌표와 함께 텍스트 추출
 ```bash
 # Extract text with bounding box coordinates (essential for structured data)
 pdftotext -bbox-layout document.pdf output.xml
@@ -274,7 +274,7 @@ pdftotext -bbox-layout document.pdf output.xml
 # The XML output contains precise coordinates for each text element
 ```
 
-#### Advanced Image Conversion
+#### 고급 이미지 변환
 ```bash
 # Convert to PNG images with specific resolution
 pdftoppm -png -r 300 document.pdf output_prefix
@@ -286,7 +286,7 @@ pdftoppm -png -r 600 -f 1 -l 3 document.pdf high_res_pages
 pdftoppm -jpeg -jpegopt quality=85 -r 200 document.pdf jpeg_output
 ```
 
-#### Extract Embedded Images
+#### 임베디드 이미지 추출
 ```bash
 # Extract all embedded images with metadata
 pdfimages -j -p document.pdf page_images
@@ -298,9 +298,9 @@ pdfimages -list document.pdf
 pdfimages -all document.pdf images/img
 ```
 
-### qpdf Advanced Features
+### qpdf 고급 기능
 
-#### Complex Page Manipulation
+#### 복잡한 페이지 조작
 ```bash
 # Split PDF into groups of pages
 qpdf --split-pages=3 input.pdf output_group_%02d.pdf
@@ -312,7 +312,7 @@ qpdf input.pdf --pages input.pdf 1,3-5,8,10-end -- extracted.pdf
 qpdf --empty --pages doc1.pdf 1-3 doc2.pdf 5-7 doc3.pdf 2,4 -- combined.pdf
 ```
 
-#### PDF Optimization and Repair
+#### PDF 최적화 및 복구
 ```bash
 # Optimize PDF for web (linearize for streaming)
 qpdf --linearize input.pdf optimized.pdf
@@ -328,7 +328,7 @@ qpdf --fix-qdf damaged.pdf repaired.pdf
 qpdf --show-all-pages input.pdf > structure.txt
 ```
 
-#### Advanced Encryption
+#### 고급 암호화
 ```bash
 # Add password protection with specific permissions
 qpdf --encrypt user_pass owner_pass 256 --print=none --modify=none -- input.pdf encrypted.pdf
@@ -340,34 +340,34 @@ qpdf --show-encryption encrypted.pdf
 qpdf --password=secret123 --decrypt encrypted.pdf decrypted.pdf
 ```
 
-## Advanced Python Techniques
+## 고급 Python 기법
 
-### pdfplumber Advanced Features
+### pdfplumber 고급 기능
 
-#### Extract Text with Precise Coordinates
+#### 정밀 좌표와 함께 텍스트 추출
 ```python
 import pdfplumber
 
 with pdfplumber.open("document.pdf") as pdf:
     page = pdf.pages[0]
-    
+
     # Extract all text with coordinates
     chars = page.chars
     for char in chars[:10]:  # First 10 characters
         print(f"Char: '{char['text']}' at x:{char['x0']:.1f} y:{char['y0']:.1f}")
-    
+
     # Extract text by bounding box (left, top, right, bottom)
     bbox_text = page.within_bbox((100, 100, 400, 200)).extract_text()
 ```
 
-#### Advanced Table Extraction with Custom Settings
+#### 커스텀 설정으로 고급 테이블 추출
 ```python
 import pdfplumber
 import pandas as pd
 
 with pdfplumber.open("complex_table.pdf") as pdf:
     page = pdf.pages[0]
-    
+
     # Extract tables with custom settings for complex layouts
     table_settings = {
         "vertical_strategy": "lines",
@@ -376,15 +376,15 @@ with pdfplumber.open("complex_table.pdf") as pdf:
         "intersection_tolerance": 15
     }
     tables = page.extract_tables(table_settings)
-    
+
     # Visual debugging for table extraction
     img = page.to_image(resolution=150)
     img.save("debug_layout.png")
 ```
 
-### reportlab Advanced Features
+### reportlab 고급 기능
 
-#### Create Professional Reports with Tables
+#### 테이블이 포함된 전문 보고서 생성
 ```python
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph
 from reportlab.lib.styles import getSampleStyleSheet
@@ -423,17 +423,17 @@ elements.append(table)
 doc.build(elements)
 ```
 
-## Complex Workflows
+## 복잡한 워크플로우
 
-### Extract Figures/Images from PDF
+### PDF에서 그림/이미지 추출
 
-#### Method 1: Using pdfimages (fastest)
+#### 방법 1: pdfimages 사용 (가장 빠름)
 ```bash
 # Extract all images with original quality
 pdfimages -all document.pdf images/img
 ```
 
-#### Method 2: Using pypdfium2 + Image Processing
+#### 방법 2: pypdfium2 + 이미지 처리 사용
 ```python
 import pypdfium2 as pdfium
 from PIL import Image
@@ -441,26 +441,26 @@ import numpy as np
 
 def extract_figures(pdf_path, output_dir):
     pdf = pdfium.PdfDocument(pdf_path)
-    
+
     for page_num, page in enumerate(pdf):
         # Render high-resolution page
         bitmap = page.render(scale=3.0)
         img = bitmap.to_pil()
-        
+
         # Convert to numpy for processing
         img_array = np.array(img)
-        
+
         # Simple figure detection (non-white regions)
         mask = np.any(img_array != [255, 255, 255], axis=2)
-        
+
         # Find contours and extract bounding boxes
         # (This is simplified - real implementation would need more sophisticated detection)
-        
+
         # Save detected figures
         # ... implementation depends on specific needs
 ```
 
-### Batch PDF Processing with Error Handling
+### 오류 처리가 포함된 배치 PDF 처리
 ```python
 import os
 import glob
@@ -472,7 +472,7 @@ logger = logging.getLogger(__name__)
 
 def batch_process_pdfs(input_dir, operation='merge'):
     pdf_files = glob.glob(os.path.join(input_dir, "*.pdf"))
-    
+
     if operation == 'merge':
         writer = PdfWriter()
         for pdf_file in pdf_files:
@@ -484,10 +484,10 @@ def batch_process_pdfs(input_dir, operation='merge'):
             except Exception as e:
                 logger.error(f"Failed to process {pdf_file}: {e}")
                 continue
-        
+
         with open("batch_merged.pdf", "wb") as output:
             writer.write(output)
-    
+
     elif operation == 'extract_text':
         for pdf_file in pdf_files:
             try:
@@ -495,18 +495,18 @@ def batch_process_pdfs(input_dir, operation='merge'):
                 text = ""
                 for page in reader.pages:
                     text += page.extract_text()
-                
+
                 output_file = pdf_file.replace('.pdf', '.txt')
                 with open(output_file, 'w', encoding='utf-8') as f:
                     f.write(text)
                 logger.info(f"Extracted text from: {pdf_file}")
-                
+
             except Exception as e:
                 logger.error(f"Failed to extract text from {pdf_file}: {e}")
                 continue
 ```
 
-### Advanced PDF Cropping
+### 고급 PDF 자르기
 ```python
 from pypdf import PdfWriter, PdfReader
 
@@ -525,48 +525,48 @@ with open("cropped.pdf", "wb") as output:
     writer.write(output)
 ```
 
-## Performance Optimization Tips
+## 성능 최적화 팁
 
-### 1. For Large PDFs
-- Use streaming approaches instead of loading entire PDF in memory
-- Use `qpdf --split-pages` for splitting large files
-- Process pages individually with pypdfium2
+### 1. 대용량 PDF의 경우
+- 전체 PDF를 메모리에 로드하는 대신 스트리밍 방식을 사용하세요
+- 대용량 파일 분할에는 `qpdf --split-pages`를 사용하세요
+- pypdfium2로 페이지를 개별적으로 처리하세요
 
-### 2. For Text Extraction
-- `pdftotext -bbox-layout` is fastest for plain text extraction
-- Use pdfplumber for structured data and tables
-- Avoid `pypdf.extract_text()` for very large documents
+### 2. 텍스트 추출의 경우
+- 일반 텍스트 추출에는 `pdftotext -bbox-layout`이 가장 빠릅니다
+- 구조화된 데이터와 테이블에는 pdfplumber를 사용하세요
+- 매우 큰 문서에는 `pypdf.extract_text()` 사용을 피하세요
 
-### 3. For Image Extraction
-- `pdfimages` is much faster than rendering pages
-- Use low resolution for previews, high resolution for final output
+### 3. 이미지 추출의 경우
+- `pdfimages`가 페이지 렌더링보다 훨씬 빠릅니다
+- 미리보기에는 저해상도, 최종 출력에는 고해상도를 사용하세요
 
-### 4. For Form Filling
-- pdf-lib maintains form structure better than most alternatives
-- Pre-validate form fields before processing
+### 4. 양식 작성의 경우
+- pdf-lib가 대부분의 대안보다 양식 구조를 더 잘 유지합니다
+- 처리 전에 양식 필드를 사전 검증하세요
 
-### 5. Memory Management
+### 5. 메모리 관리
 ```python
 # Process PDFs in chunks
 def process_large_pdf(pdf_path, chunk_size=10):
     reader = PdfReader(pdf_path)
     total_pages = len(reader.pages)
-    
+
     for start_idx in range(0, total_pages, chunk_size):
         end_idx = min(start_idx + chunk_size, total_pages)
         writer = PdfWriter()
-        
+
         for i in range(start_idx, end_idx):
             writer.add_page(reader.pages[i])
-        
+
         # Process chunk
         with open(f"chunk_{start_idx//chunk_size}.pdf", "wb") as output:
             writer.write(output)
 ```
 
-## Troubleshooting Common Issues
+## 일반적인 문제 해결
 
-### Encrypted PDFs
+### 암호화된 PDF
 ```python
 # Handle password-protected PDFs
 from pypdf import PdfReader
@@ -579,14 +579,14 @@ except Exception as e:
     print(f"Failed to decrypt: {e}")
 ```
 
-### Corrupted PDFs
+### 손상된 PDF
 ```bash
 # Use qpdf to repair
 qpdf --check corrupted.pdf
 qpdf --replace-input corrupted.pdf
 ```
 
-### Text Extraction Issues
+### 텍스트 추출 문제
 ```python
 # Fallback to OCR for scanned PDFs
 import pytesseract
@@ -600,13 +600,13 @@ def extract_text_with_ocr(pdf_path):
     return text
 ```
 
-## License Information
+## 라이선스 정보
 
-- **pypdf**: BSD License
-- **pdfplumber**: MIT License
-- **pypdfium2**: Apache/BSD License
-- **reportlab**: BSD License
-- **poppler-utils**: GPL-2 License
-- **qpdf**: Apache License
-- **pdf-lib**: MIT License
-- **pdfjs-dist**: Apache License
+- **pypdf**: BSD 라이선스
+- **pdfplumber**: MIT 라이선스
+- **pypdfium2**: Apache/BSD 라이선스
+- **reportlab**: BSD 라이선스
+- **poppler-utils**: GPL-2 라이선스
+- **qpdf**: Apache 라이선스
+- **pdf-lib**: MIT 라이선스
+- **pdfjs-dist**: Apache 라이선스
